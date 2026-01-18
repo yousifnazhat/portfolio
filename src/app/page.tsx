@@ -1,6 +1,11 @@
-import React from 'react';
+"use client";
+import React, { useState } from 'react';
+import Link from 'next/link';
+import ResumeModal from '../components/ResumeModal';
 
 export default function Portfolio() {
+  const [isResumeModalOpen, setIsResumeModalOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-black text-slate-200 p-4 md:p-8 font-sans selection:bg-blue-500/30">
       
@@ -31,11 +36,17 @@ export default function Portfolio() {
             >
               Download Resume
             </a>
+            <button
+              onClick={() => setIsResumeModalOpen(true)}
+              className="px-6 py-2 bg-blue-500/10 text-blue-400 font-bold rounded-full hover:bg-blue-500/20 transition-colors text-center border border-blue-500/20"
+            >
+              Interactive Resume
+            </button>
           </div>
         </div>
 
         {/* --- CARD 2: PROFILE PHOTO (Spans 2 cols, 2 rows) --- */}
-        <div className="md:col-span-2 md:row-span-2 relative rounded-3xl overflow-hidden border border-white/10 group h-auto md:h-auto">
+        <Link href="/project-daedalus" className="md:col-span-2 md:row-span-2 relative rounded-3xl overflow-hidden border border-white/10 group h-auto md:h-auto">
           <img 
             src="hero-plane.jpg" 
             alt="Yousif with Plane" 
@@ -45,7 +56,7 @@ export default function Portfolio() {
             <p className="text-white font-bold text-xl">Project Daedalus</p>
             <p className="text-slate-300 text-sm">Lead Avionics Integration</p>
           </div>
-        </div>
+        </Link>
 
         {/* --- CARD 3: TECH STACK TICKER (Spans full width 4 cols) --- */}
         <div className="md:col-span-4 bg-slate-900 rounded-3xl p-6 border border-white/10 flex items-center justify-between gap-4 overflow-hidden transform transition-transform duration-300 hover:-translate-y-2 hover:shadow-lg hover:shadow-slate-500/10">
@@ -86,8 +97,12 @@ export default function Portfolio() {
 
           <div className="w-full md:w-2/3 flex flex-col gap-4">
              {/* SMALL IMAGES ON THE RIGHT */}
-             <img src="arduino-logic.jpg" className="rounded-2xl border border-white/10 object-cover h-64 w-full" alt="Arduino Logic"/>
-             <img src="thrust-stand.jpg" className="rounded-2xl border border-white/10 object-cover h-64 w-full" alt="Thrust Stand"/>
+             <Link href="/arduino-logic">
+              <img src="arduino-logic.jpg" className="rounded-2xl border border-white/10 object-cover h-64 w-full" alt="Arduino Logic"/>
+             </Link>
+             <Link href="/thrust-stand">
+              <img src="thrust-stand.jpg" className="rounded-2xl border border-white/10 object-cover h-64 w-full" alt="Thrust Stand"/>
+             </Link>
           </div>
         </div>
 
@@ -97,9 +112,11 @@ export default function Portfolio() {
               <span className="text-xs font-mono text-yellow-500">SIMULATION DATA</span>
               <span className="text-xs text-slate-500">eCalc v1</span>
            </div>
-           <div className="relative rounded-xl overflow-hidden h-96">
-              <img src="ecalc-data.jpg" className="absolute inset-0 w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity" alt="eCalc Data"/>
-           </div>
+           <Link href="/ecalc-data">
+            <div className="relative rounded-xl overflow-hidden h-96">
+                <img src="ecalc-data.jpg" className="absolute inset-0 w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity" alt="eCalc Data"/>
+            </div>
+           </Link>
            <p className="text-xs text-slate-500 leading-tight">
              Initial modelling of Config 1 vs Config 2 before physical validation.
            </p>
@@ -147,8 +164,10 @@ export default function Portfolio() {
         <div className="md:col-span-4 mt-10 text-center text-slate-600 text-sm font-mono">
             &copy; 2025 Yousif Nazhat. 
         </div>
-
+ 
       </div>
+
+      {isResumeModalOpen && <ResumeModal onClose={() => setIsResumeModalOpen(false)} />}
     </div>
   );
 }
