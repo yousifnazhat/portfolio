@@ -104,6 +104,16 @@ export default function Portfolio() {
           </div>
         </div>
 
+        {/* --- INTERACTIVE IMAGES BUBBLE --- */}
+        <div id="interactive-bubble" data-section className={`md:col-span-4 mt-8 transition-all duration-700 ease-in-out ${isVisible('interactive-bubble') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+            <div className="bg-blue-500/10 border border-blue-500/20 rounded-full p-4 flex items-center justify-center gap-4 text-center">
+                <div className="w-3 h-3 rounded-full bg-blue-400 animate-pulse shrink-0"></div>
+                <p className="text-blue-300 text-sm font-mono">
+                    Heads up! The images in the following sections are interactive. Click them to dive deeper.
+                </p>
+            </div>
+        </div>
+
         {/* --- CARD 4: DAEDALUS DEEP DIVE (Spans 4 cols) --- */}
         <div id="data-loop" data-section className={`md:col-span-4 bg-slate-900 rounded-3xl p-8 border border-white/10 flex flex-col md:flex-row gap-8 transform transition-all duration-700 ease-in-out ${isVisible('data-loop') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'} hover:-translate-y-2 hover:border-green-500/30 hover:shadow-lg hover:shadow-green-500/10`}>
           <div className="flex-1 space-y-6">
