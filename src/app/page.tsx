@@ -109,7 +109,7 @@ export default function Portfolio() {
             <div className="bg-blue-500/10 border border-blue-500/20 rounded-full p-4 flex items-center justify-center gap-4 text-center">
                 <div className="w-3 h-3 rounded-full bg-blue-400 animate-pulse shrink-0"></div>
                 <p className="text-blue-300 text-sm font-mono">
-                    Heads up! The images in the following sections are interactive. Click them to dive deeper.
+                    Heads up! The images above AND below are interactive. Click them to dive deeper.
                 </p>
             </div>
         </div>
