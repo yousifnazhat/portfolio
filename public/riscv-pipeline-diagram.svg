@@ -1,0 +1,277 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 650">
+  <!-- Title -->
+  <text x="700" y="40" font-family="Arial, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#2c3e50">
+    RISC-V Pipeline Simulator
+  </text>
+  <text x="700" y="70" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#7f8c8d">
+    Cycle-Accurate 5-Stage Pipelined Processor
+  </text>
+
+  <!-- Pipeline Stages -->
+  <g transform="translate(100, 120)">
+    <!-- Stage 1: Fetch (IF) -->
+    <g id="fetch">
+      <rect x="0" y="0" width="220" height="140" rx="10" fill="#3498db" stroke="#2c3e50" stroke-width="3"/>
+      <text x="110" y="30" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="white">
+        1. FETCH (IF)
+      </text>
+      <text x="110" y="55" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#ecf0f1">
+        • Read instruction
+      </text>
+      <text x="110" y="75" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#ecf0f1">
+        • From memory @ PC
+      </text>
+      <text x="110" y="95" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#ecf0f1">
+        • Cache access
+      </text>
+      <text x="110" y="120" font-family="monospace" font-size="11" text-anchor="middle" fill="#ecf0f1">
+        inst = mem[PC]
+      </text>
+    </g>
+
+    <!-- Arrow 1 -->
+    <polygon points="230,70 260,70 250,60 260,70 250,80" fill="#e74c3c"/>
+
+    <!-- Stage 2: Decode (ID) -->
+    <g id="decode">
+      <rect x="270" y="0" width="220" height="140" rx="10" fill="#2ecc71" stroke="#2c3e50" stroke-width="3"/>
+      <text x="380" y="30" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="white">
+        2. DECODE (ID)
+      </text>
+      <text x="380" y="55" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#ecf0f1">
+        • Parse instruction
+      </text>
+      <text x="380" y="75" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#ecf0f1">
+        • Read registers
+      </text>
+      <text x="380" y="95" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#ecf0f1">
+        • Generate controls
+      </text>
+      <text x="380" y="120" font-family="monospace" font-size="11" text-anchor="middle" fill="#ecf0f1">
+        rs1, rs2, imm
+      </text>
+    </g>
+
+    <!-- Arrow 2 -->
+    <polygon points="500,70 530,70 520,60 530,70 520,80" fill="#e74c3c"/>
+
+    <!-- Stage 3: Execute (EX) -->
+    <g id="execute">
+      <rect x="540" y="0" width="220" height="140" rx="10" fill="#f39c12" stroke="#2c3e50" stroke-width="3"/>
+      <text x="650" y="30" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="white">
+        3. EXECUTE (EX)
+      </text>
+      <text x="650" y="55" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#ecf0f1">
+        • ALU operations
+      </text>
+      <text x="650" y="75" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#ecf0f1">
+        • Branch calc
+      </text>
+      <text x="650" y="95" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#ecf0f1">
+        • Address compute
+      </text>
+      <text x="650" y="120" font-family="monospace" font-size="11" text-anchor="middle" fill="#ecf0f1">
+        result = op(a, b)
+      </text>
+    </g>
+
+    <!-- Arrow 3 -->
+    <polygon points="770,70 800,70 790,60 800,70 790,80" fill="#e74c3c"/>
+
+    <!-- Stage 4: Memory (MEM) -->
+    <g id="memory">
+      <rect x="810" y="0" width="220" height="140" rx="10" fill="#9b59b6" stroke="#2c3e50" stroke-width="3"/>
+      <text x="920" y="30" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="white">
+        4. MEMORY (MEM)
+      </text>
+      <text x="920" y="55" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#ecf0f1">
+        • Load/Store ops
+      </text>
+      <text x="920" y="75" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#ecf0f1">
+        • Data cache
+      </text>
+      <text x="920" y="95" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#ecf0f1">
+        • Memory access
+      </text>
+      <text x="920" y="120" font-family="monospace" font-size="11" text-anchor="middle" fill="#ecf0f1">
+        data = mem[addr]
+      </text>
+    </g>
+
+    <!-- Arrow 4 -->
+    <polygon points="1040,70 1070,70 1060,60 1070,70 1060,80" fill="#e74c3c"/>
+
+    <!-- Stage 5: Writeback (WB) -->
+    <g id="writeback">
+      <rect x="1080" y="0" width="220" height="140" rx="10" fill="#e74c3c" stroke="#2c3e50" stroke-width="3"/>
+      <text x="1190" y="30" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="white">
+        5. WRITEBACK (WB)
+      </text>
+      <text x="1190" y="55" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#ecf0f1">
+        • Update registers
+      </text>
+      <text x="1190" y="75" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#ecf0f1">
+        • Complete inst
+      </text>
+      <text x="1190" y="95" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#ecf0f1">
+        • Commit state
+      </text>
+      <text x="1190" y="120" font-family="monospace" font-size="11" text-anchor="middle" fill="#ecf0f1">
+        reg[rd] = result
+      </text>
+    </g>
+  </g>
+
+  <!-- Cache Architecture -->
+  <g transform="translate(100, 290)">
+    <text x="0" y="0" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#2c3e50">
+      Cache Architecture:
+    </text>
+    
+    <rect x="0" y="15" width="1200" height="100" rx="8" fill="#ecf0f1" stroke="#2c3e50" stroke-width="2"/>
+    
+    <!-- Cache blocks -->
+    <g transform="translate(20, 35)">
+      <text x="0" y="15" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#2c3e50">
+        Set-Associative Cache
+      </text>
+      
+      <!-- Set 0 -->
+      <rect x="250" y="0" width="180" height="60" rx="5" fill="#3498db" stroke="#2c3e50" stroke-width="2"/>
+      <text x="340" y="25" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle" fill="white">
+        Set 0
+      </text>
+      <text x="340" y="45" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#ecf0f1">
+        Tag | Valid | Dirty | Data[64B]
+      </text>
+      
+      <!-- Set 1 -->
+      <rect x="450" y="0" width="180" height="60" rx="5" fill="#2ecc71" stroke="#2c3e50" stroke-width="2"/>
+      <text x="540" y="25" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle" fill="white">
+        Set 1
+      </text>
+      <text x="540" y="45" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#ecf0f1">
+        Tag | Valid | Dirty | Data[64B]
+      </text>
+      
+      <!-- ... -->
+      <text x="660" y="35" font-family="Arial, sans-serif" font-size="24" fill="#7f8c8d">...</text>
+      
+      <!-- Set N -->
+      <rect x="730" y="0" width="180" height="60" rx="5" fill="#e67e22" stroke="#2c3e50" stroke-width="2"/>
+      <text x="820" y="25" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle" fill="white">
+        Set N-1
+      </text>
+      <text x="820" y="45" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#ecf0f1">
+        Tag | Valid | Dirty | Data[64B]
+      </text>
+      
+      <!-- Cache specs -->
+      <text x="950" y="25" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">
+        • Block Size: 64 bytes
+      </text>
+      <text x="950" y="45" font-family="Arial, sans-serif" font-size="12" fill="#2c3e50">
+        • LRU replacement
+      </text>
+    </g>
+  </g>
+
+  <!-- Supported Instructions -->
+  <g transform="translate(100, 420)">
+    <text x="0" y="0" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#2c3e50">
+      Supported RISC-V Instructions:
+    </text>
+    
+    <g transform="translate(0, 25)">
+      <!-- Arithmetic -->
+      <rect x="0" y="0" width="180" height="70" rx="5" fill="#3498db" opacity="0.15"/>
+      <text x="10" y="20" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#2c3e50">
+        Arithmetic
+      </text>
+      <text x="15" y="40" font-family="monospace" font-size="11" fill="#7f8c8d">
+        ADD, ADDI, SUB
+      </text>
+      <text x="15" y="58" font-family="monospace" font-size="11" fill="#7f8c8d">
+        MUL, DIV
+      </text>
+      
+      <!-- Logical -->
+      <rect x="200" y="0" width="180" height="70" rx="5" fill="#2ecc71" opacity="0.15"/>
+      <text x="210" y="20" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#2c3e50">
+        Logical
+      </text>
+      <text x="215" y="40" font-family="monospace" font-size="11" fill="#7f8c8d">
+        AND, OR, XOR
+      </text>
+      <text x="215" y="58" font-family="monospace" font-size="11" fill="#7f8c8d">
+        SLL, SRL, SRA
+      </text>
+      
+      <!-- Memory -->
+      <rect x="400" y="0" width="180" height="70" rx="5" fill="#f39c12" opacity="0.15"/>
+      <text x="410" y="20" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#2c3e50">
+        Memory
+      </text>
+      <text x="415" y="40" font-family="monospace" font-size="11" fill="#7f8c8d">
+        LD, SD
+      </text>
+      <text x="415" y="58" font-family="monospace" font-size="11" fill="#7f8c8d">
+        (Load/Store)
+      </text>
+      
+      <!-- Branch -->
+      <rect x="600" y="0" width="180" height="70" rx="5" fill="#9b59b6" opacity="0.15"/>
+      <text x="610" y="20" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#2c3e50">
+        Branch/Jump
+      </text>
+      <text x="615" y="40" font-family="monospace" font-size="11" fill="#7f8c8d">
+        BEQ, BNE, BLT
+      </text>
+      <text x="615" y="58" font-family="monospace" font-size="11" fill="#7f8c8d">
+        JAL, JALR
+      </text>
+    </g>
+  </g>
+
+  <!-- Performance Metrics -->
+  <g transform="translate(100, 520)">
+    <text x="0" y="0" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#2c3e50">
+      Key Achievements:
+    </text>
+    
+    <g transform="translate(0, 25)">
+      <circle cx="10" cy="0" r="8" fill="#27ae60"/>
+      <text x="30" y="5" font-family="Arial, sans-serif" font-size="14" fill="#2c3e50">
+        ✓ 100% execution fidelity - All unit tests passed for memory &amp; arithmetic ops
+      </text>
+    </g>
+    
+    <g transform="translate(0, 50)">
+      <circle cx="10" cy="0" r="8" fill="#27ae60"/>
+      <text x="30" y="5" font-family="Arial, sans-serif" font-size="14" fill="#2c3e50">
+        ✓ Complete 5-stage pipeline implementation with proper stage isolation
+      </text>
+    </g>
+    
+    <g transform="translate(0, 75)">
+      <circle cx="10" cy="0" r="8" fill="#27ae60"/>
+      <text x="30" y="5" font-family="Arial, sans-serif" font-size="14" fill="#2c3e50">
+        ✓ Working set-associative cache with realistic memory hierarchy behavior
+      </text>
+    </g>
+  </g>
+
+  <!-- Tech Stack -->
+  <g transform="translate(900, 520)">
+    <rect x="0" y="0" width="300" height="90" rx="10" fill="#34495e" stroke="#2c3e50" stroke-width="2"/>
+    <text x="150" y="30" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="white">
+      Technology Stack
+    </text>
+    <text x="150" y="55" font-family="monospace" font-size="13" text-anchor="middle" fill="#ecf0f1">
+      C • RISC-V ISA • RV64I
+    </text>
+    <text x="150" y="75" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#bdc3c7">
+      Cycle-Accurate Simulation
+    </text>
+  </g>
+</svg>
