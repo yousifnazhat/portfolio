@@ -28,4 +28,5 @@ This is a portfolio website designed to showcase projects and skills. It feature
     - A detailed description of the project.
     - A link to the GitHub repository.
     - A project diagram.
+    - The project's README dynamically fetched from GitHub.
     - A back button to return to the portfolio.
