@@ -24,6 +24,7 @@ This is a portfolio website designed to showcase projects and skills. It feature
     - Unix FS Emulator
     - 128-Bit Toolkit
     - Symbiote Host Compatibility Tree
+    - Virtual Honeypot Security Monitoring Lab
 - Each project page includes:
     - A detailed description of the project.
     - A link to the GitHub repository.

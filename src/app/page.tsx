@@ -4,54 +4,7 @@ import Link from 'next/link';
 import ResumeModal from '../components/ResumeModal';
 import AboutMe from '../components/AboutMe';
 import { ArrowRight } from 'lucide-react';
-
-const softwareProjects = [
-  {
-    id: "risc-v-simulator",
-    title: "RISC-V Simulator",
-    description: "Cycle-accurate 5-stage pipeline with cache logic.",
-    category: "Architecture",
-    color: "purple",
-    icon: "C",
-    link: "/software/risc-v-simulator"
-  },
-  {
-    id: "election-engine",
-    title: "Election Engine",
-    description: "Triply-Nested Linked List for O(1) voter traversal.",
-    category: "Algorithms",
-    color: "orange",
-    icon: "J",
-    link: "/software/election-engine"
-  },
-  {
-    id: "unix-fs-emulator",
-    title: "Unix FS Emulator",
-    description: "Memory-resident N-ary tree filesystem.",
-    category: "Systems",
-    color: "blue",
-    icon: "C",
-    link: "/software/unix-fs-emulator"
-  },
-  {
-    id: "128-bit-toolkit",
-    title: "128-Bit Toolkit",
-    description: "Low-level bitwise math for cryptography.",
-    category: "Optimization",
-    color: "red",
-    icon: "C",
-    link: "/software/128-bit-toolkit"
-  },
-  {
-    id: "symbiote-host-compatibility-tree",
-    title: "Symbiote Tree",
-    description: "N-ary tree for symbiote-host compatibility.",
-    category: "Data Structures",
-    color: "green",
-    icon: "J",
-    link: "/software/symbiote-host-compatibility-tree"
-  }
-];
+import { softwareProjects, coreStack, profileData } from '../data/portfolioData';
 
 const colorMap = {
   purple: {
@@ -78,6 +31,11 @@ const colorMap = {
     shadow: "hover:shadow-green-500/10",
     bg: "bg-green-500/20",
     text: "text-green-400",
+  },
+  cyan: {
+    shadow: "hover:shadow-cyan-500/10",
+    bg: "bg-cyan-500/20",
+    text: "text-cyan-400",
   },
 };
 
@@ -109,29 +67,31 @@ export default function Portfolio() {
 
   return (
     <div className="min-h-screen bg-black text-slate-200 p-4 md:p-8 font-sans selection:bg-blue-500/30">
-      
+
       {/* --- MASTER GRID --- */}
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 auto-rows-auto gap-4">
 
         {/* --- CARD 1: HERO INTRO (Spans 2 cols, 2 rows) --- */}
         <div id="hero" data-section className={`md:col-span-2 md:row-span-2 bg-slate-900 rounded-3xl p-8 border border-white/10 flex flex-col justify-between transform transition-all duration-700 ease-in-out ${isVisible('hero') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'} hover:-translate-y-2 hover:border-blue-500/50 hover:shadow-lg hover:shadow-blue-500/10 group`}>
           <div>
-            <div className="inline-block px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 text-xs font-mono mb-4 border border-blue-500/20">
-              AVAILABLE FOR HIRE
-            </div>
+            {profileData.availableForHire && (
+              <div className="inline-block px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 text-xs font-mono mb-4 border border-blue-500/20">
+                AVAILABLE FOR HIRE
+              </div>
+            )}
             <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-white mb-4">
-              Yousif <br/> <span className="text-slate-500">Nazhat.</span>
+              {profileData.name.split(' ')[0]} <br /> <span className="text-slate-500">{profileData.name.split(' ')[1]}.</span>
             </h1>
             <p className="text-lg text-slate-400 leading-relaxed max-w-md">
-              IT & Security Specialist bridging the gap between <span className="text-blue-400">embedded hardware</span> and <span className="text-blue-400">secure data systems</span>.
+              {profileData.tagline}
             </p>
           </div>
-          
+
           <div className="flex gap-4 mt-8">
             {/* BUTTON 1: DOWNLOAD RESUME */}
-            <a 
-              href="resume.pdf" 
-              target="_blank" 
+            <a
+              href="resume.pdf"
+              target="_blank"
               rel="noopener noreferrer"
               className="px-6 py-2 bg-white text-black font-bold rounded-full transition-all duration-300 hover:bg-blue-100 hover:shadow-lg hover:shadow-blue-500/30 text-center"
             >
@@ -148,16 +108,16 @@ export default function Portfolio() {
 
         {/* --- CARD 2: PROFILE PHOTO (Spans 2 cols, 2 rows) --- */}
         <Link href="/project-daedalus" id="project-daedalus-hero" data-section className={`md:col-span-2 md:row-span-2 relative rounded-3xl overflow-hidden border border-white/10 group h-auto md:h-auto transition-all duration-700 ease-in-out ${isVisible('project-daedalus-hero') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-          <img 
-            src="/hero-plane.jpg" 
-            alt="Yousif with Plane" 
+          <img
+            src="/hero-plane.jpg"
+            alt="Yousif with Plane"
             className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col justify-end p-8">
             <p className="text-white font-bold text-xl">Project Daedalus</p>
             <div className="flex items-center gap-2 text-slate-300 text-sm">
               <span>Lead Avionics Integration</span>
-              <ArrowRight size={16} className="transform transition-transform duration-300 group-hover:translate-x-1"/>
+              <ArrowRight size={16} className="transform transition-transform duration-300 group-hover:translate-x-1" />
             </div>
           </div>
         </Link>
@@ -170,24 +130,21 @@ export default function Portfolio() {
         <div id="stack" data-section className={`md:col-span-4 bg-slate-900 rounded-3xl p-6 border border-white/10 flex items-center justify-between gap-4 overflow-hidden transform transition-all duration-700 ease-in-out ${isVisible('stack') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'} hover:-translate-y-2 hover:shadow-lg hover:shadow-slate-500/10`}>
           <p className="text-slate-500 text-sm font-mono whitespace-nowrap">CORE STACK</p>
           <div className="h-px bg-white/10 flex-1"></div>
-          <div className="flex gap-6 text-slate-300 font-mono text-sm font-bold opacity-70">
-            <span>C/C++</span>
-            <span>ARDUINO</span>
-            <span>RISC-V</span>
-            <span>JAVA</span>
-            <span>NEXT.JS</span>
-            <span>SYSTEMS INTEGRATION</span>
+          <div className="flex gap-6 text-slate-300 font-mono text-sm font-bold opacity-70 overflow-x-auto no-scrollbar mask-gradient">
+            {coreStack.map((tech) => (
+              <span key={tech} className="whitespace-nowrap">{tech}</span>
+            ))}
           </div>
         </div>
 
         {/* --- INTERACTIVE IMAGES BUBBLE --- */}
         <div id="interactive-bubble" data-section className={`md:col-span-4 mt-8 transition-all duration-700 ease-in-out ${isVisible('interactive-bubble') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-            <div className="bg-blue-500/10 border border-blue-500/20 rounded-full p-4 flex items-center justify-center gap-4 text-center">
-                <div className="w-3 h-3 rounded-full bg-blue-400 animate-pulse shrink-0"></div>
-                <p className="text-blue-300 text-sm font-mono">
-                    Heads up! The images above AND below are interactive. Click them to dive deeper.
-                </p>
-            </div>
+          <div className="bg-blue-500/10 border border-blue-500/20 rounded-full p-4 flex items-center justify-center gap-4 text-center">
+            <div className="w-3 h-3 rounded-full bg-blue-400 animate-pulse shrink-0"></div>
+            <p className="text-blue-300 text-sm font-mono">
+              Heads up! The images above AND below are interactive. Click them to dive deeper.
+            </p>
+          </div>
         </div>
 
         {/* --- CARD 4: DAEDALUS DEEP DIVE (Spans 4 cols) --- */}
@@ -198,9 +155,9 @@ export default function Portfolio() {
               <h2 className="text-2xl font-bold text-white">Engineering The Data Loop</h2>
             </div>
             <p className="text-slate-400 leading-relaxed">
-              Simulation wasn't enough. I built a custom <strong>Arduino + Load Cell</strong> rig to capture real-world thrust metrics, proving our eCalc models were underestimating performance by 40%.
+              Simulation is needed but additionally, I built a custom <strong>Arduino + Load Cell</strong> rig to capture real-world thrust metrics, proving our eCalc models were underestimating performance by 40%.
             </p>
-            
+
             <div className="grid grid-cols-2 gap-4 mt-4">
               <div className="bg-black/30 p-4 rounded-2xl border border-white/5">
                 <p className="text-slate-500 text-xs font-mono uppercase mb-1">Theoretical T/W</p>
@@ -214,48 +171,48 @@ export default function Portfolio() {
           </div>
 
           <div className="w-full md:w-2/3 flex flex-col gap-4">
-             {/* SMALL IMAGES ON THE RIGHT */}
-             <Link href="/arduino-logic" className="group relative">
-                <img src="/arduino-logic.jpg" className="rounded-2xl border border-white/10 object-cover h-64 w-full group-hover:border-green-500/50 transition-colors" alt="Arduino Logic"/>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col justify-end p-4">
-                    <p className="text-white font-bold text-lg">Arduino Logic</p>
-                    <p className="text-slate-300 text-sm">Real-time data acquisition from the load cell.</p>
-                </div>
-             </Link>
-             <Link href="/thrust-stand" className="group relative">
-                <img src="/thrust-stand.jpg" className="rounded-2xl border border-white/10 object-cover h-64 w-full group-hover:border-green-500/50 transition-colors" alt="Thrust Stand"/>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col justify-end p-4">
-                    <p className="text-white font-bold text-lg">Thrust Stand</p>
-                    <p className="text-slate-300 text-sm">The physical test rig for validating motor performance.</p>
-                </div>
-             </Link>
+            {/* SMALL IMAGES ON THE RIGHT */}
+            <Link href="/arduino-logic" className="group relative">
+              <img src="/arduino-logic.jpg" className="rounded-2xl border border-white/10 object-cover h-64 w-full group-hover:border-green-500/50 transition-colors" alt="Arduino Logic" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col justify-end p-4">
+                <p className="text-white font-bold text-lg">Arduino Logic</p>
+                <p className="text-slate-300 text-sm">Real-time data acquisition from the load cell.</p>
+              </div>
+            </Link>
+            <Link href="/thrust-stand" className="group relative">
+              <img src="/thrust-stand.jpg" className="rounded-2xl border border-white/10 object-cover h-64 w-full group-hover:border-green-500/50 transition-colors" alt="Thrust Stand" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col justify-end p-4">
+                <p className="text-white font-bold text-lg">Thrust Stand</p>
+                <p className="text-slate-300 text-sm">The physical test rig for validating motor performance.</p>
+              </div>
+            </Link>
           </div>
         </div>
 
         {/* --- CARD 5: ECALC DATA (Spans 4 cols) --- */}
         <div id="ecalc" data-section className={`md:col-span-4 bg-slate-900 rounded-3xl p-4 border border-white/10 flex flex-col gap-4 transform transition-all duration-700 ease-in-out ${isVisible('ecalc') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'} hover:-translate-y-2 hover:border-yellow-500/30 hover:shadow-lg hover:shadow-yellow-500/10`}>
-           <div className="flex items-center justify-between">
-              <span className="text-xs font-mono text-yellow-500">SIMULATION DATA</span>
-              <span className="text-xs text-slate-500">eCalc v1</span>
-           </div>
-           <Link href="/ecalc-data" className="group relative">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-mono text-yellow-500">SIMULATION DATA</span>
+            <span className="text-xs text-slate-500">eCalc v1</span>
+          </div>
+          <Link href="/ecalc-data" className="group relative">
             <div className="relative rounded-xl overflow-hidden h-96">
-                <img src="/ecalc-data.jpg" className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" alt="eCalc Data"/>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col justify-end p-6">
-                    <p className="text-white font-bold text-2xl">eCalc Simulation</p>
-                    <p className="text-slate-300">Initial modelling of motor and propeller configurations.</p>
-                </div>
+              <img src="/ecalc-data.jpg" className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" alt="eCalc Data" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col justify-end p-6">
+                <p className="text-white font-bold text-2xl">eCalc Simulation</p>
+                <p className="text-slate-300">Initial modelling of motor and propeller configurations.</p>
+              </div>
             </div>
-           </Link>
-           <p className="text-xs text-slate-500 leading-tight">
-             Initial modelling of Config 1 vs Config 2 before physical validation.
-           </p>
+          </Link>
+          <p className="text-xs text-slate-500 leading-tight">
+            Initial modelling of Config 1 vs Config 2 before physical validation.
+          </p>
         </div>
 
         {/* --- SOFTWARE PROJECTS HEADER --- */}
         <div id="software" data-section className={`md:col-span-4 mt-8 mb-4 flex items-center gap-4 transition-all duration-700 ease-in-out ${isVisible('software') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-           <h3 className="text-2xl font-bold text-white">Software Engineering</h3>
-           <div className="h-px bg-white/10 flex-1"></div>
+          <h3 className="text-2xl font-bold text-white">Software Engineering</h3>
+          <div className="h-px bg-white/10 flex-1"></div>
         </div>
 
         {/* --- SOFTWARE PROJECT CARDS --- */}
@@ -273,9 +230,9 @@ export default function Portfolio() {
 
         {/* --- FOOTER --- */}
         <div id="footer" data-section className={`md:col-span-4 mt-10 text-center text-slate-600 text-sm font-mono transition-all duration-700 ease-in-out ${isVisible('footer') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-            &copy; 2025 Yousif Nazhat. 
+          &copy; 2025 Yousif Nazhat.
         </div>
- 
+
       </div>
 
       {isResumeModalOpen && <ResumeModal onClose={() => setIsResumeModalOpen(false)} />}

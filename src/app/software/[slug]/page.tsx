@@ -24,6 +24,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
     "unix-fs-emulator": { owner: "yousifnazhat", repo: "filesystem-emulator" },
     "128-bit-toolkit": { owner: "yousifnazhat", repo: "128-bit-arithmetic-toolkit" },
     "symbiote-host-compatibility-tree": { owner: "yousifnazhat", repo: "symbiote-host-compatibility-tree" },
+    "honeypot-lab": { owner: "yousifnazhat", repo: "honeypot-security-lab" },
   };
 
   const { slug } = params;
