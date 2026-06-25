@@ -1,130 +1,308 @@
+// Source of truth for the Daedalus portfolio.
+// NOTE: The YC defense-startup offensive-security internship is under NDA and is
+// intentionally omitted everywhere. Do not add it.
 
-import { Cpu, ShieldCheck, Clipboard } from 'lucide-react';
+export type Tag = { label: string; kind: "security" | "neutral" };
 
-export const profileData = {
+export const profile = {
   name: "Yousif Nazhat",
-  title: "IT & Security Specialist",
-  tagline: "Bridging the gap between embedded hardware and secure data systems.",
-  availableForHire: true,
+  role: "Offensive Security Engineer",
+  tagline: "Maker of tools, breaker of trust boundaries.",
+  wallText:
+    "A working museum of systems built — and systems broken. Red-team tradecraft, security tooling, and high-reliability hardware, kept under one roof.",
+  status: "Available · 2026",
+  location: "New Brunswick, NJ",
   contact: {
-    phone: "(973)-382-5159",
     email: "yousif.snazhat@gmail.com",
-    linkedin: "http://www.linkedin.com/in/yousif-nazhat-526027296",
-    github: "https://github.com/yousifnazhat"
-  }
+    phone: "(973) 382-5159",
+    github: "https://github.com/yousifnazhat",
+    linkedin: "https://www.linkedin.com/in/yousif-nazhat-526027296",
+  },
 };
 
-export const aboutData = {
-  title: "About Me",
-  description: "As Deputy Lead for the NASA and Lockheed Martin-sponsored Project Daedalus, I direct cross-functional teams in developing high-reliability avionics, achieving zero critical failures under peak loads. I am passionate about applying this rigorous, hardware-level discipline to the field of cybersecurity, seeking challenges where physical constraints meet digital security.",
-  skills: [
-    { icon: Cpu, label: "Embedded Systems" },
-    { icon: ShieldCheck, label: "Cybersecurity" },
-    { icon: Clipboard, label: "Data Analysis" }
+export const stats: { n: string; k: string }[] = [
+  { n: "1,000+", k: "Auth attempts captured" },
+  { n: "78", k: "Server assets de-risked" },
+  { n: "50+", k: "Members trained" },
+  { n: "0", k: "Critical failures" },
+];
+
+export type Artifact = {
+  id: string;
+  no: string;
+  category: string;
+  title: string;
+  medium: string;
+  blurb: string;
+  longDescription: string;
+  tags: Tag[];
+  image?: string;
+  href?: string;
+};
+
+// "The Collection" — the headline exhibits.
+export const collection: Artifact[] = [
+  {
+    id: "penpal",
+    no: "No. 01",
+    category: "Tooling",
+    title: "PenPal",
+    medium: "Python · authorized enumeration assistant",
+    blurb:
+      "A modular assistant for authorized pentesting — automated workspaces, dry-run scan plans, evidence ingestion, and deterministic, methodology-driven recommendations.",
+    longDescription:
+      "Open-sourced PenPal: a modular Python assistant for authorized pentesting that automates target workspaces, dry-run scan plans, XML/evidence ingestion, masked parameters, deterministic recommendations and a local JSON-API report. Operationalized MITRE ATT&CK, OWASP, NIST, HTB Academy and OffSec guidance into repeatable playbooks — validated through an automated methodology pipeline (55 methodology files, 21 PenPal-ready files, 21 evidence-rule blocks, 0 invalid blocks).",
+    tags: [
+      { label: "Python", kind: "neutral" },
+      { label: "MITRE ATT&CK", kind: "security" },
+      { label: "OWASP", kind: "security" },
+      { label: "Open Source", kind: "neutral" },
+    ],
+    href: "https://github.com/yousifnazhat",
+  },
+  {
+    id: "attack-detection-labs",
+    no: "No. 02",
+    category: "Red Team",
+    title: "Attack & Detection Labs",
+    medium: "Active Directory · credential chaining · ELK",
+    blurb:
+      "Full credential chains across Windows, Linux and AD — then 1,000+ captured auth events turned into ELK detection dashboards.",
+    longDescription:
+      "Completed enterprise credential chains across Windows, Linux and Active Directory — validated SAM/LSA/LSASS extraction, NTDS.dit dumping, Kerberos ticket import, Pass-the-Hash, SMB credential chaining and WinRM access via password-attack, credential-dumping, ticketing, access-validation and lateral-movement workflows. Captured 1,000+ authentication attempts with honeypot telemetry and transformed the events into ELK security-analytics dashboards, identifying reconnaissance and brute-force patterns.",
+    tags: [
+      { label: "Kerberos/NTLM", kind: "security" },
+      { label: "Active Directory", kind: "security" },
+      { label: "ELK", kind: "neutral" },
+      { label: "Honeypot", kind: "security" },
+    ],
+    image: "/honeypot-lab-diagram.svg",
+    href: "#collection",
+  },
+  {
+    id: "mu-sigma",
+    no: "No. 03",
+    category: "Full-Stack",
+    title: "Mu Sigma Alumni Platform",
+    medium: "Next.js · Stripe · Supabase · Vercel",
+    blurb:
+      "A deployed alumni platform — 10 pages, 3 server APIs, idempotent Stripe webhooks across 6 event types, server-side secret isolation and donor-privacy controls.",
+    longDescription:
+      "Architected and deployed a full-stack alumni platform spanning 10 public pages and 3 server APIs — enabling one-time and monthly donations and live reporting by integrating Stripe Checkout, signed and idempotent webhooks across 6 event types, Supabase persistence, server-side secret isolation, and opt-in donor-privacy controls.",
+    tags: [
+      { label: "Next.js", kind: "neutral" },
+      { label: "TypeScript", kind: "neutral" },
+      { label: "Stripe", kind: "neutral" },
+      { label: "Supabase", kind: "neutral" },
+    ],
+    href: "https://github.com/yousifnazhat",
+  },
+  {
+    id: "project-daedalus",
+    no: "No. 04",
+    category: "Hardware",
+    title: "Project Daedalus",
+    medium: "Avionics · NASA & Lockheed Martin",
+    blurb:
+      "Design-team lead on a sponsored UAV — avionics integrated to 100% interface compliance with zero critical failures at 130A peak current.",
+    longDescription:
+      "Directed integration of interconnected avionics subsystems on a UAV sponsored by NASA and Lockheed Martin, applying rigorous interface validation to ensure 100% compliance with strict safety and reliability standards. Delivered a fully integrated system within a 5-week timeline by coordinating cross-functional Aerodynamics and Manufacturing teams — optimizing propulsion to a 1.46 thrust-to-weight ratio with zero critical failures during 130A peak-current operations.",
+    tags: [
+      { label: "Embedded", kind: "neutral" },
+      { label: "C/C++", kind: "neutral" },
+      { label: "RISC-V", kind: "neutral" },
+      { label: "Integration", kind: "neutral" },
+    ],
+    image: "/hero-plane.jpg",
+    href: "#collection",
+  },
+];
+
+// "The Atelier" — roles & appointments.
+export type Appointment = {
+  role: string;
+  org: string;
+  period: string;
+  location: string;
+  kind: "security" | "hardware" | "leadership";
+  bullets: string[];
+};
+
+export const atelier: Appointment[] = [
+  {
+    role: "Cloud Infrastructure & Security Intern",
+    org: "Schindler Group",
+    period: "Jun 2026 – Aug 2026",
+    location: "Morristown, NJ",
+    kind: "security",
+    bullets: [
+      "Strengthened internal AI security posture by implementing Microsoft Entra ID and Azure AI Foundry agentic identity controls across Azure, reducing privilege-escalation and unauthorized agent-to-agent access paths.",
+      "Reduced end-of-support infrastructure risk across 78 server assets by analyzing dependencies and delivering remediation-ready architecture assessments with 100% coverage and prioritized migration actions.",
+      "Secured an Azure LLM-integrated production server for Group Cyber Security review — scoping identity/SAS privileges, hardening workflows, and rebuilding patched configurations.",
+    ],
+  },
+  {
+    role: "Team Lead",
+    org: "RU Cybersecurity",
+    period: "Sep 2025 – Present",
+    location: "New Brunswick, NJ",
+    kind: "security",
+    bullets: [
+      "Improved technical competency for 50+ active members — a 30% increase in project participation — by spearheading workshops on Red/Blue Team operations, SIEM, and Linux fundamentals.",
+      "Strengthened incident-response skills through the successful execution of 4 simulated cyber-defense exercises, leading infrastructure-hardening and threat-mitigation workshops.",
+    ],
+  },
+  {
+    role: "Design Team Lead",
+    org: "RU Airborne, Avionics & Integration",
+    period: "Jan 2025 – Present",
+    location: "New Brunswick, NJ",
+    kind: "hardware",
+    bullets: [
+      "Directed integration of interconnected avionics subsystems on a UAV sponsored by NASA and Lockheed Martin — 100% compliance with strict safety and reliability standards.",
+      "Delivered a fully integrated system within a strict 5-week timeline by coordinating cross-functional Aerodynamics and Manufacturing teams.",
+    ],
+  },
+  {
+    role: "Alumni Relations Chair",
+    org: "Phi Mu Delta Fraternity",
+    period: "Jan 2024 – Present",
+    location: "New Brunswick, NJ",
+    kind: "leadership",
+    bullets: [
+      "Surpassed fundraising targets by 625% for the Embrace Kids Foundation, securing sponsorships from 32 local organizations.",
+    ],
+  },
+];
+
+export const skillGroups: { title: string; items: string[] }[] = [
+  {
+    title: "Offensive Methodology",
+    items: [
+      "Footprinting & Enumeration",
+      "Vulnerability Assessment",
+      "Password Attacks",
+      "Credential Chaining",
+      "Lateral Movement",
+      "AD Attack Paths",
+    ],
+  },
+  {
+    title: "Auth & Windows Internals",
+    items: [
+      "Kerberos / NTLM",
+      "SMB / WinRM / RDP",
+      "NTDS.dit",
+      "SAM / LSA / LSASS",
+    ],
+  },
+  {
+    title: "Detection & Tooling",
+    items: [
+      "Python Security Tooling",
+      "Scan-Output Parsing",
+      "SIEM / ELK Log Analysis",
+    ],
+  },
+  {
+    title: "Cloud & Identity",
+    items: [
+      "Microsoft Entra ID",
+      "Azure AI Foundry",
+      "Azure RBAC",
+      "SAS Access Scoping",
+      "Server Hardening",
+    ],
+  },
+  {
+    title: "Full-Stack",
+    items: ["Next.js", "TypeScript", "React", "Supabase / PostgreSQL", "Stripe", "Vercel"],
+  },
+];
+
+export const certifications = {
+  inProgress: [
+    "CompTIA Security+",
+    "OffSec OSCP+",
+    "HTB CPTS",
+    "HTB COAE",
+    "Microsoft SC-500",
   ],
-  collaboration: {
-    text: "Project Daedalus was developed with key sponsorship and support from Lockheed Martin and NASA.",
-    partners: [
-      { name: "Lockheed Martin", logo: "/lockheed-martin-logo.jpg" },
-      { name: "NASA", logo: "/nasa.png" }
-    ]
-  }
+  honors: ["Dean's List Recipient", "ISC2 NJ Chapter — Active Member"],
 };
 
-export const educationData = [
-  {
-    school: "Rutgers University",
-    degree: "B.S. Information Technology",
-    minor: "Critical Intelligence",
-    graduation: "Expected Jan 2027"
-  }
-];
+export const education = {
+  school: "Rutgers University",
+  degree: "B.S. Information Technology & Informatics",
+  minor: "Minor in Critical Intelligence",
+  graduation: "Expected May 2027",
+  location: "New Brunswick, NJ",
+};
 
-export const skillsList = [
-  'Java', 'C', 'Python', 'RISC-V', 'HTML/CSS', 'Wireshark', 'Nmap', 'GDB', 'Git', 'Linux'
-];
+// ---- Case studies (the deeper exhibit pages, keyed by Artifact.id) ----
+export type CaseStudy = {
+  year: string;
+  role: string;
+  github?: string;
+  live?: string;
+  overview: string;
+  highlights: { label: string; detail: string }[];
+  stack: string[];
+};
 
-export const organizationsData = [
-  { name: "Phi Mu Delta Fraternity", role: "Alumni Chair" },
-  { name: "RU Airborne", role: "Avionics Deputy Lead" },
-  { name: "RU Cybersecurity Club", role: "Team Member" }
-];
-
-export const experienceData = [
-  {
-    title: "Design Team Deputy Lead",
-    company: "RU Airborne, Avionics & Integration",
-    period: "Jan 2025 - Present",
-    details: [
-      "Authored a detailed design report on propulsion performance and safety improvements.",
-      "Led cross-functional system integration for the 'Daedalus' aircraft within a strict 5-week prototyping window.",
-      "Optimized aircraft propulsion to achieve a 1.46 T/W ratio and projected 80 m/s cruise speed.",
-      "Enhanced high-load system reliability, resulting in zero critical failures during 130A peak-current flight operations."
-    ]
-  }
-];
-
-export const softwareProjects = [
-  {
-    id: "risc-v-simulator",
-    title: "RISC-V Simulator",
-    description: "Cycle-accurate 5-stage pipeline with cache logic.",
-    category: "Architecture",
-    color: "purple",
-    icon: "C",
-    link: "/software/risc-v-simulator",
-    longDescription: "Developed a cycle-accurate 5-stage pipeline and set-associative cache simulator, achieving 100% execution fidelity for the RISC-V ISA subset."
+export const caseStudies: Record<string, CaseStudy> = {
+  penpal: {
+    year: "2026",
+    role: "Creator & maintainer",
+    github: "https://github.com/yousifnazhat",
+    overview:
+      "PenPal is an open-source, methodology-driven assistant for authorized penetration testing. Instead of firing off ad-hoc commands, it scaffolds a clean engagement: per-target workspaces, dry-run scan plans you review before anything touches the wire, structured ingestion of XML and evidence, masked parameters, and deterministic, playbook-backed recommendations — all reportable through a local JSON API.",
+    highlights: [
+      { label: "Repeatable playbooks", detail: "Operationalized MITRE ATT&CK, OWASP, NIST, HTB Academy and OffSec guidance into deterministic, reviewable methodology blocks." },
+      { label: "Validated pipeline", detail: "An automated methodology pipeline validated 55 methodology files, 21 PenPal-ready files, 21 evidence-rule blocks — and 0 invalid blocks." },
+      { label: "Safe by design", detail: "Dry-run scan plans and masked parameters keep operators inside the rules of engagement before any action executes." },
+      { label: "Structured evidence", detail: "XML / evidence ingestion and a local JSON-API report turn raw output into auditable findings." },
+    ],
+    stack: ["Python", "CLI", "JSON API", "MITRE ATT&CK", "OWASP", "NIST"],
   },
-  {
-    id: "election-engine",
-    title: "Election Engine",
-    description: "Triply-Nested Linked List for O(1) voter traversal.",
-    category: "Algorithms",
-    color: "orange",
-    icon: "J",
-    link: "/software/election-engine",
-    longDescription: "Architected a custom triply-nested linked list to efficiently query thousands of historical voter records without external databases."
+  "attack-detection-labs": {
+    year: "2025–2026",
+    role: "Red & blue team",
+    overview:
+      "A pair of enterprise labs that close the loop between offense and detection. On the red side: full credential chains across Windows, Linux and Active Directory. On the blue side: honeypot telemetry streamed into ELK, where the same attacker behaviors surface as detection signal.",
+    highlights: [
+      { label: "Credential chaining", detail: "Validated SAM/LSA/LSASS extraction, NTDS.dit dumping, Kerberos ticket import, Pass-the-Hash, SMB credential chaining and WinRM access." },
+      { label: "End-to-end workflows", detail: "Executed password-attack, credential-dumping, ticketing, access-validation and lateral-movement workflows against a domain." },
+      { label: "1,000+ events captured", detail: "Deployed honeypot telemetry and captured 1,000+ authentication attempts for analysis." },
+      { label: "Detection dashboards", detail: "Transformed events into ELK security-analytics dashboards, identifying reconnaissance and brute-force patterns." },
+    ],
+    stack: ["Active Directory", "Kerberos / NTLM", "Credential Dumping", "ELK", "Honeypot Telemetry"],
   },
-  {
-    id: "unix-fs-emulator",
-    title: "Unix FS Emulator",
-    description: "Memory-resident N-ary tree filesystem.",
-    category: "Systems",
-    color: "blue",
-    icon: "C",
-    link: "/software/unix-fs-emulator",
-    longDescription: "Memory-resident N-ary tree filesystem emulation."
+  "mu-sigma": {
+    year: "2025",
+    role: "Architect & full-stack engineer",
+    github: "https://github.com/yousifnazhat",
+    overview:
+      "A production alumni platform for the Phi Mu Delta Mu Sigma chapter — donations, live reporting, and donor privacy, built with a security-first posture. Money movement is handled through Stripe with idempotent, signed webhooks; secrets never leave the server.",
+    highlights: [
+      { label: "10 pages, 3 server APIs", detail: "A full public site plus server endpoints powering donations and live reporting." },
+      { label: "Idempotent payments", detail: "Stripe Checkout for one-time and monthly gifts, with signed and idempotent webhooks across 6 event types." },
+      { label: "Secret isolation", detail: "Server-side secret isolation so keys and tokens never reach the client." },
+      { label: "Privacy controls", detail: "Opt-in donor-privacy controls and Supabase persistence for reporting." },
+    ],
+    stack: ["Next.js", "TypeScript", "React", "Supabase / PostgreSQL", "Stripe", "Vercel"],
   },
-  {
-    id: "128-bit-toolkit",
-    title: "128-Bit Toolkit",
-    description: "Low-level bitwise math for cryptography.",
-    category: "Optimization",
-    color: "red",
-    icon: "C",
-    link: "/software/128-bit-toolkit",
-    longDescription: "Engineered low-level bitwise algorithms to enable high-precision cryptography-grade computation beyond standard 64-bit hardware limits."
+  "project-daedalus": {
+    year: "2025",
+    role: "Avionics design-team lead",
+    overview:
+      "Project Daedalus is a NASA- and Lockheed-Martin-sponsored UAV. As avionics & integration lead, I directed the integration of interconnected subsystems under strict safety and reliability standards — the hardware counterpart to the rest of this museum, where a single failed interface is not an option.",
+    highlights: [
+      { label: "100% interface compliance", detail: "Rigorous interface validation ensured full compliance with strict safety and reliability standards." },
+      { label: "5-week integration", detail: "Delivered a fully integrated system within a strict window by coordinating Aerodynamics and Manufacturing teams." },
+      { label: "1.46 thrust-to-weight", detail: "Optimized propulsion to a 1.46 T/W ratio for the target flight envelope." },
+      { label: "Zero critical failures", detail: "No critical failures during 130A peak-current flight operations." },
+    ],
+    stack: ["Embedded C/C++", "RISC-V", "Avionics Integration", "Systems Validation"],
   },
-  {
-    id: "symbiote-host-compatibility-tree",
-    title: "Symbiote Tree",
-    description: "N-ary tree for symbiote-host compatibility.",
-    category: "Data Structures",
-    color: "green",
-    icon: "J",
-    link: "/software/symbiote-host-compatibility-tree",
-    longDescription: "N-ary tree implementation for tracking biological compatibility data."
-  },
-  {
-    id: "honeypot-lab",
-    title: "Honeypot Lab",
-    description: "SSH honeypot with ELK SIEM monitoring.",
-    category: "Cybersecurity",
-    color: "cyan",
-    icon: "🛡",
-    link: "/software/honeypot-lab",
-    longDescription: "Deployed a multi-VM security lab with Cowrie SSH honeypot and ELK Stack SIEM, capturing 500+ credential attempts per simulation run."
-  }
-];
-
-export const coreStack = ["C/C++", "ARDUINO", "RISC-V", "JAVA", "NEXT.JS", "COWRIE", "ELK STACK", "SYSTEMS INTEGRATION"];
+};
