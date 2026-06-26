@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { collection, caseStudies, profile } from "../../../data/portfolioData";
-import Meander from "../../../components/Meander";
 
 export function generateStaticParams() {
   return collection.map((a) => ({ id: a.id }));
@@ -79,14 +78,16 @@ export default async function ExhibitPage({
           </div>
         </header>
 
-        <Meander />
-
         <div className="study-body">
           <p className="study-overview">{study.overview}</p>
 
-          {artifact.image && (
+          {(artifact.images?.[0]?.src ?? artifact.image) && (
             // eslint-disable-next-line @next/next/no-img-element
-            <img className="study-image" src={artifact.image} alt={artifact.title} />
+            <img
+              className="study-image"
+              src={artifact.images?.[0]?.src ?? artifact.image}
+              alt={artifact.title}
+            />
           )}
 
           <h2 className="study-h2">Selected work</h2>
@@ -119,6 +120,7 @@ export default async function ExhibitPage({
         </footer>
       </div>
 
+      <div className="vignette" />
       <div className="grain" />
     </article>
   );

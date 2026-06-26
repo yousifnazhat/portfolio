@@ -3,6 +3,7 @@
 // intentionally omitted everywhere. Do not add it.
 
 export type Tag = { label: string; kind: "security" | "neutral" };
+export type ArtifactImage = { src: string; fit: "cover" | "contain" };
 
 export const profile = {
   name: "Yousif Nazhat",
@@ -36,6 +37,9 @@ export type Artifact = {
   blurb: string;
   longDescription: string;
   tags: Tag[];
+  year: string;
+  t: number;
+  images: ArtifactImage[];
   image?: string;
   href?: string;
 };
@@ -48,6 +52,9 @@ export const collection: Artifact[] = [
     category: "Tooling",
     title: "PenPal",
     medium: "Python · authorized enumeration assistant",
+    year: "2026",
+    t: 5,
+    images: [],
     blurb:
       "A modular assistant for authorized pentesting — automated workspaces, dry-run scan plans, evidence ingestion, and deterministic, methodology-driven recommendations.",
     longDescription:
@@ -66,6 +73,9 @@ export const collection: Artifact[] = [
     category: "Red Team",
     title: "Attack & Detection Labs",
     medium: "Active Directory · credential chaining · ELK",
+    year: "2025–26",
+    t: 3,
+    images: [{ src: "/images/attack-detection/architecture-diagram.svg", fit: "contain" }],
     blurb:
       "Full credential chains across Windows, Linux and AD — then 1,000+ captured auth events turned into ELK detection dashboards.",
     longDescription:
@@ -85,6 +95,15 @@ export const collection: Artifact[] = [
     category: "Full-Stack",
     title: "Mu Sigma Alumni Platform",
     medium: "Next.js · Stripe · Supabase · Vercel",
+    year: "2025",
+    t: 2,
+    images: [
+      { src: "/images/mu-sigma/slide-5.jpeg", fit: "cover" },
+      { src: "/images/mu-sigma/slide-3.jpeg", fit: "cover" },
+      { src: "/images/mu-sigma/slide-2.jpeg", fit: "cover" },
+      { src: "/images/mu-sigma/formal-group.jpg", fit: "cover" },
+      { src: "/images/mu-sigma/crest.jpg", fit: "contain" },
+    ],
     blurb:
       "A deployed alumni platform — 10 pages, 3 server APIs, idempotent Stripe webhooks across 6 event types, server-side secret isolation and donor-privacy controls.",
     longDescription:
@@ -103,6 +122,13 @@ export const collection: Artifact[] = [
     category: "Hardware",
     title: "Project Daedalus",
     medium: "Avionics · NASA & Lockheed Martin",
+    year: "2025",
+    t: 1,
+    images: [
+      { src: "/images/daedalus/plane.jpg", fit: "cover" },
+      { src: "/images/daedalus/thrust-stand.jpg", fit: "cover" },
+      { src: "/images/daedalus/ecalc-data.jpg", fit: "contain" },
+    ],
     blurb:
       "Design-team lead on a sponsored UAV — avionics integrated to 100% interface compliance with zero critical failures at 130A peak current.",
     longDescription:
@@ -122,6 +148,9 @@ export const collection: Artifact[] = [
     category: "Architecture",
     title: "RISC-V Pipeline Simulator",
     medium: "C · cycle-accurate 5-stage pipeline",
+    year: "2026",
+    t: 4,
+    images: [{ src: "/riscv-pipeline-diagram.svg", fit: "contain" }],
     blurb:
       "A cycle-accurate, 5-stage pipelined RISC-V processor with a configurable set-associative cache — 100% execution fidelity across the RV64I subset.",
     longDescription:
@@ -338,3 +367,62 @@ export const caseStudies: Record<string, CaseStudy> = {
     stack: ["C", "Makefile", "RISC-V RV64I", "Set-Associative Cache", "Computer Architecture"],
   },
 };
+
+// ---- Gilded Atelier additions ----
+export const navItems = [
+  { n: "01", label: "The Collection", href: "#collection" },
+  { n: "02", label: "The Atelier", href: "#atelier" },
+  { n: "03", label: "The Stack", href: "#arsenal" },
+  { n: "04", label: "Contact", href: "#contact" },
+];
+
+export const marquee = [
+  "Red Team",
+  "Active Directory",
+  "Credential Chaining",
+  "Kerberos / NTLM",
+  "ELK Detection",
+  "Azure Identity",
+  "Avionics Integration",
+  "Full-Stack",
+];
+
+export const counters = [
+  { v: 1000, suffix: "+", k: "Auth attempts captured" },
+  { v: 78, suffix: "", k: "Server assets de-risked" },
+  { v: 50, suffix: "+", k: "Members trained" },
+  { v: 0, suffix: "", k: "Critical failures" },
+];
+
+export type TechItem = { name: string; slug: string | null; glyph: string | null };
+const icon = (name: string, slug: string): TechItem => ({ name, slug, glyph: null });
+const glyph = (name: string, g: string): TechItem => ({ name, slug: null, glyph: g });
+
+export const stack: { title: string; items: TechItem[] }[] = [
+  {
+    title: "Languages",
+    items: [icon("Python", "python"), icon("TypeScript", "typescript"), icon("JavaScript", "javascript"), icon("C++", "cplusplus"), icon("PHP", "php")],
+  },
+  {
+    title: "Offensive & Security",
+    items: [icon("Metasploit", "metasploit"), glyph("msfvenom", "msf"), icon("Kali Linux", "kalilinux"), icon("Wireshark", "wireshark"), icon("Burp Suite", "burpsuite")],
+  },
+  {
+    title: "ML & Frameworks",
+    items: [icon("PyTorch", "pytorch"), icon("React", "react"), icon("Next.js", "nextdotjs"), icon("Node.js", "nodedotjs")],
+  },
+  {
+    title: "Cloud & DevOps",
+    items: [icon("Docker", "docker"), glyph("Azure", "Az"), icon("Vercel", "vercel"), icon("Git", "git"), icon("Linux", "linux")],
+  },
+  {
+    title: "Data & Detection",
+    items: [icon("PostgreSQL", "postgresql"), icon("Supabase", "supabase"), icon("Elastic / ELK", "elasticsearch"), icon("Stripe", "stripe")],
+  },
+];
+
+export const credentials = [
+  { title: "Certifications · In Progress", items: ["CompTIA Security+", "OffSec OSCP+", "HTB CPTS", "HTB COAE", "Microsoft SC-500"] },
+  { title: "Honors", items: ["Dean's List Recipient", "ISC2 NJ Chapter — Member"] },
+  { title: "Education", items: ["B.S. IT & Informatics", "Minor in Critical Intelligence", "Rutgers · Expected May 2027"] },
+];

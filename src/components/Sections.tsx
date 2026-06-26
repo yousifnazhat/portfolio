@@ -1,58 +1,140 @@
 import {
-  stats,
   collection,
   atelier,
-  skillGroups,
-  certifications,
-  education,
+  stack,
+  credentials,
+  counters,
+  marquee,
   profile,
 } from "../data/portfolioData";
 import Reveal from "./Reveal";
+import Counter from "./Counter";
+import TechTile from "./TechTile";
+
+export function Marquee() {
+  const Row = ({ hidden }: { hidden?: boolean }) => (
+    <div className="grp" aria-hidden={hidden}>
+      {marquee.map((m, i) => (
+        <span className="kw" key={i}>
+          {m}
+          <span className="diamond" />
+        </span>
+      ))}
+    </div>
+  );
+  return (
+    <div className="marquee">
+      <div className="marquee-track">
+        <Row />
+        <Row hidden />
+      </div>
+    </div>
+  );
+}
 
 export function Stats() {
   return (
-    <div className="stats">
-      {stats.map((s) => (
-        <div className="stat" key={s.k}>
-          <div className="n">{s.n}</div>
-          <div className="k">{s.k}</div>
-        </div>
-      ))}
+    <div className="wrap">
+      <div className="stats">
+        {counters.map((s) => (
+          <Reveal key={s.k}>
+            <div className="stat">
+              <div className="n">
+                <Counter value={s.v} suffix={s.suffix} />
+              </div>
+              <div className="k">{s.k}</div>
+            </div>
+          </Reveal>
+        ))}
+      </div>
     </div>
   );
 }
 
 export function Collection() {
+  const items = [...collection].sort((a, b) => b.t - a.t);
   return (
     <section className="section" id="collection">
       <div className="wrap">
         <Reveal>
           <div className="sec-head">
             <h2>The Collection</h2>
-            <span className="idx">FIVE ARTIFACTS</span>
+            <span className="idx">Timeline · 2025 → 2026</span>
           </div>
         </Reveal>
-        <div className="gallery">
-          {collection.map((a) => (
-            <Reveal key={a.id}>
-              <a className="exhibit-card" href={`/exhibit/${a.id}`}>
-                <span className="arrow">↗</span>
-                <div className="no">
-                  {a.no} · {a.category}
+        <div className="timeline">
+          {items.map((a, i) => {
+            const lead = a.images[0];
+            const thumbs = a.images.slice(1);
+            const notLast = i !== items.length - 1;
+            return (
+              <div className="tl-row" key={a.id}>
+                <Reveal>
+                  <div className="tl-year">
+                    <div className="y">{a.year}</div>
+                    <div className="no">{a.no}</div>
+                  </div>
+                </Reveal>
+                <div className="tl-spine">
+                  {notLast && <span className="line" />}
+                  <span className="node" />
                 </div>
-                <h3>{a.title}</h3>
-                <div className="medium">{a.medium}</div>
-                <p className="blurb">{a.blurb}</p>
-                <div className="tags">
-                  {a.tags.map((t) => (
-                    <span className={`tag ${t.kind}`} key={t.label}>
-                      {t.label}
-                    </span>
-                  ))}
-                </div>
-              </a>
-            </Reveal>
-          ))}
+                <Reveal>
+                  <a className="artifact" href={`/exhibit/${a.id}`}>
+                    <span className="scan" />
+                    {!lead && (
+                      <div className="lead terminal">
+                        <div>
+                          <div className="l1">$ penpal init --target acme.corp</div>
+                          <div className="l2">› workspace scaffolded · dry-run plan ready</div>
+                          <div className="l3">› 55 methodology files · 0 invalid blocks</div>
+                          <div className="l4">SOURCE ONLY · NO ARTIFACT PHOTOGRAPHED</div>
+                        </div>
+                      </div>
+                    )}
+                    {lead && lead.fit === "cover" && (
+                      <div className="lead cover">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={lead.src} alt="" loading="lazy" />
+                        <span className="scrim" />
+                      </div>
+                    )}
+                    {lead && lead.fit === "contain" && (
+                      <div className="lead contain">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={lead.src} alt="" loading="lazy" />
+                      </div>
+                    )}
+                    <div className="a-no">
+                      {a.no} · {a.category}
+                    </div>
+                    <h3 className="a-title">{a.title}</h3>
+                    <div className="a-medium">{a.medium}</div>
+                    <p className="a-blurb">{a.blurb}</p>
+                    {thumbs.length > 0 && (
+                      <div className="thumbs">
+                        {thumbs.map((th, j) => (
+                          <span key={j}>
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img src={th.src} alt="" loading="lazy" />
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                    <div className="tags">
+                      {a.tags.map((t) => (
+                        <span className="tag" key={t.label}>
+                          {t.kind === "security" && <span className="dot" />}
+                          {t.label}
+                        </span>
+                      ))}
+                    </div>
+                    <span className="arr">↗</span>
+                  </a>
+                </Reveal>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
@@ -66,18 +148,16 @@ export function Atelier() {
         <Reveal>
           <div className="sec-head">
             <h2>The Atelier</h2>
-            <span className="idx">APPOINTMENTS</span>
+            <span className="idx">Appointments</span>
           </div>
         </Reveal>
         {atelier.map((r) => (
           <Reveal key={r.org}>
             <div className="atelier-row">
-              <div className="meta">
+              <div>
                 <div className="role">{r.role}</div>
                 <div className="org">{r.org}</div>
-                <div className={`kind ${r.kind === "security" ? "security" : ""}`}>
-                  {r.kind}
-                </div>
+                <div className="kind">{r.kind.charAt(0).toUpperCase() + r.kind.slice(1)}</div>
                 <div className="period">
                   {r.period} · {r.location}
                 </div>
@@ -95,47 +175,42 @@ export function Atelier() {
   );
 }
 
-export function Arsenal() {
+export function Stack() {
   return (
     <section className="section" id="arsenal">
       <div className="wrap">
         <Reveal>
-          <div className="sec-head">
-            <h2>The Arsenal</h2>
-            <span className="idx">INSTRUMENTS</span>
+          <div className="sec-head" style={{ marginBottom: 48 }}>
+            <h2>The Stack</h2>
+            <span className="idx">Toolchain</span>
           </div>
         </Reveal>
-        <Reveal>
-          <div className="skills">
-            {skillGroups.map((g) => (
-              <div className="skill-group" key={g.title}>
+        {stack.map((g) => (
+          <Reveal key={g.title}>
+            <div className="stack-row">
+              <div className="cat">
                 <h4>{g.title}</h4>
+              </div>
+              <div className="tiles">
+                {g.items.map((it) => (
+                  <TechTile key={it.name} item={it} />
+                ))}
+              </div>
+            </div>
+          </Reveal>
+        ))}
+        <Reveal>
+          <div className="credentials">
+            {credentials.map((c) => (
+              <div className="cred" key={c.title}>
+                <h4>{c.title}</h4>
                 <ul>
-                  {g.items.map((it) => (
-                    <li key={it}>{it}</li>
+                  {c.items.map((i) => (
+                    <li key={i}>{i}</li>
                   ))}
                 </ul>
               </div>
             ))}
-            <div className="skill-group">
-              <h4>Certifications · In Progress</h4>
-              <ul>
-                {certifications.inProgress.map((c) => (
-                  <li key={c}>{c}</li>
-                ))}
-              </ul>
-            </div>
-            <div className="skill-group">
-              <h4>Honors</h4>
-              <ul>
-                {certifications.honors.map((c) => (
-                  <li key={c}>{c}</li>
-                ))}
-                <li>{education.degree}</li>
-                <li>{education.minor}</li>
-                <li>{education.graduation}</li>
-              </ul>
-            </div>
           </div>
         </Reveal>
       </div>
@@ -146,36 +221,34 @@ export function Arsenal() {
 export function Contact() {
   return (
     <section className="contact" id="contact">
-      <div className="wrap">
-        <Reveal>
-          <p className="lead">Commission a breach.</p>
-          <a className="email" href={`mailto:${profile.contact.email}`}>
-            {profile.contact.email}
+      <Reveal>
+        <p className="lead">Commission a breach.</p>
+        <a className="email" href={`mailto:${profile.contact.email}`}>
+          {profile.contact.email}
+        </a>
+        <div className="links">
+          <a className="btn-gold" href={profile.contact.github} target="_blank" rel="noreferrer">
+            GitHub
           </a>
-          <div className="links">
-            <a href={profile.contact.github} target="_blank" rel="noreferrer">
-              GitHub
-            </a>
-            <a href={profile.contact.linkedin} target="_blank" rel="noreferrer">
-              LinkedIn
-            </a>
-            <a href={`tel:${profile.contact.phone.replace(/[^0-9]/g, "")}`}>
-              {profile.contact.phone}
-            </a>
-          </div>
-        </Reveal>
-      </div>
+          <a className="btn-outline" href={profile.contact.linkedin} target="_blank" rel="noreferrer">
+            LinkedIn
+          </a>
+          <a className="btn-outline" href={`tel:${profile.contact.phone.replace(/[^0-9]/g, "")}`}>
+            {profile.contact.phone}
+          </a>
+        </div>
+      </Reveal>
     </section>
   );
 }
 
 export function Footer() {
   return (
-    <footer className="footer">
-      <div className="wrap" style={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
-        <div className="fn">{profile.name.toUpperCase()}</div>
+    <div className="wrap">
+      <footer className="footer">
+        <div className="fn">YOUSIF NAZHAT</div>
         <div className="fm">© 2026 · CURATED IN THE LABYRINTH</div>
-      </div>
-    </footer>
+      </footer>
+    </div>
   );
 }

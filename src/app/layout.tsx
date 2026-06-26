@@ -1,30 +1,24 @@
 import type { Metadata } from "next";
-import { Cinzel, Cormorant_Garamond, IBM_Plex_Mono } from "next/font/google";
+import { Cormorant_Garamond, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-
-const cinzel = Cinzel({
-  variable: "--font-display",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-});
 
 const cormorant = Cormorant_Garamond({
   variable: "--font-serif",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
+  weight: ["400", "500", "600", "700"],
   style: ["normal", "italic"],
 });
 
-const plexMono = IBM_Plex_Mono({
+const jetbrains = JetBrains_Mono({
   variable: "--font-mono",
   subsets: ["latin"],
-  weight: ["400", "500"],
+  weight: ["300", "400", "500"],
 });
 
 export const metadata: Metadata = {
   title: "Yousif Nazhat — Offensive Security Engineer",
   description:
-    "A working museum of systems built and systems broken. Offensive security, security tooling, and high-reliability hardware by Yousif Nazhat.",
+    "A working museum of systems built and systems broken — red-team tradecraft, security tooling, and high-reliability hardware by Yousif Nazhat.",
   openGraph: {
     title: "Yousif Nazhat — Offensive Security Engineer",
     description: "Maker of tools, breaker of trust boundaries.",
@@ -37,9 +31,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${cinzel.variable} ${cormorant.variable} ${plexMono.variable} antialiased`}
-      >
+      <body className={`${cormorant.variable} ${jetbrains.variable} antialiased`}>
         {children}
       </body>
     </html>
