@@ -1,10 +1,10 @@
 import Hero from "../components/Hero";
-import Meander from "../components/Meander";
 import {
+  Marquee,
   Stats,
   Collection,
   Atelier,
-  Arsenal,
+  Stack,
   Contact,
   Footer,
 } from "../components/Sections";
@@ -15,29 +15,17 @@ export default function Home() {
       <Hero defaultModel="/statue.glb" />
 
       <main>
-        <div className="wrap" style={{ paddingTop: 40 }}>
-          <Meander />
-        </div>
-
-        <div className="wrap" style={{ marginTop: 40 }}>
-          <Stats />
-        </div>
-
+        <Marquee />
+        <Stats />
         <Collection />
-
-        <div className="wrap" style={{ marginTop: 90 }}>
-          <Meander />
-        </div>
-
         <Atelier />
-        <Arsenal />
+        <Stack />
         <Contact />
       </main>
 
-      <div className="wrap">
-        <Footer />
-      </div>
+      <Footer />
 
+      <div className="vignette" />
       <div className="grain" />
     </>
   );
