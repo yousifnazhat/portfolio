@@ -116,6 +116,24 @@ export const collection: Artifact[] = [
     image: "/hero-plane.jpg",
     href: "#collection",
   },
+  {
+    id: "risc-v-simulator",
+    no: "No. 05",
+    category: "Architecture",
+    title: "RISC-V Pipeline Simulator",
+    medium: "C · cycle-accurate 5-stage pipeline",
+    blurb:
+      "A cycle-accurate, 5-stage pipelined RISC-V processor with a configurable set-associative cache — 100% execution fidelity across the RV64I subset.",
+    longDescription:
+      "A complete simulation of a pipelined RISC-V processor, faithfully modeling execution of an RV64I subset. Five classic stages — Fetch, Decode, Execute, Memory, Writeback — drive a set-associative cache (64-byte blocks, configurable associativity, LRU eviction, write-back with dirty bits). Cycle-accurate timing and realistic memory latency yield 100% execution fidelity for memory and arithmetic operations.",
+    tags: [
+      { label: "C", kind: "neutral" },
+      { label: "Computer Architecture", kind: "neutral" },
+      { label: "Cache", kind: "neutral" },
+      { label: "RV64I", kind: "neutral" },
+    ],
+    image: "/riscv-pipeline-diagram.svg",
+  },
 ];
 
 // "The Atelier" — roles & appointments.
@@ -304,5 +322,19 @@ export const caseStudies: Record<string, CaseStudy> = {
       { label: "Zero critical failures", detail: "No critical failures during 130A peak-current flight operations." },
     ],
     stack: ["Embedded C/C++", "RISC-V", "Avionics Integration", "Systems Validation"],
+  },
+  "risc-v-simulator": {
+    year: "2026",
+    role: "Author",
+    github: "https://github.com/yousifnazhat/riscv-pipeline-simulator",
+    overview:
+      "A cycle-accurate simulation of a pipelined RISC-V processor, written in C. It models a subset of the RV64I ISA across the five classic pipeline stages and pairs the datapath with a configurable set-associative cache — turning the textbook diagram into a running, testable machine.",
+    highlights: [
+      { label: "5-stage pipeline", detail: "Fetch, Decode, Execute, Memory and Writeback, each modeled as a discrete stage with accurate timing." },
+      { label: "RV64I core ISA", detail: "Arithmetic, logical, memory (LD/SD), branch (BEQ/BNE/BLT…), and jump (JAL/JALR) instructions, plus limited ECALL." },
+      { label: "Set-associative cache", detail: "64-byte blocks, configurable associativity, LRU eviction, and write-back with dirty bits — plus hit/miss statistics." },
+      { label: "100% fidelity", detail: "Cycle-accurate timing and realistic memory latency give full execution fidelity for memory and arithmetic operations." },
+    ],
+    stack: ["C", "Makefile", "RISC-V RV64I", "Set-Associative Cache", "Computer Architecture"],
   },
 };

@@ -425,6 +425,10 @@ a {
   background: var(--line);
   border: 1px solid var(--line);
 }
+/* a lone final card (odd count) spans full width as a featured exhibit */
+.gallery > *:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+}
 .exhibit-card {
   background: var(--paper);
   padding: 40px 38px;

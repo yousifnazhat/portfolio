@@ -29,7 +29,7 @@ export function Collection() {
         <Reveal>
           <div className="sec-head">
             <h2>The Collection</h2>
-            <span className="idx">FOUR ARTIFACTS</span>
+            <span className="idx">FIVE ARTIFACTS</span>
           </div>
         </Reveal>
         <div className="gallery">
