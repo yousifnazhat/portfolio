@@ -1,13 +1,7 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import { navItems, profile } from "../data/portfolioData";
 import Signature from "./Signature";
-
-const PlasmaCore = dynamic(() => import("./PlasmaCore"), {
-  ssr: false,
-  loading: () => null,
-});
 
 const sparkles = [
   { top: "34%", left: "24%", size: 26, anim: "twinkle 4.2s ease-in-out infinite" },
@@ -35,10 +29,6 @@ export default function Hero() {
         <svg className="r2" viewBox="0 0 600 600">
           <ellipse cx="300" cy="300" rx="296" ry="150" transform="rotate(64 300 300)" fill="none" stroke="rgba(201,162,76,.12)" strokeWidth="1" />
         </svg>
-      </div>
-
-      <div className="scene">
-        <PlasmaCore />
       </div>
 
       {sparkles.map((s, i) => (
@@ -90,8 +80,6 @@ export default function Hero() {
           little hardware.
         </p>
       </div>
-
-      <div className="plinthlabel">Antimatter core · always enumerating</div>
 
       <div className="herofoot">
         <a className="scrollcue" href="#collection" data-magnetic="0.4">

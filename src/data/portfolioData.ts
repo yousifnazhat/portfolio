@@ -8,9 +8,9 @@ export type ArtifactImage = { src: string; fit: "cover" | "contain"; caption?: s
 export const profile = {
   name: "Yousif Nazhat",
   role: "Offensive Security Engineer",
-  tagline: "Maker of tools, breaker of trust boundaries.",
+  tagline: "Offensive-security engineer who designs.",
   wallText:
-    "A working museum of systems built — and systems broken. Red-team tradecraft, security tooling, and high-reliability hardware, kept under one roof.",
+    "I keep red-team tradecraft, security tooling, and high-reliability hardware under one roof — systems built, and systems broken.",
   status: "Available · 2026",
   location: "New Brunswick, NJ",
   contact: {
@@ -353,7 +353,7 @@ export const caseStudies: Record<string, CaseStudy> = {
     year: "2025",
     role: "Avionics design-team lead",
     overview:
-      "Project Daedalus is a NASA- and Lockheed-Martin-sponsored UAV. As avionics & integration lead, I directed the integration of interconnected subsystems under strict safety and reliability standards — the hardware counterpart to the rest of this museum, where a single failed interface is not an option.",
+      "Project Daedalus is a NASA- and Lockheed-Martin-sponsored UAV. As avionics & integration lead, I directed the integration of interconnected subsystems under strict safety and reliability standards — the hardware counterpart to everything else here, where a single failed interface is not an option.",
     highlights: [
       { label: "100% interface compliance", detail: "Rigorous interface validation ensured full compliance with strict safety and reliability standards." },
       { label: "5-week integration", detail: "Delivered a fully integrated system within a strict window by coordinating Aerodynamics and Manufacturing teams." },
@@ -380,9 +380,9 @@ export const caseStudies: Record<string, CaseStudy> = {
 
 // ---- Gilded Atelier additions ----
 export const navItems = [
-  { n: "01", label: "The Collection", href: "#collection" },
-  { n: "02", label: "The Atelier", href: "#atelier" },
-  { n: "03", label: "The Stack", href: "#arsenal" },
+  { n: "01", label: "Work", href: "#collection" },
+  { n: "02", label: "Experience", href: "#atelier" },
+  { n: "03", label: "Stack", href: "#arsenal" },
   { n: "04", label: "Contact", href: "#contact" },
 ];
 

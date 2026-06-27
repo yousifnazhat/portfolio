@@ -15,7 +15,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { id } = await params;
   const a = collection.find((x) => x.id === id);
-  if (!a) return { title: "Exhibit — Daedalus" };
+  if (!a) return { title: "Yousif Nazhat" };
   return {
     title: `${a.title} — ${profile.name}`,
     description: a.blurb,
@@ -46,7 +46,7 @@ export default async function ExhibitPage({
             <span className="mark">YN</span>DAEDALUS
           </Link>
           <Link href="/#collection" className="study-back">
-            ← Back to the collection
+            ← Back to work
           </Link>
         </nav>
 
@@ -112,7 +112,7 @@ export default async function ExhibitPage({
 
         <footer className="study-foot">
           <Link href="/#collection" className="view">
-            ← Back to the collection
+            ← Back to work
           </Link>
           <a className="view" href={`mailto:${profile.contact.email}`}>
             Get in touch →

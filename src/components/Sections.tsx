@@ -58,7 +58,7 @@ export function Collection() {
       <div className="wrap">
         <Reveal>
           <div className="sec-head">
-            <h2 data-split>The Collection</h2>
+            <h2 data-split>Selected Work</h2>
             <span className="idx">Timeline · 2025 → 2026</span>
           </div>
         </Reveal>
@@ -147,8 +147,8 @@ export function Atelier() {
       <div className="wrap">
         <Reveal>
           <div className="sec-head">
-            <h2 data-split>The Atelier</h2>
-            <span className="idx">Appointments</span>
+            <h2 data-split>Experience</h2>
+            <span className="idx">Roles</span>
           </div>
         </Reveal>
         {atelier.map((r) => (
@@ -181,7 +181,7 @@ export function Stack() {
       <div className="wrap">
         <Reveal>
           <div className="sec-head" style={{ marginBottom: 48 }}>
-            <h2 data-split>The Stack</h2>
+            <h2 data-split>Stack</h2>
             <span className="idx">Toolchain</span>
           </div>
         </Reveal>
@@ -247,7 +247,7 @@ export function Footer() {
     <div className="wrap">
       <footer className="footer">
         <div className="fn">YOUSIF NAZHAT</div>
-        <div className="fm">© 2026 · CURATED IN THE LABYRINTH</div>
+        <div className="fm">© 2026 · ALWAYS ENUMERATING</div>
       </footer>
     </div>
   );
