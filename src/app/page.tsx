@@ -1,4 +1,7 @@
 import Hero from "../components/Hero";
+import IntroLoader from "../components/IntroLoader";
+import Cursor from "../components/Cursor";
+import HeadingReveals from "../components/HeadingReveals";
 import {
   Marquee,
   Stats,
@@ -12,7 +15,11 @@ import {
 export default function Home() {
   return (
     <>
-      <Hero defaultModel="/statue.glb" />
+      <IntroLoader />
+      <Cursor />
+      <HeadingReveals />
+
+      <Hero />
 
       <main>
         <Marquee />

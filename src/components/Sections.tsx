@@ -58,7 +58,7 @@ export function Collection() {
       <div className="wrap">
         <Reveal>
           <div className="sec-head">
-            <h2>The Collection</h2>
+            <h2 data-split>The Collection</h2>
             <span className="idx">Timeline · 2025 → 2026</span>
           </div>
         </Reveal>
@@ -147,7 +147,7 @@ export function Atelier() {
       <div className="wrap">
         <Reveal>
           <div className="sec-head">
-            <h2>The Atelier</h2>
+            <h2 data-split>The Atelier</h2>
             <span className="idx">Appointments</span>
           </div>
         </Reveal>
@@ -181,7 +181,7 @@ export function Stack() {
       <div className="wrap">
         <Reveal>
           <div className="sec-head" style={{ marginBottom: 48 }}>
-            <h2>The Stack</h2>
+            <h2 data-split>The Stack</h2>
             <span className="idx">Toolchain</span>
           </div>
         </Reveal>
@@ -222,7 +222,7 @@ export function Contact() {
   return (
     <section className="contact" id="contact">
       <Reveal>
-        <p className="lead">Commission a breach.</p>
+        <p className="lead">Get in touch.</p>
         <a className="email" href={`mailto:${profile.contact.email}`}>
           {profile.contact.email}
         </a>
