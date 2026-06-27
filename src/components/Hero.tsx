@@ -1,10 +1,10 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useCallback, useState } from "react";
 import { navItems, profile } from "../data/portfolioData";
+import Signature from "./Signature";
 
-const StatueScene = dynamic(() => import("./StatueScene"), {
+const PlasmaCore = dynamic(() => import("./PlasmaCore"), {
   ssr: false,
   loading: () => null,
 });
@@ -16,34 +16,14 @@ const sparkles = [
   { top: "70%", right: "22%", size: 22, anim: "twinkle 6s ease-in-out .3s infinite" },
 ];
 
-export default function Hero({ defaultModel }: { defaultModel?: string }) {
-  const [modelUrl, setModelUrl] = useState<string | undefined>(defaultModel);
-  const [dropping, setDropping] = useState(false);
-
-  const onDrop = useCallback((e: React.DragEvent) => {
-    e.preventDefault();
-    setDropping(false);
-    const file = e.dataTransfer.files?.[0];
-    if (!file) return;
-    if (!/\.(glb|gltf)$/i.test(file.name)) return;
-    setModelUrl(URL.createObjectURL(file));
-  }, []);
-
+export default function Hero() {
   return (
-    <section
-      className="hero"
-      onDragOver={(e) => {
-        e.preventDefault();
-        setDropping(true);
-      }}
-      onDragLeave={() => setDropping(false)}
-      onDrop={onDrop}
-    >
+    <section className="hero">
       <div className="spotlight" />
       <div className="lattice" />
 
       <div className="giant">
-        <h1>NAZHAT</h1>
+        <Signature text="Yousif Nazhat" />
         <div className="sublabel">Offensive&nbsp;&nbsp;Security&nbsp;&nbsp;Engineer</div>
       </div>
 
@@ -58,7 +38,7 @@ export default function Hero({ defaultModel }: { defaultModel?: string }) {
       </div>
 
       <div className="scene">
-        <StatueScene modelUrl={modelUrl} />
+        <PlasmaCore />
       </div>
 
       {sparkles.map((s, i) => (
@@ -99,22 +79,23 @@ export default function Hero({ defaultModel }: { defaultModel?: string }) {
       </nav>
 
       <div className="wall">
-        <div className="exhibit">Exhibit 01 · The Daedalus Collection</div>
-        <p className="tagline">Maker of tools, breaker of trust boundaries.</p>
+        <div className="exhibit">Yousif Nazhat · Portfolio ’26</div>
+        <p className="tagline">Hey, I&rsquo;m Yousif&nbsp;— I love enumerating.</p>
       </div>
 
       <div className="caption">
         <p>
-          {profile.name} keeps red-team tradecraft, security tooling, and high-reliability
-          hardware under one roof — a working museum of systems built and systems broken.
+          An offensive-security engineer who designs. I build security tooling and
+          high-reliability systems — then I take them apart. Red team, detection, and a
+          little hardware.
         </p>
       </div>
 
-      <div className="plinthlabel">Marble · gilded breaks · 2026</div>
+      <div className="plinthlabel">Antimatter core · always enumerating</div>
 
       <div className="herofoot">
-        <a className="scrollcue" href="#collection">
-          Scroll to enter the collection <span>↓</span>
+        <a className="scrollcue" href="#collection" data-magnetic="0.4">
+          Scroll to see the work <span>↓</span>
         </a>
       </div>
 
@@ -123,27 +104,6 @@ export default function Hero({ defaultModel }: { defaultModel?: string }) {
         {profile.status}
       </div>
       <div className="vert">New Brunswick · MMXXVII</div>
-
-      {dropping && (
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            zIndex: 9,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            background: "rgba(11,10,8,.6)",
-            fontFamily: "var(--font-mono-stack)",
-            fontSize: 12,
-            letterSpacing: ".18em",
-            textTransform: "uppercase",
-            color: "var(--gold-l)",
-          }}
-        >
-          Release to mount the statue
-        </div>
-      )}
     </section>
   );
 }

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { collection, caseStudies, profile } from "../../../data/portfolioData";
+import Gallery from "../../../components/Gallery";
 
 export function generateStaticParams() {
   return collection.map((a) => ({ id: a.id }));
@@ -30,6 +31,12 @@ export default async function ExhibitPage({
   const artifact = collection.find((a) => a.id === id);
   const study = caseStudies[id];
   if (!artifact || !study) notFound();
+
+  const imgs = artifact.images?.length
+    ? artifact.images
+    : artifact.image
+      ? [{ src: artifact.image, fit: "cover" as const }]
+      : [];
 
   return (
     <article className="study">
@@ -81,14 +88,7 @@ export default async function ExhibitPage({
         <div className="study-body">
           <p className="study-overview">{study.overview}</p>
 
-          {(artifact.images?.[0]?.src ?? artifact.image) && (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              className="study-image"
-              src={artifact.images?.[0]?.src ?? artifact.image}
-              alt={artifact.title}
-            />
-          )}
+          <Gallery images={imgs} />
 
           <h2 className="study-h2">Selected work</h2>
           <ul className="study-highlights">
@@ -115,7 +115,7 @@ export default async function ExhibitPage({
             ← Back to the collection
           </Link>
           <a className="view" href={`mailto:${profile.contact.email}`}>
-            Commission a breach →
+            Get in touch →
           </a>
         </footer>
       </div>

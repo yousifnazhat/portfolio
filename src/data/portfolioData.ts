@@ -3,7 +3,7 @@
 // intentionally omitted everywhere. Do not add it.
 
 export type Tag = { label: string; kind: "security" | "neutral" };
-export type ArtifactImage = { src: string; fit: "cover" | "contain" };
+export type ArtifactImage = { src: string; fit: "cover" | "contain"; caption?: string };
 
 export const profile = {
   name: "Yousif Nazhat",
@@ -97,13 +97,7 @@ export const collection: Artifact[] = [
     medium: "Next.js · Stripe · Supabase · Vercel",
     year: "2025",
     t: 2,
-    images: [
-      { src: "/images/mu-sigma/slide-5.jpeg", fit: "cover" },
-      { src: "/images/mu-sigma/slide-3.jpeg", fit: "cover" },
-      { src: "/images/mu-sigma/slide-2.jpeg", fit: "cover" },
-      { src: "/images/mu-sigma/formal-group.jpg", fit: "cover" },
-      { src: "/images/mu-sigma/crest.jpg", fit: "contain" },
-    ],
+    images: [],
     blurb:
       "A deployed alumni platform — 10 pages, 3 server APIs, idempotent Stripe webhooks across 6 event types, server-side secret isolation and donor-privacy controls.",
     longDescription:
@@ -125,9 +119,24 @@ export const collection: Artifact[] = [
     year: "2025",
     t: 1,
     images: [
-      { src: "/images/daedalus/plane.jpg", fit: "cover" },
-      { src: "/images/daedalus/thrust-stand.jpg", fit: "cover" },
-      { src: "/images/daedalus/ecalc-data.jpg", fit: "contain" },
+      {
+        src: "/images/daedalus/plane.jpg",
+        fit: "cover",
+        caption:
+          "The Daedalus UAV airframe — Rutgers Airborne, sponsored by NASA & Lockheed Martin. I led integration of the interconnected avionics subsystems mounted inside this build.",
+      },
+      {
+        src: "/images/daedalus/thrust-stand.jpg",
+        fit: "cover",
+        caption:
+          "Our custom propulsion thrust stand. We bench-tested the powertrain here to validate the 1.46 thrust-to-weight ratio against the simulation before flight.",
+      },
+      {
+        src: "/images/daedalus/ecalc-data.jpg",
+        fit: "contain",
+        caption:
+          "eCalc propulsion modeling — the predictive baseline (motor, prop, battery, cruise) we tuned the real powertrain against to hit the target flight envelope.",
+      },
     ],
     blurb:
       "Design-team lead on a sponsored UAV — avionics integrated to 100% interface compliance with zero critical failures at 130A peak current.",
@@ -329,6 +338,7 @@ export const caseStudies: Record<string, CaseStudy> = {
     year: "2025",
     role: "Architect & full-stack engineer",
     github: "https://github.com/yousifnazhat",
+    live: "https://musigmaalumni.vercel.app/",
     overview:
       "A production alumni platform for the Phi Mu Delta Mu Sigma chapter — donations, live reporting, and donor privacy, built with a security-first posture. Money movement is handled through Stripe with idempotent, signed webhooks; secrets never leave the server.",
     highlights: [
