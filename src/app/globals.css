@@ -165,14 +165,9 @@ a {
 .hero .giant { position: absolute; top: 13%; left: 0; right: 0; z-index: 2; text-align: center; pointer-events: none; animation: fadeIn 1.6s ease both; }
 .hero .giant h1 { margin: 0; font-weight: 600; font-size: clamp(86px, 17vw, 272px); line-height: 0.82; letter-spacing: 0.01em; color: var(--ivory); }
 .sig { position: relative; display: inline-block; pointer-events: none; }
-.sig-clip { display: inline-block; white-space: nowrap; vertical-align: bottom; clip-path: inset(-18% 100% -18% 0); }
-.sig.reveal .sig-clip { clip-path: inset(-18% 0% -18% 0); }
-.sig.reveal .sig-pen { display: none; }
-.sig.go .sig-clip { animation: sigWrite 2.3s var(--d, 0.35s) cubic-bezier(0.45, 0.05, 0.2, 1) forwards; }
-.sig.go .sig-pen { animation: sigPen 2.3s var(--d, 0.35s) cubic-bezier(0.45, 0.05, 0.2, 1) forwards, sigPenFade 0.45s calc(var(--d, 0.35s) + 2.1s) forwards; }
-@keyframes sigWrite { from { clip-path: inset(-18% 100% -18% 0); } to { clip-path: inset(-18% 0% -18% 0); } }
-@keyframes sigPen { from { left: 0%; opacity: 1; } to { left: 100%; opacity: 1; } }
-@keyframes sigPenFade { to { opacity: 0; } }
+.sig-clip { display: inline-block; white-space: nowrap; vertical-align: bottom; }
+.sig-cover { position: absolute; inset: -14% -2%; background: #15110b; transform: scaleX(1); transform-origin: right center; z-index: 2; will-change: transform; }
+.sig.reveal .sig-cover { display: none; }
 .sig-text {
   display: inline-block;
   font-family: var(--font-script), cursive;
@@ -193,6 +188,7 @@ a {
   background: var(--gold-pale);
   box-shadow: 0 0 16px 5px rgba(244, 220, 154, 0.75), 0 0 4px 1px #fff;
   transform: translate(-50%, -50%);
+  opacity: 0;
 }
 .hero .sublabel { margin-top: 6px; font-family: var(--font-mono-stack); font-size: clamp(10px, 1vw, 13px); letter-spacing: 0.62em; text-transform: uppercase; color: var(--muted); padding-left: 0.62em; }
 .hero .rings { position: absolute; top: 54%; left: 50%; width: min(78vw, 720px); height: min(78vw, 720px); transform: translate(-50%, -50%); z-index: 3; pointer-events: none; animation: fadeIn 2s ease both; }
