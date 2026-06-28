@@ -6,7 +6,7 @@ import gsap from "gsap";
 /* Cinematic clip-band intro — adapted (MIT) from Animmaster's "cinematic-loader-entrance".
    Reskinned to the Gilded Atelier: gold marquee on near-black, wipes to reveal the hero.
    Plays once per session, respects prefers-reduced-motion. */
-const WORD = "DAEDALUS";
+const WORD = "YOUSIF NAZHAT";
 const SEP = "◆";
 
 export default function IntroLoader() {
