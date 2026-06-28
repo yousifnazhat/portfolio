@@ -1,5 +1,6 @@
 import Hero from "../components/Hero";
-import IntroLoader from "../components/IntroLoader";
+import Gate from "../components/Gate";
+import Transition from "../components/Transition";
 import Cursor from "../components/Cursor";
 import HeadingReveals from "../components/HeadingReveals";
 import {
@@ -14,7 +15,8 @@ import {
 export default function Home() {
   return (
     <>
-      <IntroLoader />
+      <Gate />
+      <Transition />
       <Cursor />
       <HeadingReveals />
 

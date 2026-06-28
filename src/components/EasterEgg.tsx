@@ -24,8 +24,13 @@ export default function EasterEgg() {
         }
       }
     };
+    const onEgg = () => setOpen(true);
     window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
+    window.addEventListener("whoami-egg", onEgg);
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      window.removeEventListener("whoami-egg", onEgg);
+    };
   }, []);
 
   if (!open) return null;
