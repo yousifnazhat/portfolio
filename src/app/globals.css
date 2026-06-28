@@ -475,4 +475,31 @@ html.has-cursor, html.has-cursor * { cursor: none !important; }
   .hstat:nth-child(2) { border-right: 0; }
   .sidebar { display: none; }
 }
+
+/* ===================== ENTRY GATE (phase 1) ===================== */
+html.gate-lock, html.gate-lock body { overflow: hidden; height: 100%; }
+.gate { position: fixed; inset: 0; z-index: 10000; background: #0e0d0a; color: #cfc8b8; font-family: var(--font-mono-stack); display: flex; align-items: center; justify-content: center; padding: 30px; transition: transform 1s cubic-bezier(0.7, 0, 0.2, 1); }
+.gate.exit { transform: translateY(-101%); }
+.gate-inner { width: min(640px, 94vw); }
+.gate-boot { margin: 0 0 20px; font-size: 13px; line-height: 1.95; color: #2f8f5a; white-space: pre-wrap; }
+.gate-line { display: flex; align-items: center; gap: 11px; font-size: 15px; }
+.gate-pre { color: var(--gold); font-weight: 700; white-space: nowrap; }
+.gate-in { background: none; border: 0; outline: none; color: #f0ead9; font: inherit; flex: 1; min-width: 0; caret-color: var(--gold); letter-spacing: 0.02em; }
+.gate-err { margin: 14px 0 0; color: var(--gold-deep); font-size: 13px; }
+.gate-grant { margin: 14px 0 0; color: var(--gold); font-size: 14px; font-weight: 700; letter-spacing: 0.04em; }
+.gate-hint { margin-top: 24px; font-size: 12px; color: #6b6456; letter-spacing: 0.03em; }
+.gate-hint b { color: #cfc8b8; }
+.gate-skip { background: none; border: 0; color: var(--gold-l); font: inherit; cursor: pointer; text-decoration: underline; }
+
+/* ===================== PAGE TRANSITION (phase 2) ===================== */
+.ptrans { position: fixed; inset: 0; z-index: 9999; background: var(--gold); transform: translateY(100%); pointer-events: none; display: flex; align-items: center; justify-content: center; }
+.ptrans.in { transform: translateY(0); transition: transform 0.6s cubic-bezier(0.7, 0, 0.2, 1); pointer-events: auto; }
+.ptrans.out { transform: translateY(-100%); transition: transform 0.6s cubic-bezier(0.7, 0, 0.2, 1); }
+.ptrans-label { font-family: var(--font-display-stack); font-weight: 700; font-size: clamp(28px, 6vw, 84px); color: var(--ink); letter-spacing: -0.02em; }
+
+/* CLI command line + tip */
+.cliwrap { margin-top: 28px; }
+.cliwrap .cli { margin-top: 0; }
+.cli-tip { margin-top: 11px; font-family: var(--font-mono-stack); font-size: 12px; color: var(--muted); letter-spacing: 0.02em; }
+.cli-tip b { color: var(--gold); font-weight: 700; }
 @media (max-width: 820px) { .gallery-grid { grid-template-columns: 1fr; } }
