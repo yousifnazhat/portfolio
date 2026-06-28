@@ -1,25 +1,18 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, JetBrains_Mono, Allura } from "next/font/google";
+import { JetBrains_Mono, Space_Mono } from "next/font/google";
 import "./globals.css";
 import EasterEgg from "../components/EasterEgg";
-
-const cormorant = Cormorant_Garamond({
-  variable: "--font-serif",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  style: ["normal", "italic"],
-});
 
 const jetbrains = JetBrains_Mono({
   variable: "--font-mono",
   subsets: ["latin"],
-  weight: ["300", "400", "500"],
+  weight: ["400", "500", "700", "800"],
 });
 
-const allura = Allura({
-  variable: "--font-script",
+const spaceMono = Space_Mono({
+  variable: "--font-display",
   subsets: ["latin"],
-  weight: ["400"],
+  weight: ["400", "700"],
 });
 
 export const metadata: Metadata = {
@@ -38,7 +31,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${cormorant.variable} ${jetbrains.variable} ${allura.variable} antialiased`}>
+      <body className={`${jetbrains.variable} ${spaceMono.variable} antialiased`}>
         {children}
         <EasterEgg />
       </body>

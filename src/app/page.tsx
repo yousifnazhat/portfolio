@@ -4,7 +4,6 @@ import Cursor from "../components/Cursor";
 import HeadingReveals from "../components/HeadingReveals";
 import {
   Marquee,
-  Stats,
   Collection,
   Atelier,
   Stack,
@@ -23,7 +22,6 @@ export default function Home() {
 
       <main>
         <Marquee />
-        <Stats />
         <Collection />
         <Atelier />
         <Stack />
