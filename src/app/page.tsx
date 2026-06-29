@@ -1,6 +1,7 @@
 import Hero from "../components/Hero";
 import Gate from "../components/Gate";
 import Transition from "../components/Transition";
+import StickyImages from "../components/StickyImages";
 import Cursor from "../components/Cursor";
 import HeadingReveals from "../components/HeadingReveals";
 import {
@@ -17,6 +18,7 @@ export default function Home() {
     <>
       <Gate />
       <Transition />
+      <StickyImages />
       <Cursor />
       <HeadingReveals />
 
