@@ -14,6 +14,8 @@ export default function EasterEgg() {
         setOpen(false);
         return;
       }
+      // don't capture typing while the entry gate is still up
+      if (!sessionStorage.getItem("entered")) return;
       const t = e.target as HTMLElement | null;
       if (t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.isContentEditable)) return;
       if (e.key.length === 1) {
