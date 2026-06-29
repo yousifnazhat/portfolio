@@ -3,11 +3,11 @@ import Gate from "../components/Gate";
 import Transition from "../components/Transition";
 import Cursor from "../components/Cursor";
 import HeadingReveals from "../components/HeadingReveals";
+import PinnedStack from "../components/PinnedStack";
 import {
   Marquee,
   Collection,
   Atelier,
-  Stack,
   Contact,
   Footer,
 } from "../components/Sections";
@@ -26,7 +26,7 @@ export default function Home() {
         <Marquee />
         <Collection />
         <Atelier />
-        <Stack />
+        <PinnedStack />
         <Contact />
       </main>
 
