@@ -95,14 +95,14 @@ export function Collection() {
                     {lead && lead.fit === "cover" && (
                       <div className="lead cover">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img src={lead.src} alt="" loading="lazy" data-sticky />
+                        <img src={lead.src} alt="" loading="lazy" />
                         <span className="scrim" />
                       </div>
                     )}
                     {lead && lead.fit === "contain" && (
                       <div className="lead contain">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img src={lead.src} alt="" loading="lazy" data-sticky />
+                        <img src={lead.src} alt="" loading="lazy" />
                       </div>
                     )}
                     <div className="a-no">
