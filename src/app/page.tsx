@@ -3,7 +3,7 @@ import Gate from "../components/Gate";
 import Transition from "../components/Transition";
 import Cursor from "../components/Cursor";
 import HeadingReveals from "../components/HeadingReveals";
-import PinnedStack from "../components/PinnedStack";
+import VelocityMarquee from "../components/VelocityMarquee";
 import {
   Marquee,
   Collection,
@@ -26,7 +26,7 @@ export default function Home() {
         <Marquee />
         <Collection />
         <Atelier />
-        <PinnedStack />
+        <VelocityMarquee />
         <Contact />
       </main>
 
