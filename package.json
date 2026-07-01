@@ -32,7 +32,6 @@
     "@types/three": "^0.171.0",
     "eslint": "^9",
     "eslint-config-next": "16.0.8",
-    "simple-icons": "^13.21.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

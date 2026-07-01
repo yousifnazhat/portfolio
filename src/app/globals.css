@@ -535,6 +535,27 @@ html.gate-lock, html.gate-lock body { overflow: hidden; height: 100%; }
   .spanel { width: auto; }
 }
 
+/* ===================== VELOCITY MARQUEE (Stack) ===================== */
+.marq { padding: 90px 0; overflow: hidden; }
+.marq .sec-head { margin-bottom: 40px; }
+.marq-rows { display: flex; flex-direction: column; gap: 2px; }
+.marq-row { overflow: hidden; white-space: nowrap; border-top: 1.5px solid var(--ink); padding: 14px 0; }
+.marq-rows .marq-row:last-child { border-bottom: 1.5px solid var(--ink); }
+.marq-track { display: inline-flex; align-items: center; will-change: transform; }
+.marq-item { display: inline-flex; align-items: center; font-family: var(--font-display-stack); font-weight: 700; font-size: clamp(26px, 4.6vw, 60px); letter-spacing: -0.02em; color: var(--ink); text-transform: uppercase; padding: 0 6px; }
+.marq-ico { display: inline-block; width: 0.7em; height: 0.7em; margin-right: 0.32em; background: var(--ink); -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center; -webkit-mask-size: contain; mask-size: contain; }
+.marq-glyph { font-family: var(--font-mono-stack); font-size: 0.5em; color: var(--gold); margin-right: 0.3em; }
+.marq-sep { color: var(--gold); font-style: normal; font-weight: 700; margin: 0 0.34em; }
+.marq-creds { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 60px; }
+.marq-creds .cred h5 { margin: 0 0 10px; font-family: var(--font-mono-stack); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); }
+.marq-creds .cred ul { margin: 0; padding: 0; list-style: none; }
+.marq-creds .cred li { font-family: var(--font-mono-stack); font-size: 14px; line-height: 1.8; color: var(--muted); }
+.marq-creds .cred li::before { content: "› "; color: var(--gold); }
+@media (max-width: 860px) {
+  .marq-creds { grid-template-columns: 1fr; gap: 22px; }
+  .marq-item { font-size: clamp(22px, 8vw, 38px); }
+}
+
 /* ===================== VELOCITY MARQUEE (stack) ===================== */
 .marq { padding: 90px 0 96px; overflow: hidden; }
 .marq-rows { margin: 44px 0 56px; }
