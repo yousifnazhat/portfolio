@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { stack, credentials } from "../data/portfolioData";
+import { stack, credentials, type TechItem } from "../data/portfolioData";
 
-const ITEMS = stack.flatMap((g) => g.items.map((i) => i.name));
-const ROWS: string[][] = [[], [], []];
+const ITEMS: TechItem[] = stack.flatMap((g) => g.items);
+const ROWS: TechItem[][] = [[], [], []];
 ITEMS.forEach((x, i) => ROWS[i % 3].push(x));
 const DIRS = [-1, 1, -1];
 
@@ -73,9 +73,20 @@ export default function VelocityMarquee() {
                 tracks.current[i] = el;
               }}
             >
-              {[...row, ...row, ...row].map((name, j) => (
+              {[...row, ...row, ...row].map((it, j) => (
                 <span className="marq-item" key={j}>
-                  {name}
+                  {it.slug ? (
+                    <span
+                      className="marq-ico"
+                      style={{
+                        WebkitMaskImage: `url(/icons/${it.slug}.svg)`,
+                        maskImage: `url(/icons/${it.slug}.svg)`,
+                      }}
+                    />
+                  ) : it.glyph ? (
+                    <span className="marq-glyph">{it.glyph}</span>
+                  ) : null}
+                  {it.name}
                   <i className="marq-sep">/</i>
                 </span>
               ))}
