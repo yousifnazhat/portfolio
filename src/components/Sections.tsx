@@ -1,15 +1,12 @@
 import {
   collection,
   atelier,
-  stack,
-  credentials,
   counters,
   marquee,
   profile,
 } from "../data/portfolioData";
 import Reveal from "./Reveal";
 import Counter from "./Counter";
-import TechTile from "./TechTile";
 
 export function Marquee() {
   const Row = ({ hidden }: { hidden?: boolean }) => (
@@ -170,49 +167,6 @@ export function Atelier() {
             </div>
           </Reveal>
         ))}
-      </div>
-    </section>
-  );
-}
-
-export function Stack() {
-  return (
-    <section className="section" id="arsenal">
-      <div className="wrap">
-        <Reveal>
-          <div className="sec-head" style={{ marginBottom: 48 }}>
-            <h2 data-split>Stack</h2>
-            <span className="idx">Toolchain</span>
-          </div>
-        </Reveal>
-        {stack.map((g) => (
-          <Reveal key={g.title}>
-            <div className="stack-row">
-              <div className="cat">
-                <h4>{g.title}</h4>
-              </div>
-              <div className="tiles">
-                {g.items.map((it) => (
-                  <TechTile key={it.name} item={it} />
-                ))}
-              </div>
-            </div>
-          </Reveal>
-        ))}
-        <Reveal>
-          <div className="credentials">
-            {credentials.map((c) => (
-              <div className="cred" key={c.title}>
-                <h4>{c.title}</h4>
-                <ul>
-                  {c.items.map((i) => (
-                    <li key={i}>{i}</li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </Reveal>
       </div>
     </section>
   );
