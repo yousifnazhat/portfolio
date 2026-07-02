@@ -3,9 +3,10 @@
 import { useEffect, useRef, useState } from "react";
 
 /* Phase 1 — the entry gate. A real terminal: just start typing (no input to
-   focus, no Enter required). Typing "whoami" grants access and wipes to the
-   site. Once per session, reduced-motion safe, never traps the user. */
-type Phase = "boot" | "prompt" | "granted" | "done";
+   focus, no Enter required). Typing "whoami" grants access, plays a short
+   readable "access granted" sequence, then wipes to the site. Once per
+   session, reduced-motion safe, never traps the user. */
+type Phase = "boot" | "prompt" | "granted" | "exit" | "done";
 
 export default function Gate() {
   const [phase, setPhase] = useState<Phase>("boot");
@@ -16,14 +17,21 @@ export default function Gate() {
   phaseRef.current = phase;
 
   const enter = () => {
-    if (phaseRef.current === "granted" || phaseRef.current === "done") return;
+    if (phaseRef.current === "granted" || phaseRef.current === "exit" || phaseRef.current === "done")
+      return;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const hold = reduce ? 700 : 3400; // let the granted sequence be read before the wipe
+    const wipe = reduce ? 50 : 1300; // slower reveal wipe
     setPhase("granted");
     window.setTimeout(() => {
-      sessionStorage.setItem("entered", "1");
-      window.dispatchEvent(new CustomEvent("gate-entered"));
-      document.documentElement.classList.remove("gate-lock");
-      setPhase("done");
-    }, 1100);
+      setPhase("exit");
+      window.setTimeout(() => {
+        sessionStorage.setItem("entered", "1");
+        window.dispatchEvent(new CustomEvent("gate-entered"));
+        document.documentElement.classList.remove("gate-lock");
+        setPhase("done");
+      }, wipe);
+    }, hold);
   };
 
   useEffect(() => {
@@ -39,7 +47,7 @@ export default function Gate() {
       if (phaseRef.current !== "prompt") return;
       let next = valRef.current;
       if (e.key === "Backspace") next = next.slice(0, -1);
-      else if (e.key === "Enter") next = next; // submit current
+      else if (e.key === "Enter") next = next;
       else if (e.key.length === 1) next = (next + e.key).slice(0, 24);
       else return;
       e.preventDefault();
@@ -59,15 +67,20 @@ export default function Gate() {
 
   if (phase === "done") return null;
 
+  const granted = phase === "granted" || phase === "exit";
+
   return (
-    <div className={`gate${phase === "granted" ? " exit" : ""}`} aria-label="entry terminal — type whoami to enter">
+    <div
+      className={`gate${phase === "exit" ? " exit" : ""}`}
+      aria-label="entry terminal — type whoami to enter"
+    >
       <div className="gate-inner">
         <pre className="gate-boot">{`> establishing secure channel ...... ok
 > tls handshake ................... ok
 > fingerprinting visitor .......... ok
 > identity required to proceed`}</pre>
 
-        {phase !== "boot" && (
+        {phase !== "boot" && !granted && (
           <div className="gate-line">
             <span className="gate-pre">visitor@yousif.dev:~$</span>
             <span className="gate-typed">{val}</span>
@@ -76,7 +89,16 @@ export default function Gate() {
         )}
 
         {err && <pre className="gate-err">{`> access denied — hint: just type whoami`}</pre>}
-        {phase === "granted" && <pre className="gate-grant">{`> ACCESS GRANTED — welcome, Yousif is expecting you.`}</pre>}
+
+        {granted && (
+          <div className="gate-grantseq">
+            <pre className="gate-grant gl1">{`visitor@yousif.dev:~$ whoami`}</pre>
+            <pre className="gate-grant gl2">{`> identity ............. Yousif Nazhat`}</pre>
+            <pre className="gate-grant gl3">{`> clearance ............ GRANTED`}</pre>
+            <pre className="gate-grant gl4">{`> booting portfolio ....`}</pre>
+          </div>
+        )}
+
         {phase === "prompt" && (
           <div className="gate-hint">
             [ start typing <b>whoami</b> ·{" "}
