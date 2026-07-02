@@ -17,8 +17,20 @@ export async function generateMetadata({
   const a = collection.find((x) => x.id === id);
   if (!a) return { title: "Yousif Nazhat" };
   return {
-    title: `${a.title} — ${profile.name}`,
+    title: a.title,
     description: a.blurb,
+    alternates: { canonical: `/exhibit/${a.id}` },
+    openGraph: {
+      title: `${a.title} — ${profile.name}`,
+      description: a.blurb,
+      url: `/exhibit/${a.id}`,
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${a.title} — ${profile.name}`,
+      description: a.blurb,
+    },
   };
 }
 
