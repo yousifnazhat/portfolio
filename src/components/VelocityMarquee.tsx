@@ -76,12 +76,13 @@ export default function VelocityMarquee() {
               {[...row, ...row, ...row].map((it, j) => (
                 <span className="marq-item" key={j}>
                   {it.slug ? (
-                    <span
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
                       className="marq-ico"
-                      style={{
-                        WebkitMaskImage: `url(/icons/${it.slug}.svg)`,
-                        maskImage: `url(/icons/${it.slug}.svg)`,
-                      }}
+                      src={`/icons/${it.slug}.svg`}
+                      alt=""
+                      aria-hidden="true"
+                      loading="lazy"
                     />
                   ) : it.glyph ? (
                     <span className="marq-glyph">{it.glyph}</span>
