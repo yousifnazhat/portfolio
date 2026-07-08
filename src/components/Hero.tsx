@@ -51,6 +51,20 @@ export default function Hero() {
           <p>
             I love <span className="hl">enumerating</span>.
           </p>
+          <pre className="ascii-jet" aria-hidden="true">
+{`            /\\
+           /  \\
+          |    |
+     _____|    |_____
+    /                \\
+   /__________________\\
+   \\                  /
+    \\________________/
+          |    |
+         /|    |\\
+        /_|    |_\\`}
+          </pre>
+          <div className="ascii-cap">// f-22 raptor · air superiority_</div>
         </div>
       </div>
 
