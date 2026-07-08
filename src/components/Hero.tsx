@@ -33,11 +33,9 @@ export default function Hero() {
         <div className="hero-left">
           <span className="chip">RED TEAM · TOOLING · DETECTION_</span>
           <h1 className="bighead">
-            Build&nbsp;It<span className="us">_</span>
+            Offense,
             <br />
-            Then
-            <br />
-            Break&nbsp;It<span className="us">_</span>
+            Engineered<span className="us">_</span>
           </h1>
           <CliHint />
         </div>
@@ -48,11 +46,10 @@ export default function Hero() {
           </h2>
           <p>
             An offensive-security engineer who designs. I build security tooling and
-            high-reliability systems — then I take them apart.
+            high-reliability systems.
           </p>
           <p>
-            Red team, detection, and a little hardware. I love{" "}
-            <span className="hl">enumerating</span>.
+            I love <span className="hl">enumerating</span>.
           </p>
         </div>
       </div>

@@ -547,7 +547,7 @@ html.gate-lock, html.gate-lock body { overflow: hidden; height: 100%; }
 .marq-rows .marq-row:last-child { border-bottom: 1.5px solid var(--ink); }
 .marq-track { display: inline-flex; align-items: center; will-change: transform; }
 .marq-item { display: inline-flex; align-items: center; font-family: var(--font-display-stack); font-weight: 700; font-size: clamp(26px, 4.6vw, 60px); letter-spacing: -0.02em; color: var(--ink); text-transform: uppercase; padding: 0 6px; }
-.marq-ico { display: inline-block; width: 0.72em; height: 0.72em; margin-right: 0.3em; object-fit: contain; vertical-align: -0.06em; }
+.marq-ico { display: inline-block; width: 0.72em; height: 0.72em; margin: 0 0.3em 0 0.14em; object-fit: contain; vertical-align: -0.06em; }
 .marq-glyph { font-family: var(--font-mono-stack); font-size: 0.5em; color: var(--gold); margin-right: 0.3em; }
 .marq-sep { color: var(--gold); font-style: normal; font-weight: 700; margin: 0 0.34em; }
 .marq-creds { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 60px; }
@@ -567,7 +567,7 @@ html.gate-lock, html.gate-lock body { overflow: hidden; height: 100%; }
 .marq-row:last-child { border-bottom: 1.5px solid var(--ink); }
 .marq-track { display: inline-flex; align-items: center; padding: 12px 0; will-change: transform; }
 .marq-item { display: inline-flex; align-items: center; font-family: var(--font-display-stack); font-weight: 700; font-size: clamp(30px, 5.2vw, 72px); letter-spacing: -0.02em; text-transform: uppercase; color: var(--ink); padding: 0 4px; }
-.marq-sep { font-style: normal; color: var(--gold); font-weight: 700; margin: 0 0.34em; }
+.marq-sep { font-style: normal; color: var(--gold); font-weight: 700; margin: 0 0.55em; }
 .marq-row:nth-child(2) .marq-item { color: transparent; -webkit-text-stroke: 1.4px var(--ink); }
 .marq-creds { display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px; margin-top: 6px; }
 .marq-creds .cred h5 { margin: 0 0 10px; font-family: var(--font-mono-stack); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); }
