@@ -445,7 +445,22 @@ html.has-cursor, html.has-cursor * { cursor: none !important; }
 .hero-right p { font-family: var(--font-mono-stack); font-size: 14px; line-height: 1.7; color: var(--muted); margin: 0 0 16px; }
 .hero-right .hl { color: #fff; background: var(--gold); padding: 0 4px; }
 .hero-right .jetbox { margin-top: 48px; display: flex; flex-direction: column; align-items: center; gap: 16px; }
-.hero-right .pixel-jet { width: min(260px, 60vw); height: auto; display: block; }
+.hero-right .pixel-jet {
+  width: min(260px, 60vw); height: auto; display: block;
+  /* faint warm wash where the afterburner meets the paper */
+  background: radial-gradient(42% 16% at 50% 87%, rgba(255, 90, 31, 0.1), transparent 70%);
+}
+
+/* stepped 8-bit flame flicker — three offset phases so it never pulses in sync */
+@keyframes pjFlick { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
+.pixel-jet .pj-f0 { animation: pjFlick 0.48s steps(1) infinite; }
+.pixel-jet .pj-f1 { animation: pjFlick 0.62s steps(1) infinite 0.12s; }
+.pixel-jet .pj-f2 { animation: pjFlick 0.54s steps(1) infinite 0.27s; }
+
+/* countermeasure burst — `flares` in the hero CLI */
+.pixel-jet .pj-burst { opacity: 0; }
+.pixel-jet.burst .pj-burst { opacity: 1; }
+.pixel-jet.burst .pj-f0, .pixel-jet.burst .pj-f1, .pixel-jet.burst .pj-f2 { animation-duration: 0.26s; }
 .hero-right .ascii-cap { font-family: var(--font-mono-stack); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); }
 
 .hero-stats { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1.5px solid var(--ink); margin: 0 46px; }

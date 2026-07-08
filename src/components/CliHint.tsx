@@ -37,7 +37,13 @@ export default function CliHint() {
       return;
     }
     if (c === "help" || c === "ls" || c === "?") {
-      setMsg("cmds → whoami · cd work · cd experience · cd stack · cd contact");
+      setMsg("cmds → whoami · cd work · cd experience · cd stack · cd contact · flares");
+      return;
+    }
+    if (c === "flares") {
+      window.dispatchEvent(new CustomEvent("jet-flares"));
+      setVal("");
+      setMsg("↯ countermeasures away_");
       return;
     }
     if (c === "clear") {
