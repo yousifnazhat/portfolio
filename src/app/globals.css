@@ -444,8 +444,9 @@ html.has-cursor, html.has-cursor * { cursor: none !important; }
 .rlabel { margin: 0 0 18px; font-family: var(--font-mono-stack); font-weight: 700; font-size: 21px; color: var(--ink); }
 .hero-right p { font-family: var(--font-mono-stack); font-size: 14px; line-height: 1.7; color: var(--muted); margin: 0 0 16px; }
 .hero-right .hl { color: #fff; background: var(--gold); padding: 0 4px; }
-.hero-right .ascii-jet { margin: 40px 0 0; font-family: var(--font-mono-stack); font-size: 12px; line-height: 1.25; color: var(--ink); white-space: pre; overflow: hidden; }
-.hero-right .ascii-cap { margin-top: 14px; font-family: var(--font-mono-stack); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); }
+.hero-right .jetbox { margin-top: 48px; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+.hero-right .pixel-jet { width: min(260px, 60vw); height: auto; display: block; }
+.hero-right .ascii-cap { font-family: var(--font-mono-stack); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); }
 
 .hero-stats { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1.5px solid var(--ink); margin: 0 46px; }
 .hstat { padding: 22px 16px 6px 0; border-right: 1px solid var(--line); }
