@@ -51,21 +51,21 @@ export const collection: Artifact[] = [
     no: "No. 01",
     category: "Tooling",
     title: "PenPal",
-    medium: "Python · authorized enumeration assistant",
+    medium: "Python · local-first enumeration assistant",
     year: "2026",
     t: 5,
     images: [],
     blurb:
-      "A modular assistant for authorized pentesting — automated workspaces, dry-run scan plans, evidence ingestion, and deterministic, methodology-driven recommendations.",
+      "PenPal V1 — a local-first, deterministic assistant for authorized enumeration. Paste tool output and it stores masked evidence, then returns evidence-backed next checks with every command shown, not run.",
     longDescription:
-      "Open-sourced PenPal: a modular Python assistant for authorized pentesting that automates target workspaces, dry-run scan plans, XML/evidence ingestion, masked parameters, deterministic recommendations and a local JSON-API report. Operationalized MITRE ATT&CK, OWASP, NIST, HTB Academy and OffSec guidance into repeatable playbooks — validated through an automated methodology pipeline (55 methodology files, 21 PenPal-ready files, 21 evidence-rule blocks, 0 invalid blocks).",
+      "Shipped PenPal v1.0.0 (MIT): a local-first, deterministic assistant for authorized enumeration, built around a Python core with an optional PI conversational cockpit and a read-only MCP server. It parses Nmap XML and ingests pasted tool output, stores scoped targets, services, evidence and parameters in a local workspace, masks credential-like values by default, and returns deterministic, evidence-backed suggestions — one primary next check plus alternatives — while suppressing operator-confirmed dead ends until their supporting inputs change. By design it never executes exploits, hides commands, uses credentials automatically, or provides C2 tasking. Validated with 97 Python tests, four bundled playbooks, clean-install and installed-wheel journeys, Python 3.11–3.13 CI across Linux, macOS and Windows, and CodeQL.",
     tags: [
       { label: "Python", kind: "neutral" },
-      { label: "MITRE ATT&CK", kind: "security" },
-      { label: "OWASP", kind: "security" },
+      { label: "Enumeration", kind: "security" },
+      { label: "MCP", kind: "neutral" },
       { label: "Open Source", kind: "neutral" },
     ],
-    href: "https://github.com/yousifnazhat",
+    href: "https://github.com/yousifnazhat/penpal",
   },
   {
     id: "attack-detection-labs",
@@ -310,16 +310,17 @@ export const caseStudies: Record<string, CaseStudy> = {
   penpal: {
     year: "2026",
     role: "Creator & maintainer",
-    github: "https://github.com/yousifnazhat",
+    github: "https://github.com/yousifnazhat/penpal",
+    live: "https://github.com/yousifnazhat/penpal/releases/tag/v1.0.0",
     overview:
-      "PenPal is an open-source, methodology-driven assistant for authorized penetration testing. Instead of firing off ad-hoc commands, it scaffolds a clean engagement: per-target workspaces, dry-run scan plans you review before anything touches the wire, structured ingestion of XML and evidence, masked parameters, and deterministic, playbook-backed recommendations — all reportable through a local JSON API.",
+      "PenPal V1 is an open-source, local-first assistant for authorized enumeration. Instead of firing off ad-hoc commands, it turns services and pasted tool output into stored, masked evidence and clear, evidence-backed next checks — with every command shown, not run. A deterministic Python core does the reasoning; an optional PI conversational cockpit and a read-only MCP server are just interfaces layered on top. By design it never executes exploits, hides commands, uses credentials automatically, or provides C2 tasking.",
     highlights: [
-      { label: "Repeatable playbooks", detail: "Operationalized MITRE ATT&CK, OWASP, NIST, HTB Academy and OffSec guidance into deterministic, reviewable methodology blocks." },
-      { label: "Validated pipeline", detail: "An automated methodology pipeline validated 55 methodology files, 21 PenPal-ready files, 21 evidence-rule blocks — and 0 invalid blocks." },
-      { label: "Safe by design", detail: "Dry-run scan plans and masked parameters keep operators inside the rules of engagement before any action executes." },
-      { label: "Structured evidence", detail: "XML / evidence ingestion and a local JSON-API report turn raw output into auditable findings." },
+      { label: "Deterministic core", detail: "A Python engine stores scoped targets, services and pasted tool output as evidence, then explains the next authorized check — same inputs, same recommendation, every run." },
+      { label: "Guided, not automated", detail: "Surfaces one primary next step plus up to two alternatives, and suppresses operator-confirmed dead ends until their supporting evidence changes or you reopen them." },
+      { label: "Safe by default", detail: "Masks credential-like evidence and sensitive parameters, keeps secrets as environment references outside workspace JSON, and prints commands instead of running them — no exploits, no C2." },
+      { label: "Validated V1", detail: "Shipped v1.0.0 (MIT) against 97 Python tests, four bundled playbooks, clean-install and installed-wheel journeys, Python 3.11–3.13 CI on Linux/macOS/Windows, and CodeQL." },
     ],
-    stack: ["Python", "CLI", "JSON API", "MITRE ATT&CK", "OWASP", "NIST"],
+    stack: ["Python", "CLI", "MCP", "PI Cockpit", "Nmap XML", "JSON API"],
   },
   "attack-detection-labs": {
     year: "2025–2026",
