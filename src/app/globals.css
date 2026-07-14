@@ -237,11 +237,13 @@ a {
 .lead.cover .scrim { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(11, 10, 8, 0.04) 28%, rgba(11, 10, 8, 0.82)); }
 .lead.contain { background: var(--bg-inset); display: flex; align-items: center; justify-content: center; padding: 16px; }
 .lead.contain img { max-width: 100%; max-height: 100%; object-fit: contain; display: block; border-radius: 2px; }
-.lead.terminal { background: radial-gradient(120% 120% at 80% 0%, rgba(255, 90, 31, 0.06), transparent 60%), var(--bg-dark); display: flex; align-items: center; padding: 0 40px; font-family: var(--font-mono-stack); }
+.lead.terminal { background: radial-gradient(120% 120% at 80% 0%, rgba(255, 90, 31, 0.06), transparent 60%), var(--bg-dark); height: auto; min-height: 214px; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 15px; padding: 26px 40px; font-family: var(--font-mono-stack); }
+.lead.terminal .term-lines { width: 100%; }
 .lead.terminal .l1 { color: var(--green); font-size: 13px; }
 .lead.terminal .l2 { color: #a89f8c; font-size: 13px; margin-top: 7px; }
 .lead.terminal .l3 { color: #a89f8c; font-size: 13px; margin-top: 3px; }
-.lead.terminal .l4 { color: var(--gold); font-size: 10px; letter-spacing: 0.22em; margin-top: 18px; }
+.lead.terminal .penpal-wordmark { width: min(300px, 100%); height: auto; display: block; }
+.lead.terminal .l4 { color: var(--gold); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; }
 
 .a-no { font-family: var(--font-mono-stack); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--brown); }
 .a-title { font-weight: 500; font-size: 30px; margin: 16px 0 4px; letter-spacing: 0.02em; color: var(--ivory); }

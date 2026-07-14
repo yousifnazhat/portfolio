@@ -7,6 +7,7 @@ import {
 } from "../data/portfolioData";
 import Reveal from "./Reveal";
 import Counter from "./Counter";
+import PenpalWordmark from "./PenpalWordmark";
 
 export function Marquee() {
   const Row = ({ hidden }: { hidden?: boolean }) => (
@@ -81,12 +82,13 @@ export function Collection() {
                     <span className="scan" />
                     {!lead && (
                       <div className="lead terminal">
-                        <div>
+                        <div className="term-lines">
                           <div className="l1">$ penpal init 10.10.11.42 --name box</div>
                           <div className="l2">› target scaffolded · scope enforced · evidence masked</div>
                           <div className="l3">› v1.0.0 · deterministic core · 11 PI tools</div>
-                          <div className="l4">EVIDENCE &gt; CONTEXT &gt; NEXT STEP</div>
                         </div>
+                        <PenpalWordmark />
+                        <div className="l4">·· evidence &gt; context &gt; next step ··</div>
                       </div>
                     )}
                     {lead && lead.fit === "cover" && (
