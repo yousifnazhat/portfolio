@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { collection, caseStudies, profile } from "../../../data/portfolioData";
 import Gallery from "../../../components/Gallery";
+import PixelPenguin from "../../../components/PixelPenguin";
 
 export function generateStaticParams() {
   return collection.map((a) => ({ id: a.id }));
@@ -99,6 +100,13 @@ export default async function ExhibitPage({
 
         <div className="study-body">
           <p className="study-overview">{study.overview}</p>
+
+          {artifact.id === "penpal" && (
+            <figure className="pengu-plate">
+              <PixelPenguin />
+              <figcaption>PenPal · evidence &gt; context &gt; next step_</figcaption>
+            </figure>
+          )}
 
           <Gallery images={imgs} />
 

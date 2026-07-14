@@ -82,10 +82,10 @@ export function Collection() {
                     {!lead && (
                       <div className="lead terminal">
                         <div>
-                          <div className="l1">$ penpal init --target acme.corp</div>
-                          <div className="l2">› workspace scaffolded · dry-run plan ready</div>
-                          <div className="l3">› 55 methodology files · 0 invalid blocks</div>
-                          <div className="l4">SOURCE ONLY · NO ARTIFACT PHOTOGRAPHED</div>
+                          <div className="l1">$ penpal init 10.10.11.42 --name box</div>
+                          <div className="l2">› target scaffolded · scope enforced · evidence masked</div>
+                          <div className="l3">› v1.0.0 · deterministic core · 11 PI tools</div>
+                          <div className="l4">EVIDENCE &gt; CONTEXT &gt; NEXT STEP</div>
                         </div>
                       </div>
                     )}
