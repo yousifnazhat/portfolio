@@ -79,7 +79,7 @@ export function Collection() {
                 <Reveal>
                   <a className="artifact" href={`/exhibit/${a.id}`}>
                     <span className="scan" />
-                    {!lead && (
+                    {!lead && a.id === "penpal" && (
                       <div className="lead terminal">
                         <div className="term-lines">
                           <div className="l1">$ penpal init 10.10.11.42 --name box</div>

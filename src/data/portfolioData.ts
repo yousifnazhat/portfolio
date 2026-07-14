@@ -97,7 +97,14 @@ export const collection: Artifact[] = [
     medium: "Next.js · Stripe · Supabase · Vercel",
     year: "2025",
     t: 2,
-    images: [],
+    images: [
+      {
+        src: "/mu-sigma-home.jpg",
+        fit: "cover",
+        caption:
+          "The live PMD Mu Sigma Alumni Association platform — public home base for alumni to reconnect, support the Impact Fund, and browse the event archive.",
+      },
+    ],
     blurb:
       "A deployed alumni platform — 10 pages, 3 server APIs, idempotent Stripe webhooks across 6 event types, server-side secret isolation and donor-privacy controls.",
     longDescription:
