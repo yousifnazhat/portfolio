@@ -7,7 +7,6 @@ import {
 } from "../data/portfolioData";
 import Reveal from "./Reveal";
 import Counter from "./Counter";
-import PenpalWordmark from "./PenpalWordmark";
 
 export function Marquee() {
   const Row = ({ hidden }: { hidden?: boolean }) => (
@@ -87,8 +86,13 @@ export function Collection() {
                           <div className="l2">› target scaffolded · scope enforced · evidence masked</div>
                           <div className="l3">› v1.0.0 · deterministic core · 11 PI tools</div>
                         </div>
-                        <PenpalWordmark />
-                        <div className="l4">·· evidence &gt; context &gt; next step ··</div>
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          className="term-art"
+                          src="/penpal-startup.png"
+                          alt="PenPal startup — PI conversational cockpit"
+                          loading="lazy"
+                        />
                       </div>
                     )}
                     {lead && lead.fit === "cover" && (
