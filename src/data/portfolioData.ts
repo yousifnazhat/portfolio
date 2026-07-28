@@ -200,6 +200,7 @@ export const atelier: Appointment[] = [
     kind: "security",
     bullets: [
       "Strengthened internal AI security posture by implementing Microsoft Entra ID and Azure AI Foundry agentic identity controls across Azure, reducing privilege-escalation and unauthorized agent-to-agent access paths.",
+      "Executed prompt-injection and adversarial emulation against an in-house Azure agent, reducing privilege-escalation and unauthorized agent-to-agent access paths, preventing data poisoning and sparsity attacks.",
       "Reduced end-of-support infrastructure risk across 78 server assets by analyzing dependencies and delivering remediation-ready architecture assessments with 100% coverage and prioritized migration actions.",
       "Secured an Azure LLM-integrated production server for Group Cyber Security review — scoping identity/SAS privileges, hardening workflows, and rebuilding patched configurations.",
     ],
