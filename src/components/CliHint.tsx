@@ -1,10 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { collection } from "../data/portfolioData";
+import { collection, competitions } from "../data/portfolioData";
 
 const SECTIONS: Record<string, string> = {
   work: "#collection",
+  ...(competitions.length
+    ? { competitions: "#competitions", comps: "#competitions", ctf: "#competitions" }
+    : {}),
   experience: "#atelier",
   exp: "#atelier",
   stack: "#arsenal",
@@ -37,7 +40,9 @@ export default function CliHint() {
       return;
     }
     if (c === "help" || c === "ls" || c === "?") {
-      setMsg("cmds → whoami · cd work · cd experience · cd stack · cd contact · flares");
+      setMsg(
+        `cmds → whoami · cd work${competitions.length ? " · cd competitions" : ""} · cd experience · cd stack · cd contact · flares`
+      );
       return;
     }
     if (c === "flares") {

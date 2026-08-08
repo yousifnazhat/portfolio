@@ -255,6 +255,70 @@ a {
 .tag { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono-stack); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; padding: 5px 10px; color: var(--muted); border: 1px solid var(--line-18); }
 .tag .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--green); }
 
+/* ===================== COMPETITIONS (hover-reveal index) ===================== */
+.comp-list { margin-top: 44px; border-top: 1.5px solid var(--ink); }
+.comp-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 62px minmax(0, 1fr) auto auto auto;
+  align-items: center;
+  gap: 26px;
+  padding: 24px 20px;
+  border-bottom: 1.5px solid var(--ink);
+  overflow: hidden;
+}
+/* orange sweep — purely decorative, sits under the text */
+.comp-row::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.5s cubic-bezier(0.7, 0, 0.2, 1);
+}
+.comp-row:hover::before,
+.comp-row:focus-within::before { transform: scaleX(1); }
+.comp-row > * { position: relative; z-index: 1; transition: color 0.3s ease; }
+
+.comp-no { font-family: var(--font-mono-stack); font-size: 12px; letter-spacing: 0.16em; color: var(--brown2); }
+.comp-main { min-width: 0; display: flex; flex-direction: column; gap: 8px; }
+.comp-detail { font-family: var(--font-mono-stack); font-size: 12px; letter-spacing: 0.04em; color: var(--muted); }
+.comp-name {
+  margin: 0; min-width: 0;
+  font-family: var(--font-display-stack); font-weight: 700;
+  font-size: clamp(22px, 3.4vw, 40px); line-height: 1.05;
+  letter-spacing: -0.02em; color: var(--ink);
+}
+.comp-org { font-family: var(--font-mono-stack); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.comp-result {
+  display: inline-flex; align-items: center; gap: 8px; white-space: nowrap;
+  font-family: var(--font-mono-stack); font-size: 13px; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold);
+}
+.comp-arr { font-style: normal; opacity: 0; transform: translateX(-6px); transition: opacity 0.3s ease, transform 0.3s ease; }
+.comp-year { font-family: var(--font-mono-stack); font-size: 13px; font-variant-numeric: tabular-nums; color: var(--brown2); }
+
+/* on hover the whole row inverts onto the orange sweep */
+.comp-row:hover .comp-no, .comp-row:focus-within .comp-no,
+.comp-row:hover .comp-org, .comp-row:focus-within .comp-org,
+.comp-row:hover .comp-detail, .comp-row:focus-within .comp-detail,
+.comp-row:hover .comp-year, .comp-row:focus-within .comp-year { color: rgba(255, 255, 255, 0.82); }
+.comp-row:hover .comp-name, .comp-row:focus-within .comp-name,
+.comp-row:hover .comp-result, .comp-row:focus-within .comp-result { color: #fff; }
+.comp-row:hover .comp-name .us, .comp-row:focus-within .comp-name .us { color: var(--ink); }
+.comp-row:hover .comp-arr, .comp-row:focus-within .comp-arr { opacity: 1; transform: none; }
+
+@media (max-width: 860px) {
+  .comp-row { grid-template-columns: 44px minmax(0, 1fr); gap: 6px 16px; padding: 18px 14px; }
+  .comp-main { grid-column: 2; }
+  .comp-org { grid-column: 2; }
+  .comp-result { grid-column: 2; }
+  .comp-year { grid-column: 1; grid-row: 1; font-size: 11px; }
+  .comp-arr { opacity: 1; transform: none; }
+}
+
 /* ===================== ATELIER ===================== */
 .atelier-row { display: grid; grid-template-columns: 240px 1fr; gap: 44px; padding: 38px 0; border-bottom: 1px solid var(--line); }
 .atelier-row .role { font-size: 22px; letter-spacing: 0.01em; margin-bottom: 7px; color: var(--ivory); }

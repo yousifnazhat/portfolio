@@ -1,6 +1,7 @@
 import {
   collection,
   atelier,
+  competitions,
   counters,
   marquee,
   profile,
@@ -138,6 +139,53 @@ export function Collection() {
               </div>
             );
           })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* Competitions — a hover-reveal index. Each row sweeps orange from the left
+   and inverts on hover; all content stays readable without the hover, so it
+   degrades safely on touch and if CSS/JS never runs. */
+export function Competitions() {
+  if (!competitions.length) return null;
+  return (
+    <section className="section comps" id="competitions">
+      <div className="wrap">
+        <Reveal>
+          <div className="sec-head">
+            <h2 data-split>Competitions</h2>
+            <span className="idx">
+              Scoreboard · {competitions.length}{" "}
+              {competitions.length === 1 ? "entry" : "entries"}
+            </span>
+          </div>
+        </Reveal>
+
+        <div className="comp-list">
+          {competitions.map((c, i) => (
+            <Reveal key={`${c.name}-${c.year}`}>
+              <article className="comp-row">
+                <span className="comp-no">{String(i + 1).padStart(2, "0")}</span>
+                <span className="comp-main">
+                  <h3 className="comp-name">
+                    {c.name}
+                    <span className="us">_</span>
+                  </h3>
+                  {c.detail && <span className="comp-detail">{c.detail}</span>}
+                </span>
+                <span className="comp-org">{c.org}</span>
+                <span className="comp-result">
+                  <i className="comp-arr" aria-hidden="true">
+                    ▸
+                  </i>
+                  {c.result}
+                </span>
+                <span className="comp-year">{c.year}</span>
+              </article>
+            </Reveal>
+          ))}
         </div>
       </div>
     </section>

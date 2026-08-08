@@ -239,6 +239,27 @@ export const atelier: Appointment[] = [
   },
 ];
 
+// "Competitions" — the scoreboard. Rendered as a hover-reveal index.
+// Empty array renders nothing at all, so the section is always fail-safe.
+export type Competition = {
+  name: string;
+  org: string;
+  result: string;
+  year: string;
+  detail?: string;
+};
+
+export const competitions: Competition[] = [
+  {
+    name: "Cyber Apocalypse 2026 — The Salt Crown",
+    org: "Hack The Box",
+    // Figures per the HTB certificate of participation (24–29 Jul 2026).
+    result: "12th / 6,744 teams",
+    year: "2026",
+    detail: "136/136 challenges solved · 69,425 pts · team 1337_PwnSp4c3",
+  },
+];
+
 export const skillGroups: { title: string; items: string[] }[] = [
   {
     title: "Offensive Methodology",
@@ -297,7 +318,7 @@ export const certifications = {
 
 export const education = {
   school: "Rutgers University",
-  degree: "B.S. Information Technology & Informatics",
+  degree: "B.S. Computer Science",
   minor: "Minor in Critical Intelligence",
   graduation: "Expected May 2027",
   location: "New Brunswick, NJ",
@@ -390,9 +411,12 @@ export const caseStudies: Record<string, CaseStudy> = {
 // ---- Gilded Atelier additions ----
 export const navItems = [
   { n: "01", label: "Work", href: "#collection" },
-  { n: "02", label: "Experience", href: "#atelier" },
-  { n: "03", label: "Stack", href: "#arsenal" },
-  { n: "04", label: "Contact", href: "#contact" },
+  ...(competitions.length
+    ? [{ n: "02", label: "Competitions", href: "#competitions" }]
+    : []),
+  { n: "03", label: "Experience", href: "#atelier" },
+  { n: "04", label: "Stack", href: "#arsenal" },
+  { n: "05", label: "Contact", href: "#contact" },
 ];
 
 export const marquee = [
@@ -443,5 +467,5 @@ export const stack: { title: string; items: TechItem[] }[] = [
 export const credentials = [
   { title: "Certifications · In Progress", items: ["CompTIA Security+", "OffSec OSCP+", "HTB CPTS", "HTB COAE", "Microsoft SC-500"] },
   { title: "Honors", items: ["Dean's List Recipient", "ISC2 NJ Chapter — Member"] },
-  { title: "Education", items: ["B.S. IT & Informatics", "Minor in Critical Intelligence", "Rutgers · Expected May 2027"] },
+  { title: "Education", items: ["B.S. Computer Science", "Minor in Critical Intelligence", "Rutgers · Expected May 2027"] },
 ];

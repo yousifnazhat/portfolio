@@ -7,6 +7,7 @@ import VelocityMarquee from "../components/VelocityMarquee";
 import {
   Marquee,
   Collection,
+  Competitions,
   Atelier,
   Contact,
   Footer,
@@ -25,6 +26,7 @@ export default function Home() {
       <main>
         <Marquee />
         <Collection />
+        <Competitions />
         <Atelier />
         <VelocityMarquee />
         <Contact />
