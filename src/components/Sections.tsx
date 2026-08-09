@@ -164,9 +164,9 @@ export function Competitions() {
         </Reveal>
 
         <div className="comp-list">
-          {competitions.map((c, i) => (
-            <Reveal key={`${c.name}-${c.year}`}>
-              <article className="comp-row">
+          {competitions.map((c, i) => {
+            const body = (
+              <>
                 <span className="comp-no">{String(i + 1).padStart(2, "0")}</span>
                 <span className="comp-main">
                   <h3 className="comp-name">
@@ -183,9 +183,23 @@ export function Competitions() {
                   {c.result}
                 </span>
                 <span className="comp-year">{c.year}</span>
-              </article>
-            </Reveal>
-          ))}
+              </>
+            );
+            return (
+              <Reveal key={`${c.name}-${c.year}`}>
+                {c.id ? (
+                  <a className="comp-row comp-link" href={`/competition/${c.id}`}>
+                    {body}
+                    <span className="comp-go" aria-hidden="true">
+                      ↗
+                    </span>
+                  </a>
+                ) : (
+                  <article className="comp-row">{body}</article>
+                )}
+              </Reveal>
+            );
+          })}
         </div>
       </div>
     </section>

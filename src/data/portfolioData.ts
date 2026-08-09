@@ -242,6 +242,7 @@ export const atelier: Appointment[] = [
 // "Competitions" — the scoreboard. Rendered as a hover-reveal index.
 // Empty array renders nothing at all, so the section is always fail-safe.
 export type Competition = {
+  id?: string;
   name: string;
   org: string;
   result: string;
@@ -251,6 +252,7 @@ export type Competition = {
 
 export const competitions: Competition[] = [
   {
+    id: "cyber-apocalypse-2026",
     name: "Cyber Apocalypse 2026 — The Salt Crown",
     org: "Hack The Box",
     // Figures per the HTB certificate of participation (24–29 Jul 2026).
@@ -259,6 +261,62 @@ export const competitions: Competition[] = [
     detail: "136/136 challenges solved · 69,425 pts · team 1337_PwnSp4c3",
   },
 ];
+
+// Deeper write-ups for competitions, keyed by Competition.id.
+export type CompetitionStudy = {
+  event: string;
+  edition: string;
+  dates: string;
+  team: string;
+  placement: string;
+  solved: string;
+  points: string;
+  certificate?: string;
+  overview: string;
+  highlights: { label: string; detail: string }[];
+  stack: string[];
+};
+
+export const competitionStudies: Record<string, CompetitionStudy> = {
+  "cyber-apocalypse-2026": {
+    event: "Hack The Box Cyber Apocalypse 2026",
+    edition: "The Salt Crown",
+    dates: "24 – 29 July 2026",
+    team: "1337_PwnSp4c3",
+    placement: "12th of 6,744 teams",
+    solved: "136 / 136",
+    points: "69,425",
+    certificate: "/competitions/htb-cyber-apocalypse-2026-certificate.jpg",
+    overview:
+      "Hack The Box's flagship annual CTF. Our team cleared the entire board — 136 of 136 challenges — for 69,425 points and 12th place out of 6,744 teams. The track I spent most of the week on was the AI/agent-security category: attacking LLM-driven agents the way you would any other privileged system — through their policies, their memory, and their supply chain.",
+    highlights: [
+      {
+        label: "Agent policy bypass",
+        detail:
+          "Executed machine-speed agent actions by bypassing an LLM skill scanner, mutating agent-controlled egress and permission policies, then chaining trusted skills to invoke protected loopback APIs inside a 3-minute reset window.",
+      },
+      {
+        label: "Memory poisoning → BOLA exfil",
+        detail:
+          "Exfiltrated a cross-account ledger record by poisoning persistent agent memory and exploiting broken object-level authorization — staging a two-turn prompt chain that caused a model-selected tool call against an unauthorized registry reference.",
+      },
+      {
+        label: "AI supply-chain forensics",
+        detail:
+          "Traced an AI supply-chain compromise by recovering a deleted skill from Git history, identifying persistent project-memory poisoning and browser-data beacons, and locally reconstructing six Base64/XOR fragments without ever executing the malicious JavaScript.",
+      },
+    ],
+    stack: [
+      "LLM Agent Security",
+      "Prompt Injection",
+      "Memory Poisoning",
+      "BOLA",
+      "Supply-Chain Forensics",
+      "Git Forensics",
+      "Base64 / XOR",
+    ],
+  },
+};
 
 export const skillGroups: { title: string; items: string[] }[] = [
   {
