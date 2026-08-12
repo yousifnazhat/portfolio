@@ -6,6 +6,7 @@ type Img = { src: string; fit: "cover" | "contain"; caption?: string };
 
 export default function Gallery({ images }: { images: Img[] }) {
   const [active, setActive] = useState<number | null>(null);
+  const [broken, setBroken] = useState<Record<number, boolean>>({});
   const close = useCallback(() => setActive(null), []);
 
   useEffect(() => {
@@ -24,18 +25,21 @@ export default function Gallery({ images }: { images: Img[] }) {
   return (
     <>
       <div className="gallery-grid">
-        {images.map((im, i) => (
-          <figure className="gfig" key={im.src} onClick={() => setActive(i)} role="button" tabIndex={0}
-            onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") setActive(i); }}
-            aria-label={im.caption ? `Open image: ${im.caption.slice(0, 60)}` : "Open image"}>
-            <div className="gfig-img" style={{ aspectRatio: im.fit === "contain" ? "16 / 10" : "4 / 3" }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={im.src} alt={im.caption ?? ""} style={{ objectFit: im.fit }} loading="lazy" />
-              <span className="gfig-zoom">View ↗</span>
-            </div>
-            {im.caption && <figcaption>{im.caption}</figcaption>}
-          </figure>
-        ))}
+        {images.map((im, i) =>
+          broken[i] ? null : (
+            <figure className="gfig" key={im.src} onClick={() => setActive(i)} role="button" tabIndex={0}
+              onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") setActive(i); }}
+              aria-label={im.caption ? `Open image: ${im.caption.slice(0, 60)}` : "Open image"}>
+              <div className="gfig-img" style={{ aspectRatio: im.fit === "contain" ? "16 / 10" : "4 / 3" }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={im.src} alt={im.caption ?? ""} style={{ objectFit: im.fit }} loading="lazy"
+                  onError={() => setBroken((b) => ({ ...b, [i]: true }))} />
+                <span className="gfig-zoom">View ↗</span>
+              </div>
+              {im.caption && <figcaption>{im.caption}</figcaption>}
+            </figure>
+          )
+        )}
       </div>
 
       {active !== null && (

@@ -23,7 +23,9 @@ export async function generateMetadata({
   const c = competitions.find((x) => x.id === id);
   const s = competitionStudies[id];
   if (!c || !s) return { title: "Yousif Nazhat" };
-  const description = `${s.event} — ${s.placement}, ${s.solved} challenges solved for ${s.points} points with team ${s.team}.`;
+  const description =
+    s.summary ??
+    `${s.event} — ${s.placement}, ${s.solved} challenges solved for ${s.points} points with team ${s.team}.`;
   return {
     title: c.name,
     description,
@@ -52,15 +54,22 @@ export default async function CompetitionPage({
   const study = competitionStudies[id];
   if (!comp || !study) notFound();
 
-  const imgs = study.certificate
-    ? [
-        {
-          src: study.certificate,
-          fit: "contain" as const,
-          caption: `Certificate of participation — ${study.event}, ${study.placement}.`,
-        },
-      ]
-    : [];
+  const imgs = [
+    ...(study.photos ?? []).map((p) => ({
+      src: p.src,
+      fit: "cover" as const,
+      caption: p.caption,
+    })),
+    ...(study.certificate
+      ? [
+          {
+            src: study.certificate,
+            fit: "contain" as const,
+            caption: `Certificate of participation — ${study.event}${study.placement ? `, ${study.placement}` : ""}.`,
+          },
+        ]
+      : []),
+  ];
 
   return (
     <article className="study">
@@ -75,29 +84,51 @@ export default async function CompetitionPage({
         </nav>
 
         <header className="study-head">
-          <div className="study-eyebrow">CTF · {comp.org}</div>
+          <div className="study-eyebrow">
+            {comp.kind ?? "CTF"} · {comp.org}
+          </div>
           <h1>{comp.name}</h1>
           <p className="study-medium">
-            {study.event} · {study.dates}
+            {study.event}
+            {study.dates ? ` · ${study.dates}` : ""}
           </p>
 
           <div className="study-meta">
-            <div>
-              <span className="k">Placement</span>
-              <span className="v">{study.placement}</span>
-            </div>
-            <div>
-              <span className="k">Solved</span>
-              <span className="v">{study.solved}</span>
-            </div>
-            <div>
-              <span className="k">Points</span>
-              <span className="v">{study.points}</span>
-            </div>
-            <div>
-              <span className="k">Team</span>
-              <span className="v">{study.team}</span>
-            </div>
+            {study.meta ? (
+              study.meta.map((m) => (
+                <div key={m.k}>
+                  <span className="k">{m.k}</span>
+                  <span className="v">{m.v}</span>
+                </div>
+              ))
+            ) : (
+              <>
+                {study.placement && (
+                  <div>
+                    <span className="k">Placement</span>
+                    <span className="v">{study.placement}</span>
+                  </div>
+                )}
+                {study.solved && (
+                  <div>
+                    <span className="k">Solved</span>
+                    <span className="v">{study.solved}</span>
+                  </div>
+                )}
+                {study.points && (
+                  <div>
+                    <span className="k">Points</span>
+                    <span className="v">{study.points}</span>
+                  </div>
+                )}
+                {study.team && (
+                  <div>
+                    <span className="k">Team</span>
+                    <span className="v">{study.team}</span>
+                  </div>
+                )}
+              </>
+            )}
           </div>
         </header>
 
@@ -106,7 +137,7 @@ export default async function CompetitionPage({
 
           <Gallery images={imgs} />
 
-          <h2 className="study-h2">Selected solves</h2>
+          <h2 className="study-h2">{study.highlightsTitle ?? "Selected solves"}</h2>
           <ul className="study-highlights">
             {study.highlights.map((h) => (
               <li key={h.label}>
@@ -116,7 +147,7 @@ export default async function CompetitionPage({
             ))}
           </ul>
 
-          <h2 className="study-h2">Techniques</h2>
+          <h2 className="study-h2">{study.stackTitle ?? "Techniques"}</h2>
           <div className="study-stack">
             {study.stack.map((s) => (
               <span className="tag neutral" key={s}>

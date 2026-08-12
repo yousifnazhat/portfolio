@@ -248,6 +248,8 @@ export type Competition = {
   result: string;
   year: string;
   detail?: string;
+  thumb?: string; // optional photo shown on the main scoreboard row
+  kind?: string; // "CTF" | "Hackathon" — drives the detail-page eyebrow; default CTF
 };
 
 export const competitions: Competition[] = [
@@ -259,22 +261,38 @@ export const competitions: Competition[] = [
     result: "12th / 6,744 teams",
     year: "2026",
     detail: "136/136 challenges solved · 69,425 pts · team 1337_PwnSp4c3",
+    kind: "CTF",
+  },
+  {
+    id: "nyc-vision-hack-2026",
+    name: "NYC Vision Hack v.2",
+    org: "Google × AI Tinkerers",
+    result: "Invited · demo'd Haven",
+    year: "2026",
+    detail: "50-builder on-site sprint · built Haven, a live NYC traffic-cam crowd-density read",
+    thumb: "/competitions/vision-hack-demo.jpg",
+    kind: "Hackathon",
   },
 ];
 
 // Deeper write-ups for competitions, keyed by Competition.id.
 export type CompetitionStudy = {
   event: string;
-  edition: string;
-  dates: string;
-  team: string;
-  placement: string;
-  solved: string;
-  points: string;
+  edition?: string;
+  dates?: string;
+  team?: string;
+  placement?: string;
+  solved?: string;
+  points?: string;
   certificate?: string;
+  photos?: { src: string; caption?: string }[];
+  meta?: { k: string; v: string }[]; // overrides the CTF placement/solved/points/team grid
+  summary?: string; // overrides the CTF-shaped meta description
   overview: string;
   highlights: { label: string; detail: string }[];
+  highlightsTitle?: string; // default "Selected solves"
   stack: string[];
+  stackTitle?: string; // default "Techniques"
 };
 
 export const competitionStudies: Record<string, CompetitionStudy> = {
@@ -314,6 +332,64 @@ export const competitionStudies: Record<string, CompetitionStudy> = {
       "Supply-Chain Forensics",
       "Git Forensics",
       "Base64 / XOR",
+    ],
+  },
+  "nyc-vision-hack-2026": {
+    event: "NYC Vision Hack v.2",
+    dates: "2026 · New York City",
+    summary:
+      "NYC Vision Hack v.2, an invite-only, 50-builder on-site sprint hosted by Google and AI Tinkerers NYC, where I built and demo'd Haven.",
+    meta: [
+      { k: "Role", v: "Invited builder · solo" },
+      { k: "Format", v: "50 builders · on-site sprint" },
+      { k: "Hosts", v: "Google × AI Tinkerers NYC" },
+      { k: "Project", v: "Haven" },
+    ],
+    photos: [
+      {
+        src: "/competitions/vision-hack-demo.jpg",
+        caption:
+          "Demoing Haven, a live crowd-density read of NYC DOT traffic-camera feeds.",
+      },
+      {
+        src: "/competitions/vision-hack-team.jpg",
+        caption: "On-site in the NYC Vision Hack v.2 build room.",
+      },
+    ],
+    overview:
+      "NYC Vision Hack v.2 was invite-only: 50 builders, one room, everything built on site under a hard time limit. I usually build security tooling for agentic frameworks; this time I went a different direction and shipped Haven. Haven turns live NYC DOT traffic-camera footage into a single 0-100 crowd-density score, detecting pedestrians, cars, buses, and trucks in real time and separating the chaotic corners from the quiet side streets. It's built for the roughly 800,000 New Yorkers living with claustrophobia and spatial anxiety: a three-second read of whether to take a different street, aimed at cutting down panic attacks and sensory overload in the city. The city already points cameras at the answer, and Haven is a deterministic read of that feed.",
+    highlightsTitle: "What I built",
+    highlights: [
+      {
+        label: "The read",
+        detail:
+          "Turns live NYC DOT traffic-camera feeds into one 0-100 crowd-density score, detecting pedestrians, cars, buses, and trucks in real time and separating busy corners from quiet streets.",
+      },
+      {
+        label: "Model selection",
+        detail:
+          "Picked a detector on Roboflow that holds up on real DOT footage (oblique angles, low resolution, dense overlapping crowds), because everything downstream depends on that read being right.",
+      },
+      {
+        label: "Designed from the user in",
+        detail:
+          "Worked backwards from the person deciding, in three seconds, whether to change streets, including what happens when signal drops underground right as the answer matters most.",
+      },
+      {
+        label: "Engineered to hold up live",
+        detail:
+          "Ran detection on Roboflow's Hosted Inference API so the model sat on managed GPU infrastructure instead of burning build time standing up a PyTorch server, then deployed the FastAPI service on Google Cloud Run so it autoscales, stays sub-second under load, and held together through a live demo in front of Google engineers.",
+      },
+    ],
+    stackTitle: "Stack",
+    stack: [
+      "Roboflow",
+      "Computer Vision",
+      "Object Detection",
+      "FastAPI",
+      "Google Cloud Run",
+      "Python",
+      "NYC DOT Cameras",
     ],
   },
 };

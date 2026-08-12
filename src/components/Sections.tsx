@@ -8,6 +8,7 @@ import {
 } from "../data/portfolioData";
 import Reveal from "./Reveal";
 import Counter from "./Counter";
+import CompThumb from "./CompThumb";
 
 export function Marquee() {
   const Row = ({ hidden }: { hidden?: boolean }) => (
@@ -174,6 +175,7 @@ export function Competitions() {
                     <span className="us">_</span>
                   </h3>
                   {c.detail && <span className="comp-detail">{c.detail}</span>}
+                  {c.thumb && <CompThumb src={c.thumb} />}
                 </span>
                 <span className="comp-org">{c.org}</span>
                 <span className="comp-result">

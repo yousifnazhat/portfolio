@@ -291,6 +291,15 @@ a {
 .comp-no { font-family: var(--font-mono-stack); font-size: 12px; letter-spacing: 0.16em; color: var(--brown2); }
 .comp-main { min-width: 0; display: flex; flex-direction: column; gap: 8px; }
 .comp-detail { font-family: var(--font-mono-stack); font-size: 12px; letter-spacing: 0.04em; color: var(--muted); }
+.comp-thumb {
+  width: min(260px, 48vw); aspect-ratio: 16 / 9; object-fit: cover;
+  margin-top: 10px; border: 1.5px solid var(--ink); background: #fff;
+  filter: grayscale(1) contrast(1.03);
+  transition: filter 0.45s ease, border-color 0.3s ease;
+}
+.comp-row:hover .comp-thumb, .comp-row:focus-within .comp-thumb {
+  filter: none; border-color: rgba(255, 255, 255, 0.55);
+}
 .comp-name {
   margin: 0; min-width: 0;
   font-family: var(--font-display-stack); font-weight: 700;
