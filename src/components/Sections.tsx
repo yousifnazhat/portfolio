@@ -257,9 +257,6 @@ export function Contact() {
           <a className="btn-outline" href={profile.contact.linkedin} target="_blank" rel="noreferrer">
             LinkedIn
           </a>
-          <a className="btn-outline" href={`tel:${profile.contact.phone.replace(/[^0-9]/g, "")}`}>
-            {profile.contact.phone}
-          </a>
         </div>
       </Reveal>
     </section>

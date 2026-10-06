@@ -13,7 +13,6 @@ export const profile = {
   location: "New Brunswick, NJ",
   contact: {
     email: "yousif.snazhat@gmail.com",
-    phone: "(973) 382-5159",
     github: "https://github.com/yousifnazhat",
     linkedin: "https://www.linkedin.com/in/yousif-nazhat-526027296",
   },
@@ -201,9 +200,9 @@ export const atelier: Appointment[] = [
     ],
   },
   {
-    role: "Offensive Security Engineering Intern | Y Combinator S26",
+    role: "Offensive Security & AI Engineering Intern",
     org: "GUILD",
-    period: "Sep 2026 – Dec 2026",
+    period: "Sep 2026 – May 2027",
     location: "New York, NY",
     kind: "security",
     bullets: [

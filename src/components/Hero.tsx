@@ -10,7 +10,7 @@ export default function Hero() {
       <div className="topbar">
         <span>AVAILABLE FOR WORK_ // OFFENSIVE SECURITY ENGINEER</span>
         <span className="tb-right">
-          {profile.contact.email} <i>|</i> {profile.contact.phone}
+          {profile.contact.email}
         </span>
       </div>
 
