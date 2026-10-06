@@ -1,6 +1,4 @@
 // Source of truth for the Daedalus portfolio.
-// NOTE: The YC defense-startup offensive-security internship is under NDA and is
-// intentionally omitted everywhere. Do not add it.
 
 export type Tag = { label: string; kind: "security" | "neutral" };
 export type ArtifactImage = { src: string; fit: "cover" | "contain"; caption?: string };
@@ -192,6 +190,26 @@ export type Appointment = {
 };
 
 export const atelier: Appointment[] = [
+  {
+    role: "Red Teaming Fellow",
+    org: "10a Labs",
+    period: "Aug 2026 – Present",
+    location: "Remote",
+    kind: "security",
+    bullets: [
+      "Identified 17 unapproved disclosures in 41 tests for a frontier AI lab client, 15 of 23 direct/shared-access runs leaked without review as well as 2 of 18 via owner connectors, the client remediated the gap.",
+    ],
+  },
+  {
+    role: "Offensive Security Engineering Intern | Y Combinator S26",
+    org: "GUILD",
+    period: "Sep 2026 – Dec 2026",
+    location: "New York, NY",
+    kind: "security",
+    bullets: [
+      "Owning an end-to-end AI Foundry red-team engagement to prevent data leakage and sophisticated multi-stage attack chains involving data poisoning and indirect prompt injection.",
+    ],
+  },
   {
     role: "Cloud Infrastructure & Security Intern",
     org: "Schindler Group",
