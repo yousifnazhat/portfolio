@@ -190,7 +190,7 @@ export type Appointment = {
 
 export const atelier: Appointment[] = [
   {
-    role: "Red Teaming Fellow",
+    role: "AI Red Teamer",
     org: "10a Labs",
     period: "Aug 2026 – Present",
     location: "Remote",
