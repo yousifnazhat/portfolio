@@ -196,17 +196,23 @@ export const atelier: Appointment[] = [
     location: "Remote",
     kind: "security",
     bullets: [
-      "Identified 17 unapproved disclosures in 41 tests for a frontier AI lab client, 15 of 23 direct/shared-access runs leaked without review as well as 2 of 18 via owner connectors, the client remediated the gap.",
+      "Prompted client remediation after exposing 17 unapproved disclosures for a frontier AI lab client by testing over-the-wall (need-to-know) and aggregation leakage through retrieval connectors and comparing direct/shared-access permissions against owner-connector controls.",
+      "Exposed distillation-protection and API-integrity gaps in pre-release frontier models by combining chain-of-thought (CoT) extraction with signature-test suites covering signature-validation bypasses and signed-reasoning replay.",
+      "Developed adversary-emulation test cases targeting prompt injection and skill-scanner bypasses by combining context switching and context-window overflow across conversation threads to test system and developer instruction precedence, tool calling, retrieval, and persistent memory.",
+      "Documented harmful-response findings while evaluating 4 models to support cyber-misuse prevention by probing AI refusals against CBRN-related requests and malicious uses of return-oriented programming (ROP), preserving response transcripts for safety review.",
+      "Delivered evidence-backed AI safety and content safety assessments by grading findings against client and in-house taxonomies, documenting classifier evasion, refusal behavior, and permission boundaries, and justifying severity with conversation evidence to guide mitigation priorities.",
     ],
   },
   {
-    role: "Offensive Security & AI Engineering Intern",
-    org: "GUILD",
+    role: "Offensive Security & AI Engineering Intern | Y Combinator S26",
+    org: "GUILD · AI-Native Defense Manufacturing",
     period: "Sep 2026 – May 2027",
     location: "New York, NY",
     kind: "security",
     bullets: [
       "Owning an end-to-end AI Foundry red-team engagement to prevent data leakage and sophisticated multi-stage attack chains involving data poisoning and indirect prompt injection.",
+      "Protected bid history and prevented invalid cancellations by implementing administrator-only controls, required cancellation reasons, and permanent audit trails; validated the workflow with simulated quote requests in development.",
+      "Improved bid-tracking reliability, verified by database tests and mocked-browser tests, by automatically refreshing edited bids, removing submitted bids from the active queue, and preserving wait times.",
     ],
   },
   {
