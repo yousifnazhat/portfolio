@@ -70,7 +70,7 @@ const personJsonLd = {
   email: "mailto:yousif.snazhat@gmail.com",
   sameAs: [
     "https://github.com/yousifnazhat",
-    "https://www.linkedin.com/in/yousif-nazhat-526027296",
+    "https://www.linkedin.com/in/yousif-nazhat",
   ],
   alumniOf: { "@type": "CollegeOrUniversity", name: "Rutgers University" },
   address: {

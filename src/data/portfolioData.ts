@@ -14,7 +14,7 @@ export const profile = {
   contact: {
     email: "yousif.snazhat@gmail.com",
     github: "https://github.com/yousifnazhat",
-    linkedin: "https://www.linkedin.com/in/yousif-nazhat-526027296",
+    linkedin: "https://www.linkedin.com/in/yousif-nazhat",
   },
 };
 
