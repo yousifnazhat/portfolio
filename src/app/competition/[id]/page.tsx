@@ -65,7 +65,7 @@ export default async function CompetitionPage({
           {
             src: study.certificate,
             fit: "contain" as const,
-            caption: `Certificate of participation — ${study.event}${study.placement ? `, ${study.placement}` : ""}.`,
+            caption: `Certificate of participation — ${study.event}.`,
           },
         ]
       : []),

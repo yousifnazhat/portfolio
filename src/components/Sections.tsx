@@ -86,7 +86,7 @@ export function Collection() {
                         <div className="term-lines">
                           <div className="l1">$ penpal init 10.10.11.42 --name box</div>
                           <div className="l2">› target scaffolded · scope enforced · evidence masked</div>
-                          <div className="l3">› v1.0.0 · deterministic core · 11 PI tools</div>
+                          <div className="l3">› v1.0.1 · 11 tools · 99 automated tests</div>
                         </div>
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img

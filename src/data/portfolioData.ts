@@ -19,10 +19,10 @@ export const profile = {
 };
 
 export const stats: { n: string; k: string }[] = [
-  { n: "1,000+", k: "Auth attempts captured" },
-  { n: "78", k: "Server assets de-risked" },
+  { n: "17", k: "Unapproved disclosures found" },
+  { n: "99", k: "PenPal automated tests" },
   { n: "50+", k: "Members trained" },
-  { n: "0", k: "Critical failures" },
+  { n: "12th", k: "HTB team placement" },
 ];
 
 export type Artifact = {
@@ -48,14 +48,14 @@ export const collection: Artifact[] = [
     no: "No. 01",
     category: "Tooling",
     title: "PenPal",
-    medium: "Python · local-first enumeration assistant",
+    medium: "Python · TypeScript · enumeration engine",
     year: "2026",
     t: 5,
     images: [],
     blurb:
-      "PenPal V1 — a local-first, deterministic assistant for authorized enumeration. Paste tool output and it stores masked evidence, then returns evidence-backed next checks with every command shown, not run.",
+      "PenPal v1.0.1 — repeatable enumeration through 11 tools and 4 validated playbooks, backed by 99 automated tests and published to PyPI/npm.",
     longDescription:
-      "Shipped PenPal v1.0.0 (MIT): a local-first, deterministic assistant for authorized enumeration, built around a Python core with an optional PI conversational cockpit and a read-only MCP server. It parses Nmap XML and ingests pasted tool output, stores scoped targets, services, evidence and parameters in a local workspace, masks credential-like values by default, and returns deterministic, evidence-backed suggestions — one primary next check plus alternatives — while suppressing operator-confirmed dead ends until their supporting inputs change. By design it never executes exploits, hides commands, uses credentials automatically, or provides C2 tasking. Validated with 97 Python tests, four bundled playbooks, clean-install and installed-wheel journeys, Python 3.11–3.13 CI across Linux, macOS and Windows, and CodeQL.",
+      "Delivered repeatable enumeration through 11 tools and 4 validated playbooks, backed by 99 automated tests, by publishing v1.0.1 to PyPI/npm with scoped CLI/API/MCP access, masked evidence, and CodeQL-backed CI.",
     tags: [
       { label: "Python", kind: "neutral" },
       { label: "Enumeration", kind: "security" },
@@ -105,7 +105,7 @@ export const collection: Artifact[] = [
     blurb:
       "A deployed alumni platform — 10 pages, 3 server APIs, idempotent Stripe webhooks across 6 event types, server-side secret isolation and donor-privacy controls.",
     longDescription:
-      "Architected and deployed a full-stack alumni platform spanning 10 public pages and 3 server APIs — enabling one-time and monthly donations and live reporting by integrating Stripe Checkout, signed and idempotent webhooks across 6 event types, Supabase persistence, server-side secret isolation, and opt-in donor-privacy controls.",
+      "Enabled donations and live reporting across 10 pages and 3 server APIs by integrating Stripe Checkout, signed/idempotent webhooks for 6 event types, Supabase persistence, server-side secret isolation, and donor privacy controls.",
     tags: [
       { label: "Next.js", kind: "neutral" },
       { label: "TypeScript", kind: "neutral" },
@@ -143,9 +143,9 @@ export const collection: Artifact[] = [
       },
     ],
     blurb:
-      "Design-team lead on a sponsored UAV — avionics integrated to 100% interface compliance with zero critical failures at 130A peak current.",
+      "Delivered integrated avionics within 5 weeks for a NASA- and Lockheed Martin-sponsored UAV through cross-team coordination and subsystem-interface validation.",
     longDescription:
-      "Directed integration of interconnected avionics subsystems on a UAV sponsored by NASA and Lockheed Martin, applying rigorous interface validation to ensure 100% compliance with strict safety and reliability standards. Delivered a fully integrated system within a 5-week timeline by coordinating cross-functional Aerodynamics and Manufacturing teams — optimizing propulsion to a 1.46 thrust-to-weight ratio with zero critical failures during 130A peak-current operations.",
+      "Delivered integrated avionics within 5 weeks for a UAV sponsored by NASA and Lockheed Martin by coordinating Aerodynamics/Manufacturing teams and validating subsystem interfaces.",
     tags: [
       { label: "Embedded", kind: "neutral" },
       { label: "C/C++", kind: "neutral" },
@@ -200,7 +200,7 @@ export const atelier: Appointment[] = [
       "Exposed distillation-protection and API-integrity gaps in pre-release frontier models by combining chain-of-thought (CoT) extraction with signature-test suites covering signature-validation bypasses and signed-reasoning replay.",
       "Developed adversary-emulation test cases targeting prompt injection and skill-scanner bypasses by combining context switching and context-window overflow across conversation threads to test system and developer instruction precedence, tool calling, retrieval, and persistent memory.",
       "Documented harmful-response findings while evaluating 4 models to support cyber-misuse prevention by probing AI refusals against CBRN-related requests and malicious uses of return-oriented programming (ROP), preserving response transcripts for safety review.",
-      "Delivered evidence-backed AI safety and content safety assessments by grading findings against client and in-house taxonomies, documenting classifier evasion, refusal behavior, and permission boundaries, and justifying severity with conversation evidence to guide mitigation priorities.",
+      "Delivered evidence-backed AI safety and content safety assessments by grading findings against client safety policies and client and in-house harm taxonomies, documenting classifier evasion, refusal behavior, and permission boundaries, and justifying severity with conversation evidence to guide mitigation priorities.",
     ],
   },
   {
@@ -210,7 +210,6 @@ export const atelier: Appointment[] = [
     location: "New York, NY",
     kind: "security",
     bullets: [
-      "Owning an end-to-end AI Foundry red-team engagement to prevent data leakage and sophisticated multi-stage attack chains involving data poisoning and indirect prompt injection.",
       "Protected bid history and prevented invalid cancellations by implementing administrator-only controls, required cancellation reasons, and permanent audit trails; validated the workflow with simulated quote requests in development.",
       "Improved bid-tracking reliability, verified by database tests and mocked-browser tests, by automatically refreshing edited bids, removing submitted bids from the active queue, and preserving wait times.",
     ],
@@ -222,10 +221,8 @@ export const atelier: Appointment[] = [
     location: "Morristown, NJ",
     kind: "security",
     bullets: [
-      "Executed prompt-injection and adversarial emulation against an in-house Azure agent, reducing privilege-escalation and unauthorized agent-to-agent access paths, preventing data poisoning and sparsity attacks.",
-      "Designed and deployed agentic identity controls across Azure using Microsoft Entra ID and Azure AI Foundry.",
-      "Reduced end-of-support infrastructure risk across 78 server assets by analyzing dependencies and delivering remediation-ready architecture assessments with 100% coverage and prioritized migration actions.",
-      "Secured an Azure LLM-integrated production server for Group Cyber Security review — scoping identity/SAS privileges, hardening workflows, and rebuilding patched configurations.",
+      "Hardened an in-house Azure agent, restricting privilege-escalation and unauthorized agent-to-agent access paths, by executing prompt-injection tests and implementing Entra ID/Azure AI Foundry identity controls.",
+      "Secured Azure LLM-integrated production servers for Group Cyber Security review by scoping identity/SAS privileges, patching configurations, and hardening operational workflows.",
     ],
   },
   {
@@ -235,8 +232,7 @@ export const atelier: Appointment[] = [
     location: "New Brunswick, NJ",
     kind: "security",
     bullets: [
-      "Improved technical competency for 50+ active members — a 30% increase in project participation — by spearheading workshops on Red/Blue Team operations, SIEM, and Linux fundamentals.",
-      "Strengthened incident-response skills through the successful execution of 4 simulated cyber-defense exercises, leading infrastructure-hardening and threat-mitigation workshops.",
+      "Increased project participation 30% among 50+ members by leading Red/Blue Team, SIEM, and Linux workshops and 4 simulated cyber-defense exercises on infrastructure hardening and threat mitigation.",
     ],
   },
   {
@@ -246,8 +242,7 @@ export const atelier: Appointment[] = [
     location: "New Brunswick, NJ",
     kind: "hardware",
     bullets: [
-      "Directed integration of interconnected avionics subsystems on a UAV sponsored by NASA and Lockheed Martin — 100% compliance with strict safety and reliability standards.",
-      "Delivered a fully integrated system within a strict 5-week timeline by coordinating cross-functional Aerodynamics and Manufacturing teams.",
+      "Delivered integrated avionics within 5 weeks for a UAV sponsored by NASA and Lockheed Martin by coordinating Aerodynamics/Manufacturing teams and validating subsystem interfaces.",
     ],
   },
   {
@@ -257,7 +252,7 @@ export const atelier: Appointment[] = [
     location: "New Brunswick, NJ",
     kind: "leadership",
     bullets: [
-      "Surpassed fundraising targets by 625% for the Embrace Kids Foundation, securing sponsorships from 32 local organizations.",
+      "Surpassed fundraising targets by 625% through 32 local sponsors.",
     ],
   },
 ];
@@ -280,8 +275,8 @@ export const competitions: Competition[] = [
     id: "cyber-apocalypse-2026",
     name: "Cyber Apocalypse 2026 — The Salt Crown",
     org: "Hack The Box",
-    // Figures per the HTB certificate of participation (24–29 Jul 2026).
-    result: "12th / 6,744 teams",
+    // Team total per November 2026 resume; rank, solves and points per certificate.
+    result: "12th / 12,000+ teams",
     year: "2026",
     detail: "136/136 challenges solved · 69,425 pts · team 1337_PwnSp4c3",
     kind: "CTF",
@@ -292,7 +287,7 @@ export const competitions: Competition[] = [
     org: "Google × AI Tinkerers",
     result: "Invited · demo'd Haven",
     year: "2026",
-    detail: "50-builder on-site sprint · built Haven, a live NYC traffic-cam crowd-density read",
+    detail: "Invited solo builder · 50 builders · live crowd-density demo with a 0–100 score",
     thumb: "/competitions/vision-hack-demo.jpg",
     kind: "Hackathon",
   },
@@ -324,27 +319,27 @@ export const competitionStudies: Record<string, CompetitionStudy> = {
     edition: "The Salt Crown",
     dates: "24 – 29 July 2026",
     team: "1337_PwnSp4c3",
-    placement: "12th of 6,744 teams",
+    placement: "12th of 12,000+ teams",
     solved: "136 / 136",
     points: "69,425",
     certificate: "/competitions/htb-cyber-apocalypse-2026-certificate.jpg",
     overview:
-      "Hack The Box's flagship annual CTF. Our team cleared the entire board — 136 of 136 challenges — for 69,425 points and 12th place out of 6,744 teams. The track I spent most of the week on was the AI/agent-security category: attacking LLM-driven agents the way you would any other privileged system — through their policies, their memory, and their supply chain.",
+      "Hack The Box's flagship annual CTF. Our team cleared the entire board — 136 of 136 challenges — for 69,425 points and 12th place out of 12,000+ teams. The track I spent most of the week on was the AI/agent-security category: attacking LLM-driven agents the way you would any other privileged system — through their policies, their memory, and their supply chain.",
     highlights: [
       {
         label: "Agent policy bypass",
         detail:
-          "Executed machine-speed agent actions by bypassing an LLM skill scanner, mutating agent-controlled egress and permission policies, then chaining trusted skills to invoke protected loopback APIs inside a 3-minute reset window.",
+          "Reached protected loopback APIs within a 3-minute reset window by bypassing an LLM skill scanner, mutating agent-controlled egress/permission policies, and chaining trusted skills.",
       },
       {
         label: "Memory poisoning → BOLA exfil",
         detail:
-          "Exfiltrated a cross-account ledger record by poisoning persistent agent memory and exploiting broken object-level authorization — staging a two-turn prompt chain that caused a model-selected tool call against an unauthorized registry reference.",
+          "Exfiltrated a cross-account ledger record with a 2-turn prompt chain by poisoning persistent agent memory and exploiting broken object-level authorization in a model-selected tool call.",
       },
       {
         label: "AI supply-chain forensics",
         detail:
-          "Traced an AI supply-chain compromise by recovering a deleted skill from Git history, identifying persistent project-memory poisoning and browser-data beacons, and locally reconstructing six Base64/XOR fragments without ever executing the malicious JavaScript.",
+          "Reconstructed an AI supply-chain compromise from 6 Base64/XOR fragments by recovering a deleted skill from Git history and tracing memory poisoning/browser-data beacons without executing malicious JavaScript.",
       },
     ],
     stack: [
@@ -361,7 +356,7 @@ export const competitionStudies: Record<string, CompetitionStudy> = {
     event: "NYC Vision Hack v.2",
     dates: "2026 · New York City",
     summary:
-      "NYC Vision Hack v.2, an invite-only, 50-builder on-site sprint hosted by Google and AI Tinkerers NYC, where I built and demo'd Haven.",
+      "Invited solo builder at NYC Vision Hack v.2, hosted by Google and AI Tinkerers NYC with 50 builders; delivered Haven’s live crowd-density demo with a 0–100 score.",
     meta: [
       { k: "Role", v: "Invited builder · solo" },
       { k: "Format", v: "50 builders · on-site sprint" },
@@ -380,7 +375,7 @@ export const competitionStudies: Record<string, CompetitionStudy> = {
       },
     ],
     overview:
-      "NYC Vision Hack v.2 was invite-only: 50 builders, one room, everything built on site under a hard time limit. I usually build security tooling for agentic frameworks; this time I went a different direction and shipped Haven. Haven turns live NYC DOT traffic-camera footage into a single 0-100 crowd-density score, detecting pedestrians, cars, buses, and trucks in real time and separating the chaotic corners from the quiet side streets. It's built for the roughly 800,000 New Yorkers living with claustrophobia and spatial anxiety: a three-second read of whether to take a different street, aimed at cutting down panic attacks and sensory overload in the city. The city already points cameras at the answer, and Haven is a deterministic read of that feed.",
+      "As an invited solo builder at NYC Vision Hack v.2, hosted by Google and AI Tinkerers NYC with 50 builders, I delivered Haven’s live crowd-density demo with a 0–100 score by combining NYC DOT camera feeds, Roboflow pedestrian/vehicle detection, and a FastAPI service on Google Cloud Run.",
     highlightsTitle: "What I built",
     highlights: [
       {
@@ -399,9 +394,9 @@ export const competitionStudies: Record<string, CompetitionStudy> = {
           "Worked backwards from the person deciding, in three seconds, whether to change streets, including what happens when signal drops underground right as the answer matters most.",
       },
       {
-        label: "Engineered to hold up live",
+        label: "Live demo delivered",
         detail:
-          "Ran detection on Roboflow's Hosted Inference API so the model sat on managed GPU infrastructure instead of burning build time standing up a PyTorch server, then deployed the FastAPI service on Google Cloud Run so it autoscales, stays sub-second under load, and held together through a live demo in front of Google engineers.",
+          "Delivered Haven’s live crowd-density demo with a 0–100 score by combining NYC DOT camera feeds, Roboflow pedestrian/vehicle detection, and a FastAPI service on Google Cloud Run.",
       },
     ],
     stackTitle: "Stack",
@@ -497,16 +492,17 @@ export const caseStudies: Record<string, CaseStudy> = {
     year: "2026",
     role: "Creator & maintainer",
     github: "https://github.com/yousifnazhat/penpal",
-    live: "https://github.com/yousifnazhat/penpal/releases/tag/v1.0.0",
+    live: "https://github.com/yousifnazhat/penpal/releases/tag/v1.0.1",
     overview:
-      "PenPal V1 is an open-source, local-first assistant for authorized enumeration. Instead of firing off ad-hoc commands, it turns services and pasted tool output into stored, masked evidence and clear, evidence-backed next checks — with every command shown, not run. A deterministic Python core does the reasoning; an optional PI conversational cockpit and a read-only MCP server are just interfaces layered on top. By design it never executes exploits, hides commands, uses credentials automatically, or provides C2 tasking.",
+      "PenPal v1.0.1 is an open-source enumeration engine published to PyPI/npm. It delivers repeatable enumeration through 11 tools and 4 validated playbooks, backed by 99 automated tests, with scoped CLI/API/MCP access, masked evidence, and CodeQL-backed CI.",
     highlights: [
       { label: "Deterministic core", detail: "A Python engine stores scoped targets, services and pasted tool output as evidence, then explains the next authorized check — same inputs, same recommendation, every run." },
       { label: "Guided, not automated", detail: "Surfaces one primary next step plus up to two alternatives, and suppresses operator-confirmed dead ends until their supporting evidence changes or you reopen them." },
       { label: "Safe by default", detail: "Masks credential-like evidence and sensitive parameters, keeps secrets as environment references outside workspace JSON, and prints commands instead of running them — no exploits, no C2." },
-      { label: "Validated V1", detail: "Shipped v1.0.0 (MIT) against 97 Python tests, four bundled playbooks, clean-install and installed-wheel journeys, Python 3.11–3.13 CI on Linux/macOS/Windows, and CodeQL." },
+      { label: "11 tools, 4 playbooks", detail: "Delivered repeatable enumeration through 11 tools and 4 validated playbooks, with scoped CLI/API/MCP access." },
+      { label: "Published v1.0.1", detail: "Published to PyPI/npm, backed by 99 automated tests, masked evidence, and CodeQL-backed CI." },
     ],
-    stack: ["Python", "CLI", "MCP", "PI Cockpit", "Nmap XML", "JSON API"],
+    stack: ["Python", "TypeScript", "CLI", "MCP", "PI Cockpit", "Nmap XML", "JSON API", "GitHub Actions"],
   },
   "attack-detection-labs": {
     year: "2025–2026",
@@ -527,7 +523,7 @@ export const caseStudies: Record<string, CaseStudy> = {
     github: "https://github.com/yousifnazhat",
     live: "https://musigmaalumni.vercel.app/",
     overview:
-      "A production alumni platform for the Phi Mu Delta Mu Sigma chapter — donations, live reporting, and donor privacy, built with a security-first posture. Money movement is handled through Stripe with idempotent, signed webhooks; secrets never leave the server.",
+      "Enabled donations and live reporting across 10 pages and 3 server APIs by integrating Stripe Checkout, signed/idempotent webhooks for 6 event types, Supabase persistence, server-side secret isolation, and donor privacy controls.",
     highlights: [
       { label: "10 pages, 3 server APIs", detail: "A full public site plus server endpoints powering donations and live reporting." },
       { label: "Idempotent payments", detail: "Stripe Checkout for one-time and monthly gifts, with signed and idempotent webhooks across 6 event types." },
@@ -540,9 +536,9 @@ export const caseStudies: Record<string, CaseStudy> = {
     year: "2025",
     role: "Avionics design-team lead",
     overview:
-      "Project Daedalus is a NASA- and Lockheed-Martin-sponsored UAV. As avionics & integration lead, I directed the integration of interconnected subsystems under strict safety and reliability standards — the hardware counterpart to everything else here, where a single failed interface is not an option.",
+      "Delivered integrated avionics within 5 weeks for a UAV sponsored by NASA and Lockheed Martin by coordinating Aerodynamics/Manufacturing teams and validating subsystem interfaces.",
     highlights: [
-      { label: "100% interface compliance", detail: "Rigorous interface validation ensured full compliance with strict safety and reliability standards." },
+      { label: "Subsystem validation", detail: "Validated subsystem interfaces while coordinating Aerodynamics and Manufacturing teams." },
       { label: "5-week integration", detail: "Delivered a fully integrated system within a strict window by coordinating Aerodynamics and Manufacturing teams." },
       { label: "1.46 thrust-to-weight", detail: "Optimized propulsion to a 1.46 T/W ratio for the target flight envelope." },
       { label: "Zero critical failures", detail: "No critical failures during 130A peak-current flight operations." },
@@ -588,10 +584,10 @@ export const marquee = [
 ];
 
 export const counters = [
-  { v: 1000, suffix: "+", k: "Auth attempts captured" },
-  { v: 78, suffix: "", k: "Server assets de-risked" },
+  { v: 17, suffix: "", k: "Unapproved disclosures found" },
+  { v: 99, suffix: "", k: "PenPal automated tests" },
   { v: 50, suffix: "+", k: "Members trained" },
-  { v: 0, suffix: "", k: "Critical failures" },
+  { v: 12, suffix: "th", k: "HTB team placement" },
 ];
 
 export type TechItem = { name: string; slug: string | null; glyph: string | null };
