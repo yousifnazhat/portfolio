@@ -41,7 +41,7 @@ export default function CliHint() {
     }
     if (c === "help" || c === "ls" || c === "?") {
       setMsg(
-        `cmds → whoami · cd work${competitions.length ? " · cd competitions" : ""} · cd experience · cd stack · cd contact · flares`
+        `cmds → whoami · cd experience${competitions.length ? " · cd competitions" : ""} · cd work · cd stack · cd contact · flares`
       );
       return;
     }
@@ -76,7 +76,7 @@ export default function CliHint() {
           placeholder="type a command…"
           spellCheck={false}
           autoComplete="off"
-          aria-label="command line — try whoami or cd work"
+          aria-label="command line — try whoami or cd experience"
           onChange={(e) => {
             setMsg("");
             setVal(e.target.value);
@@ -89,7 +89,7 @@ export default function CliHint() {
       <div className="cli-tip">
         {msg || (
           <>
-            ↳ try <b>whoami</b> · <b>cd work</b> · <b>cd contact</b>
+            ↳ try <b>whoami</b> · <b>cd experience</b> · <b>cd contact</b>
           </>
         )}
       </div>

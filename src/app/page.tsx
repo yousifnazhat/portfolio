@@ -6,9 +6,9 @@ import HeadingReveals from "../components/HeadingReveals";
 import VelocityMarquee from "../components/VelocityMarquee";
 import {
   Marquee,
-  Collection,
-  Competitions,
   Atelier,
+  Competitions,
+  Collection,
   Contact,
   Footer,
 } from "../components/Sections";
@@ -25,9 +25,9 @@ export default function Home() {
 
       <main>
         <Marquee />
-        <Collection />
-        <Competitions />
         <Atelier />
+        <Competitions />
+        <Collection />
         <VelocityMarquee />
         <Contact />
       </main>

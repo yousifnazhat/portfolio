@@ -563,11 +563,11 @@ export const caseStudies: Record<string, CaseStudy> = {
 
 // ---- Gilded Atelier additions ----
 export const navItems = [
-  { n: "01", label: "Work", href: "#collection" },
+  { n: "01", label: "Experience", href: "#atelier" },
   ...(competitions.length
     ? [{ n: "02", label: "Competitions", href: "#competitions" }]
     : []),
-  { n: "03", label: "Experience", href: "#atelier" },
+  { n: "03", label: "Work", href: "#collection" },
   { n: "04", label: "Stack", href: "#arsenal" },
   { n: "05", label: "Contact", href: "#contact" },
 ];
