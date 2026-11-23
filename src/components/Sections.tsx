@@ -9,9 +9,10 @@ import {
 import Reveal from "./Reveal";
 import Counter from "./Counter";
 import CompThumb from "./CompThumb";
+import ExperienceAchievements from "./ExperienceAchievements";
 
-export function Marquee() {
-  const Row = ({ hidden }: { hidden?: boolean }) => (
+function MarqueeRow({ hidden }: { hidden?: boolean }) {
+  return (
     <div className="grp" aria-hidden={hidden}>
       {marquee.map((m, i) => (
         <span className="kw" key={i}>
@@ -21,11 +22,14 @@ export function Marquee() {
       ))}
     </div>
   );
+}
+
+export function Marquee() {
   return (
     <div className="marquee">
       <div className="marquee-track">
-        <Row />
-        <Row hidden />
+        <MarqueeRow />
+        <MarqueeRow hidden />
       </div>
     </div>
   );
@@ -134,7 +138,9 @@ export function Collection() {
                         </span>
                       ))}
                     </div>
-                    <span className="arr">↗</span>
+                    <span className="arr" aria-hidden="true">
+                      <span className="arr-label">View project</span> ↗
+                    </span>
                   </a>
                 </Reveal>
               </div>
@@ -193,7 +199,7 @@ export function Competitions() {
                   <a className="comp-row comp-link" href={`/competition/${c.id}`}>
                     {body}
                     <span className="comp-go" aria-hidden="true">
-                      ↗
+                      <span className="comp-go-label">View details</span> ↗
                     </span>
                   </a>
                 ) : (
@@ -229,11 +235,7 @@ export function Atelier() {
                   {r.period} · {r.location}
                 </div>
               </div>
-              <ul>
-                {r.bullets.map((b, i) => (
-                  <li key={i}>{b}</li>
-                ))}
-              </ul>
+              <ExperienceAchievements bullets={r.bullets} />
             </div>
           </Reveal>
         ))}

@@ -1,65 +1,71 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useEffectEvent, useRef, useState } from "react";
 
-/* Phase 1 — the entry gate. A real terminal: just start typing (no input to
-   focus, no Enter required). Typing "whoami" grants access, plays a short
-   readable "access granted" sequence, then wipes to the site. Once per
-   session, reduced-motion safe, never traps the user. */
+/* Typing "whoami" grants access and plays the terminal sequence once per session. */
 type Phase = "boot" | "prompt" | "granted" | "exit" | "done";
 
 export default function Gate() {
-  const [phase, setPhase] = useState<Phase>("boot");
+  const [phase, setPhase] = useState<Phase>("done");
   const [val, setVal] = useState("");
   const [err, setErr] = useState(false);
-  const phaseRef = useRef<Phase>("boot");
-  const valRef = useRef("");
-  phaseRef.current = phase;
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const finish = () => {
+    try {
+      sessionStorage.setItem("entered", "1");
+    } catch {
+      // The visitor can still enter when storage is disabled.
+    }
+    window.dispatchEvent(new CustomEvent("gate-entered"));
+    document.documentElement.classList.remove("gate-lock");
+    setPhase("done");
+  };
 
   const enter = () => {
-    if (phaseRef.current === "granted" || phaseRef.current === "exit" || phaseRef.current === "done")
-      return;
+    if (phase !== "prompt") return;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const hold = reduce ? 700 : 3400; // let the granted sequence be read before the wipe
     const wipe = reduce ? 50 : 1300; // slower reveal wipe
     setPhase("granted");
     window.setTimeout(() => {
       setPhase("exit");
-      window.setTimeout(() => {
-        sessionStorage.setItem("entered", "1");
-        window.dispatchEvent(new CustomEvent("gate-entered"));
-        document.documentElement.classList.remove("gate-lock");
-        setPhase("done");
-      }, wipe);
+      window.setTimeout(finish, wipe);
     }, hold);
   };
 
+  const updateCommand = (next: string) => {
+    setVal(next);
+    setErr(false);
+    if (next.toLowerCase().includes("whoami")) enter();
+  };
+
+  const onKey = useEffectEvent((e: KeyboardEvent) => {
+    if (phase !== "prompt" || e.ctrlKey || e.metaKey || e.altKey || e.key.length !== 1) return;
+    if (e.target instanceof HTMLButtonElement || e.target === inputRef.current) return;
+    e.preventDefault();
+    inputRef.current?.focus({ preventScroll: true });
+    updateCommand((val + e.key).slice(0, 24));
+  });
+
   useEffect(() => {
-    if (sessionStorage.getItem("entered")) {
-      setPhase("done");
+    try {
+      if (sessionStorage.getItem("entered")) return;
+    } catch {
       return;
     }
-    document.documentElement.classList.add("gate-lock");
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const t = window.setTimeout(() => setPhase("prompt"), reduce ? 0 : 1000);
+    let timer: number;
+    const frame = window.requestAnimationFrame(() => {
+      document.documentElement.classList.add("gate-lock");
+      setPhase(reduce ? "prompt" : "boot");
+      if (!reduce) timer = window.setTimeout(() => setPhase("prompt"), 1000);
+    });
 
-    const onKey = (e: KeyboardEvent) => {
-      if (phaseRef.current !== "prompt") return;
-      let next = valRef.current;
-      if (e.key === "Backspace") next = next.slice(0, -1);
-      else if (e.key === "Enter") next = next;
-      else if (e.key.length === 1) next = (next + e.key).slice(0, 24);
-      else return;
-      e.preventDefault();
-      valRef.current = next;
-      setVal(next);
-      setErr(false);
-      if (next.toLowerCase().includes("whoami")) enter();
-      else if (e.key === "Enter" && next.trim()) setErr(true);
-    };
     window.addEventListener("keydown", onKey);
     return () => {
-      window.clearTimeout(t);
+      window.cancelAnimationFrame(frame);
+      window.clearTimeout(timer);
       window.removeEventListener("keydown", onKey);
       document.documentElement.classList.remove("gate-lock");
     };
@@ -81,14 +87,29 @@ export default function Gate() {
 > identity required to proceed`}</pre>
 
         {phase !== "boot" && !granted && (
-          <div className="gate-line">
+          <label className="gate-line">
             <span className="gate-pre">visitor@yousif.dev:~$</span>
-            <span className="gate-typed">{val}</span>
-            <span className="gate-caret" />
-          </div>
+            <input
+              ref={inputRef}
+              className="gate-input"
+              aria-label="Type whoami to enter"
+              value={val}
+              maxLength={24}
+              placeholder="whoami"
+              autoComplete="off"
+              autoCapitalize="none"
+              autoCorrect="off"
+              spellCheck={false}
+              enterKeyHint="go"
+              onChange={(e) => updateCommand(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && val.trim()) setErr(true);
+              }}
+            />
+          </label>
         )}
 
-        {err && <pre className="gate-err">{`> access denied — hint: just type whoami`}</pre>}
+        {err && !granted && <pre className="gate-err" role="status">{`> access denied — hint: just type whoami`}</pre>}
 
         {granted && (
           <div className="gate-grantseq">
@@ -100,13 +121,18 @@ export default function Gate() {
         )}
 
         {phase === "prompt" && (
-          <div className="gate-hint">
-            [ start typing <b>whoami</b> ·{" "}
-            <button className="gate-skip" onClick={enter}>
-              skip ↵
-            </button>{" "}
-            ]
-          </div>
+          <>
+            <div className="gate-hint">
+              [ start typing <b>whoami</b> ·{" "}
+              <button className="gate-skip" onClick={enter}>
+                skip ↵
+              </button>{" "}
+              ]
+            </div>
+            <button type="button" className="gate-enter" onClick={finish}>
+              Enter portfolio <span aria-hidden="true">↵</span>
+            </button>
+          </>
         )}
       </div>
     </div>

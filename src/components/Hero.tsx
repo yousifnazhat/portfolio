@@ -6,7 +6,7 @@ import PixelJet from "./PixelJet";
 
 export default function Hero() {
   return (
-    <section className="hero">
+    <section className="hero" id="top">
       <div className="topbar">
         <span>AVAILABLE FOR WORK_ // OFFENSIVE SECURITY ENGINEER</span>
         <span className="tb-right">
@@ -14,8 +14,8 @@ export default function Hero() {
         </span>
       </div>
 
-      <nav className="nav">
-        <a className="brand" href="#top">
+      <nav className="nav" aria-label="Portfolio sections">
+        <a className="brand" href="#top" aria-label="Yousif Nazhat, back to top">
           YN<span className="us">_</span>
         </a>
         <ul className="navlinks">
@@ -27,6 +27,33 @@ export default function Hero() {
             </li>
           ))}
         </ul>
+        <div className="mobile-nav">
+          <a className="experience-link" href={navItems[0].href}>
+            {navItems[0].label} <span aria-hidden="true">↓</span>
+          </a>
+          <details
+            className="section-menu"
+            onBlur={(e) => {
+              if (e.relatedTarget && !e.currentTarget.contains(e.relatedTarget)) e.currentTarget.open = false;
+            }}
+            onKeyDown={(e) => {
+              if (e.key !== "Escape") return;
+              e.currentTarget.open = false;
+              e.currentTarget.querySelector("summary")?.focus();
+            }}
+          >
+            <summary>Menu</summary>
+            <ul>
+              {navItems.slice(1).map((item) => (
+                <li key={item.href}>
+                  <a href={item.href} onClick={(e) => e.currentTarget.closest("details")?.removeAttribute("open")}>
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </details>
+        </div>
         <span className="codeicon" aria-hidden="true">&gt;/&lt;</span>
       </nav>
 
@@ -54,7 +81,7 @@ export default function Hero() {
           </p>
           <div className="jetbox">
             <PixelJet />
-            <div className="ascii-cap">// f-22 raptor · air superiority_</div>
+            <div className="ascii-cap">{"// f-22 raptor"}<span> · air superiority_</span></div>
           </div>
         </div>
       </div>

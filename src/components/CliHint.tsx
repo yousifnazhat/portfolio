@@ -76,13 +76,18 @@ export default function CliHint() {
           placeholder="type a command…"
           spellCheck={false}
           autoComplete="off"
+          autoCapitalize="none"
+          autoCorrect="off"
+          enterKeyHint="go"
           aria-label="command line — try whoami or cd experience"
           onChange={(e) => {
             setMsg("");
             setVal(e.target.value);
           }}
           onKeyDown={(e) => {
-            if (e.key === "Enter") run();
+            if (e.key !== "Enter" || e.nativeEvent.isComposing) return;
+            if (window.matchMedia("(pointer: coarse)").matches) e.currentTarget.blur();
+            run();
           }}
         />
       </div>

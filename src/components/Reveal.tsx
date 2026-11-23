@@ -1,7 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
-import type { ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 
 export default function Reveal({
   children,
@@ -12,14 +11,26 @@ export default function Reveal({
   delay?: number;
   y?: number;
 }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] }}
-    >
-      {children}
-    </motion.div>
-  );
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const element = ref.current;
+    const motion = window.matchMedia("(min-width: 861px) and (pointer: fine) and (prefers-reduced-motion: no-preference)");
+    if (!element || !motion.matches || !("IntersectionObserver" in window)) return;
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return;
+      observer.disconnect();
+      if (motion.matches) {
+        element.animate(
+          [{ opacity: 0, transform: `translateY(${y}px)` }, { opacity: 1, transform: "none" }],
+          { duration: 800, delay: delay * 1000, easing: "cubic-bezier(.16,1,.3,1)" }
+        );
+      }
+    }, { rootMargin: "0px 0px -80px" });
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, [delay, y]);
+
+  return <div ref={ref}>{children}</div>;
 }
