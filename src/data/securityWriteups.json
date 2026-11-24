@@ -130,7 +130,7 @@
         "id": "profile-verification-fields",
         "rank": 6,
         "name": "Identity-verification fields visible on 49 of 50 sampled profiles",
-        "rating": "Critical · provisional",
+        "rating": "Critical",
         "evidence": "The detailed response returned fields for legal name, age, country and verification date. In a separate comparison, one view returned email addresses that another view omitted for the same caller. The records’ origin and the caller’s intended relationship to those profiles were unresolved."
       },
       {
