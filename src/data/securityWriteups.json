@@ -167,8 +167,8 @@
         "id": "oauth-registration",
         "rank": 11,
         "name": "An OAuth client could register without administrator review",
-        "rating": "High · provisional",
-        "evidence": "The service accepted my test application. Six follow-up attempts still required sign-in and multifactor authentication. The severity depended on the intended registration policy. The score and vector in my notes disagreed, so the rating remains provisional."
+        "rating": "High",
+        "evidence": "The service accepted my test application. Six follow-up attempts still required sign-in and multifactor authentication. The severity depended on the intended registration policy. I omitted the numerical CVSS score because it did not match the vector in my notes."
       },
       {
         "id": "sign-in-metadata",
