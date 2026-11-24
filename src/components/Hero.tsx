@@ -67,7 +67,7 @@ export default function Hero() {
           <h2>{profile.role}.</h2>
           <p>{profile.bio}</p>
           <p className="hero-placement">
-            My team placed <Link href="/competition/cyber-apocalypse-2026">#12 worldwide at Cyber Apocalypse 2026</Link>.
+            I placed <Link href="/competition/cyber-apocalypse-2026">#12 worldwide at Cyber Apocalypse 2026</Link>.
             Hack The Box has called Cyber Apocalypse <a href="https://www.hackthebox.com/blog/htb-turns-seven">the world’s largest online hacking competition</a>.
           </p>
           <Link className="writeups-link" href="/writeups">

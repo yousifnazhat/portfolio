@@ -1,47 +1,129 @@
 [
   {
-    "title": "Triage of public API responses",
     "slug": "public-api-triage",
-    "question": "Did information visible without an account cross an access boundary?",
-    "work": "I checked the documented public behavior and tested whether seeing a service description also granted access to the operations it described.",
-    "evidence": "One data set was already public by design. A separate service still required a client certificate for its protected operations.",
-    "limits": "Neither observation established access to restricted records. I held both leads out of the proposed reports.",
-    "recommendation": "Keep the public data contract explicit and test that protected operations continue to require credentials."
+    "title": "Mobile credentials and internal API disclosure",
+    "assessment": "P2 and P3 proposed",
+    "summary": "What did the service trust once it recognized the application making a request? I separated the application's identity from the member's identity. The two checks protected different information.",
+    "findings": [
+      {
+        "rating": "P2 proposed",
+        "name": "Credentials distributed in a mobile release",
+        "evidence": "I found credentials packaged in the released application. My highest-priority report covered the risk of distributing a reusable application identity to everyone who installs the client."
+      },
+      {
+        "rating": "P3 proposed",
+        "name": "Internal API information disclosure",
+        "evidence": "I compared the responses for a missing, invalid and recognized client identity. A separate client identifier found in published documentation opened an internal specification covering 44 endpoints and exposed additional reference metadata. Member-only operations still required an authorized session."
+      }
+    ],
+    "method": "On a separate autocomplete lead, I borrowed a question from e-commerce ranking research. What can a ranked suggestion reveal before anyone opens the underlying record? I compared the information surfaced by discovery with what was already public. That helped me separate bulk visibility of profile metadata from access to private member records.",
+    "decision": "I prepared five reports from 13 leads. I held eight back, including a data set that was public by design and a service description whose operations still required a client certificate. I recommended enforcing permissions per operation and reviewing which credentials a public build can carry.",
+    "papers": [
+      { "title": "Seasonality Based Reranking of E-commerce Autocomplete Using Natural Language Queries", "url": "https://arxiv.org/abs/2308.02055" }
+    ]
   },
   {
-    "title": "Browser permissions and private data",
     "slug": "browser-permissions",
-    "question": "Could a page on another site actually read a signed-in user's data?",
-    "work": "I compared cross-origin response headers with what each service returned and checked whether the request reached private content.",
-    "evidence": "I found permissive cross-origin headers on responses that sent the browser to sign in.",
-    "limits": "A redirect alone did not demonstrate a private-data read. I recorded that distinction in the findings.",
-    "recommendation": "Only allow trusted sites that need access. Retest in a browser using a controlled account and a recognizable piece of test data."
+    "title": "Browser trust, OAuth registration and account isolation",
+    "assessment": "High in my report",
+    "summary": "A browser policy, a sign-in prompt and an ownership check can all sit between a visitor and the same record. I evaluated each separately so I could tell an engineering team which boundary had actually failed.",
+    "findings": [
+      {
+        "rating": "High in my report · CVSS 7.4",
+        "name": "Cross-origin trust on seven hosts",
+        "evidence": "Seven hosts reflected an untrusted web origin and advertised support for credentials. I captured that behavior on sign-in redirects. A redirect established the policy error. Reading a signed-in user's private response remained an unverified impact."
+      },
+      {
+        "rating": "High in my report · provisional",
+        "name": "Open OAuth client registration",
+        "evidence": "The service accepted my test application without administrator review. Six follow-up authorization attempts still required fresh sign-in and MFA. The rating depended on whether unreviewed registration violated the intended trust policy. The numerical score and its vector disagreed in my notes, so I retained the provisional qualitative rating."
+      },
+      {
+        "rating": "Medium in my report · CVSS 5.3",
+        "name": "Sign-in method disclosure",
+        "evidence": "The sign-in service returned authentication-method metadata before login. A nonexistent address also received a response, so a successful lookup alone could not establish that a particular person had an account."
+      }
+    ],
+    "method": "In one research pass, I mapped 20 research and advisory references to 17 candidate test scenarios. For ownership, I used a taxonomy of broken object-level authorization to group the failure modes, then borrowed the multi-identity comparison from AuthProbe to choose my controls. My account could receive its own event stream. Other streams stayed restricted, and ownership checks held across 18 API paths. Those controls kept a real browser-policy error from becoming an unsupported claim about access to other accounts.",
+    "decision": "I recommended an explicit allowlist of trusted browser origins and a review of who can register applications. During the review I lowered eight preliminary severity ratings as the controls narrowed what I could show.",
+    "papers": [
+      { "title": "Broken Object Level Authorization in the Wild", "url": "https://arxiv.org/abs/2605.25865" },
+      { "title": "AuthProbe: Specification-Driven, Multi-Identity Detection of Broken Object-Level Authorization in Recruitment API", "url": "https://arxiv.org/abs/2607.20574" }
+    ]
   },
   {
-    "title": "Who should see a profile field?",
     "slug": "profile-field-access",
-    "question": "Did two views of the same kind of profile apply the same privacy rules?",
-    "work": "I compared the fields returned to the same account through two related views, checking which details each included.",
-    "evidence": "One response included contact fields that its counterpart omitted. I documented the difference for review.",
-    "limits": "The demonstration context left the origin of the records and the caller's intended permissions unresolved.",
-    "recommendation": "Define the fields each role may see in one place. Verify both views with fictional profiles and accounts in separate groups."
+    "title": "Identity-verification data in ordinary profile responses",
+    "assessment": "Critical if real · Low if seeded",
+    "summary": "A newly provisioned account associated with a demo workspace could read identity-verification fields for 49 of 50 sampled profiles. The sensitivity was clear. The unresolved question was whose data the workspace contained.",
+    "findings": [
+      {
+        "rating": "Critical if real · Low if seeded",
+        "name": "Identity-verification fields visible to the demo account",
+        "evidence": "The detailed profile response included legal-name, age, country and verification-date fields. In a separate comparison, one profile view included email addresses that a sibling view omitted for the same caller. The records did not establish whether the values belonged to real people or which relationships the caller was intended to have."
+      },
+      {
+        "rating": "High in my report",
+        "name": "Working account provisioned without an invitation",
+        "evidence": "I obtained a working account without supplying an invitation. The product also offered invite-based onboarding. The security impact depended on whether open signup was intentional and which records the resulting demo-associated account was meant to see."
+      }
+    ],
+    "method": "I kept the caller fixed and varied the view of the same kind of profile. Comparing individual fields revealed a privacy decision that a pass/fail check on the whole response would have missed. I then counted how often the sensitive fields were present across the sample.",
+    "decision": "I recommended verifying the origin of the records first, then applying a shared field allowlist based on the caller's role and relationship to the profile. A retest with fictional identities in separately owned workspaces would settle the outstanding access question.",
+    "papers": []
   },
   {
-    "title": "A connection versus access to messages",
     "slug": "realtime-message-access",
-    "question": "What could a visitor actually receive after opening a real-time connection?",
-    "work": "I compared a signed-out connection with one opened by a fresh test account and recorded the application's response to each.",
-    "evidence": "The application denied the signed-out visitor. The signed-in account connected and received no messages.",
-    "limits": "I saw no messages belonging to another account. An empty account also could not establish how membership was enforced for an active conversation.",
-    "recommendation": "Check membership for each subscription. Repeat the test with an invited account and an uninvited one."
+    "title": "Session approval, exposed feedback and sign-in telemetry",
+    "assessment": "Critical in my report",
+    "summary": "I verified an account-takeover scenario end to end with my own account. The flaw was in the handoff between the person approving sign-in and the session that received the credentials.",
+    "findings": [
+      {
+        "rating": "Critical in my report · CVSS 8.8 (High)",
+        "name": "Approval granted a different session access to my account",
+        "evidence": "After I approved sign-in on my test account, a separate session under my control received usable access and refresh credentials. User interaction was required. I could demonstrate the consequence entirely within accounts and sessions I controlled."
+      },
+      {
+        "rating": "Critical in my report · CVSS 7.5 (High)",
+        "name": "Private feedback readable without sign-in",
+        "evidence": "I read 100 production feedback records without signing in to a user account. They included account identifiers, device details and feedback text. The 100 records are the observed sample size."
+      },
+      {
+        "rating": "High in my report",
+        "name": "Sign-in codes disclosed to analytics providers",
+        "evidence": "I traced sign-in codes into three third-party analytics integrations. That established disclosure to the providers. Use of the codes by a third party was outside the evidence."
+      }
+    ],
+    "method": "For the session flaw, I tracked who approved the action and who received the resulting capability. I applied a similar distinction to messaging: establishing a connection, receiving routing information and reading message content are separate outcomes. My method notes cite research on what push-notification services can see. I did not observe another user's message or notification.",
+    "decision": "I recommended binding each approval to the initiating session, limiting feedback reads to the roles that need them, and excluding sign-in secrets from analytics events.",
+    "papers": [
+      { "title": "The Medium is the Message: How Secure Messaging Apps Leak Sensitive Data to Push Notification Services", "url": "https://arxiv.org/abs/2407.10589" }
+    ]
   },
   {
-    "title": "Resource ownership in a shared service",
     "slug": "resource-ownership",
-    "question": "Could an account tell whether a resource outside its workspace existed?",
-    "work": "I checked the ownership rules in a staging workspace and compared responses for inaccessible and nonexistent resources.",
-    "evidence": "Both returned the same missing-resource response. Access to a known resource was scoped to its parent within the test workspace.",
-    "limits": "The assessment used one account. Confirming isolation between independently controlled workspaces required a second.",
-    "recommendation": "Repeat with two separately owned workspaces and check that each owner can use only their own resources."
+    "title": "Tenant isolation and service-account password hashes",
+    "assessment": "Medium–High in my report",
+    "summary": "The application enforced resource ownership in my staging tests. The database role assigned to the tenant could read password hashes belonging to internal service accounts.",
+    "findings": [
+      {
+        "rating": "Medium–High in my report",
+        "name": "Internal service-account password verifiers exposed",
+        "evidence": "From the tenant context I could read stored password verifiers for internal accounts. That exposure creates an offline password-guessing risk. I did not recover a password, assume an internal role or demonstrate a tenant escape."
+      },
+      {
+        "rating": "Medium in my report",
+        "name": "Internal infrastructure information visible to a tenant",
+        "evidence": "The tenant role could also read operational settings that described the service's internal infrastructure. Separately, permission checks indicated write access on internal operational tables. I left those tables untouched."
+      },
+      {
+        "rating": "Medium in my report",
+        "name": "Inconsistent anti-automation controls at sign-in",
+        "evidence": "In staging, an alternative sign-in flow issued a session for my own valid credentials without the challenge shown in the browser. Production evidence established only that the flow was recognized."
+      }
+    ],
+    "method": "I inspected the same tenant identity at two layers. At the application layer, an inaccessible resource and a nonexistent one returned the same result. At the storage layer, I reviewed the privileges the tenant role actually inherited. That exposed an internal boundary the application's ownership checks did not cover.",
+    "decision": "I recommended narrowing inherited tenant privileges and reviewing the exposed service credentials. The staging review used one tenant account. A cross-tenant conclusion would require a separate, independently controlled tenant.",
+    "papers": []
   }
 ]
