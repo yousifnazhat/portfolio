@@ -98,7 +98,7 @@ export default function Hero() {
       </div>
 
       <div className="sidebar" aria-hidden="true">
-        OFFENSIVE SECURITY · RED TEAM · DETECTION · TOOLING · {profile.status}
+        OFFENSIVE SECURITY · RED TEAM · DETECTION · TOOLING
       </div>
     </section>
   );

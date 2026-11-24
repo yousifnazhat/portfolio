@@ -56,7 +56,6 @@ export default function EasterEgg() {
 > motto ......: build it, then break it
 > certs (wip) : OSCP+, HTB CPTS, Security+
 > based ......: New Brunswick, NJ
-> status .....: available · 2026
 yousif@offsec:~$ `}
           <span className="egg-cursor">█</span>
         </pre>

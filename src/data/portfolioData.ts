@@ -9,7 +9,6 @@ export const profile = {
   tagline: "Offensive-security engineer who designs.",
   wallText:
     "I keep red-team tradecraft, security tooling, and high-reliability hardware under one roof — systems built, and systems broken.",
-  status: "Available · 2026",
   location: "New Brunswick, NJ",
   contact: {
     email: "yousif.snazhat@gmail.com",
