@@ -16,6 +16,24 @@ export const metadata: Metadata = {
 };
 
 export default function WriteupsPage() {
+  const orderedCases = cases
+    .map((entry) => ({
+      ...entry,
+      findings: [...entry.findings].sort((a, b) => a.rank - b.rank),
+    }))
+    .sort((a, b) => a.findings[0].rank - b.findings[0].rank);
+  const indexItems = orderedCases
+    .flatMap((entry) => entry.findings)
+    .sort((a, b) => a.rank - b.rank)
+    .map((finding) => (
+      <li key={finding.id} value={finding.rank}>
+        <a href={`#${finding.id}`}>
+          <span>{finding.name}</span>
+          <span className={styles.indexRating}>{finding.rating}</span>
+        </a>
+      </li>
+    ));
+
   return (
     <main className={styles.reader}>
       <header className={styles.cover}>
@@ -29,29 +47,29 @@ export default function WriteupsPage() {
       </header>
       <div className={styles.column}>
         <p className={styles.intro}>
-          Five anonymized assessments. The priorities and severity ratings are mine.
-          Where shown, CVSS scores describe technical severity. Each finding explains what I observed and what affected my rating.
+          I ranked the findings from five anonymized assessments by the impact I could demonstrate.
+          The severity ratings are mine. Where shown, CVSS scores describe technical severity.
         </p>
+        <a className={styles.researchLink} href="#browser-permissions-research">
+          My ownership checks and the two arXiv papers I cited →
+        </a>
         <nav id="case-index" className={styles.index} aria-labelledby="index-heading">
-          <h2 id="index-heading">Read a case</h2>
-          <ul>
-            {cases.map((entry) => (
-              <li key={entry.slug}>
-                <a href={`#${entry.slug}`}>
-                  <span>{entry.title}</span>
-                  <span className={styles.indexRating}>{entry.assessment}</span>
-                </a>
-              </li>
-            ))}
-          </ul>
+          <h2 id="index-heading">Findings by priority</h2>
+          <ol>{indexItems.slice(0, 3)}</ol>
+          {indexItems.length > 3 && (
+            <details>
+              <summary>{indexItems.length - 3} more findings</summary>
+              <ol start={4}>{indexItems.slice(3)}</ol>
+            </details>
+          )}
         </nav>
-        {cases.map((entry) => (
+        {orderedCases.map((entry) => (
           <article className={styles.case} id={entry.slug} key={entry.slug} aria-labelledby={`${entry.slug}-title`}>
             <h2 id={`${entry.slug}-title`}>{entry.title}</h2>
             <p className={styles.lede}>{entry.summary}</p>
             <ul className={styles.findings} aria-label="Findings">
               {entry.findings.map((finding) => (
-                <li key={finding.name}>
+                <li key={finding.id} id={finding.id} tabIndex={-1}>
                   <p className={styles.rating}>{finding.rating}</p>
                   <div>
                     <h3>{finding.name}</h3>
@@ -60,21 +78,38 @@ export default function WriteupsPage() {
                 </li>
               ))}
             </ul>
-            <h3 className={styles.sectionTitle}>How I designed the tests</h3>
-            <p>{entry.method}</p>
-            {entry.papers.length > 0 && (
-              <div className={styles.sources}>
-                <h4>Research cited in my notes</h4>
-                <ul>
-                  {entry.papers.map((paper) => (
-                    <li key={paper.url}><a href={paper.url}>{paper.title}</a></li>
-                  ))}
-                </ul>
-              </div>
-            )}
+            <h3 className={styles.sectionTitle} id={`${entry.slug}-research`}>
+              <a className={styles.sectionAnchor} href={`#${entry.slug}-research`}>
+                How I designed the tests <span aria-hidden="true">#</span>
+              </a>
+            </h3>
+            {entry.research.map((study) => (
+              <section className={styles.research} key={study.title}>
+                <h4>{study.title}</h4>
+                {study.papers.length > 0 && (
+                  <div className={styles.sources}>
+                    <p className={styles.noteLabel}>{study.papers.length === 1 ? "In the paper" : "In the papers"}</p>
+                    <ul>
+                      {study.papers.map((paper) => (
+                        <li key={paper.url}>
+                          <a href={paper.url}>{paper.title}</a>
+                          <p>{paper.approach}</p>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+                <dl className={styles.testNotes}>
+                  <dt className={styles.noteLabel}>My test</dt>
+                  <dd>{study.adaptation}</dd>
+                  <dt className={styles.noteLabel}>What it established</dt>
+                  <dd>{study.result}</dd>
+                </dl>
+              </section>
+            ))}
             <h3 className={styles.sectionTitle}>Assessment and follow-up</h3>
             <p>{entry.decision}</p>
-            <a className={styles.back} href="#case-index">↑ All writeups</a>
+            <a className={styles.back} href="#case-index">↑ Back to findings</a>
           </article>
         ))}
       </div>
