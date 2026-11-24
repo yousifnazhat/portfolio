@@ -8,21 +8,21 @@
         "id": "anonymous-feedback",
         "rank": 1,
         "name": "Anonymous access to 100 production feedback records",
-        "rating": "Critical in my report · CVSS 7.5 (High)",
+        "rating": "Critical · CVSS 7.5 (High)",
         "evidence": "The 100 records contained feedback text, device details and account identifiers for 97 distinct usernames. I could read the sample without a member sign-in."
       },
       {
         "id": "sign-in-telemetry",
         "rank": 2,
         "name": "Sign-in codes sent to three analytics providers",
-        "rating": "High in my report",
+        "rating": "High",
         "evidence": "I observed sign-in codes in outgoing analytics events for three third parties. That capture established that the codes left the service. Whether any recipient retained or redeemed a code remains unknown."
       },
       {
         "id": "session-approval",
         "rank": 4,
         "name": "A separate session received my account credentials after approval",
-        "rating": "Critical in my report · CVSS 8.8 (High)",
+        "rating": "Critical · CVSS 8.8 (High)",
         "evidence": "I controlled both sessions. After I approved sign-in with my test account, the other session received that account’s access and refresh credentials. The recorded test ends at credential delivery. An account takeover would require the account holder’s interaction."
       }
     ],
@@ -57,21 +57,21 @@
         "id": "service-account-verifiers",
         "rank": 3,
         "name": "A staging tenant could read internal service-account password hashes",
-        "rating": "Medium–High in my report",
+        "rating": "Medium–High",
         "evidence": "My tenant role could read stored password verifiers belonging to internal service accounts. Exposure puts those accounts at risk of offline password guessing. Password recovery, use of an internal role and access to another tenant were outside the demonstrated impact."
       },
       {
         "id": "tenant-infrastructure",
         "rank": 7,
         "name": "A tenant could read internal infrastructure settings",
-        "rating": "Medium in my report",
+        "rating": "Medium",
         "evidence": "I could read operational settings that described the service’s infrastructure. Separately, database privilege records showed write grants on internal operational tables. My test established the grants and made no changes to the tables."
       },
       {
         "id": "staging-sign-in",
         "rank": 10,
         "name": "Two staging sign-in flows enforced different anti-automation checks",
-        "rating": "Medium in my report",
+        "rating": "Medium",
         "evidence": "One flow challenged the browser. Another issued a staging session for my own valid credentials without that challenge. The production service recognized the flow, but session issuance was verified only in staging."
       }
     ],
@@ -130,14 +130,14 @@
         "id": "profile-verification-fields",
         "rank": 6,
         "name": "Identity-verification fields visible on 49 of 50 sampled profiles",
-        "rating": "Critical if real · Low if seeded",
+        "rating": "Critical · provisional",
         "evidence": "The detailed response returned fields for legal name, age, country and verification date. In a separate comparison, one view returned email addresses that another view omitted for the same caller. The records’ origin and the caller’s intended relationship to those profiles were unresolved."
       },
       {
         "id": "invitation-free-account",
         "rank": 12,
         "name": "A working account could be created without an invitation",
-        "rating": "High in my report",
+        "rating": "High",
         "evidence": "I obtained a working, demo-associated account without supplying an invitation. The product also offered invite-based onboarding. The security impact depends on whether open signup was intentional and which records the new account was meant to see."
       }
     ],
@@ -160,21 +160,21 @@
         "id": "cross-origin-policy",
         "rank": 9,
         "name": "Seven hosts reflected an untrusted web origin on sign-in redirects",
-        "rating": "High in my report · CVSS 7.4",
+        "rating": "High · CVSS 7.4",
         "evidence": "I recorded seven hosts reflecting an untrusted origin and advertising credential support. My captures were sign-in redirects. They established the policy behavior. A browser reading a signed-in user’s private response remained an unverified impact."
       },
       {
         "id": "oauth-registration",
         "rank": 11,
         "name": "An OAuth client could register without administrator review",
-        "rating": "High in my report · provisional",
+        "rating": "High · provisional",
         "evidence": "The service accepted my test application. Six follow-up attempts still required sign-in and multifactor authentication. The severity depended on the intended registration policy. The score and vector in my notes disagreed, so the rating remains provisional."
       },
       {
         "id": "sign-in-metadata",
         "rank": 13,
         "name": "Sign-in method metadata was visible before login",
-        "rating": "Medium in my report · CVSS 5.3",
+        "rating": "Medium · CVSS 5.3",
         "evidence": "The service returned authentication-method information before sign-in. A nonexistent address also received a response. A lookup result alone therefore could not establish whether a given person had an account."
       }
     ],
