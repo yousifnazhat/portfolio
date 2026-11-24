@@ -559,46 +559,7 @@ html.has-cursor, html.has-cursor * { cursor: none !important; }
 .hero .navlinks a.active { background: var(--gold); color: #fff; }
 .mobile-nav { display: none; }
 
-.screenprint {
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
-  display: grid;
-  grid-template-columns: minmax(0, 1.85fr) minmax(0, 1fr);
-  min-height: clamp(290px, 32vw, 485px);
-  background: var(--orange);
-  border-bottom: 1.5px solid var(--ink);
-}
-.screenprint::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background: radial-gradient(circle at 1px 1px, rgb(21 20 15 / 32%) .75px, transparent 1px) 0 0 / 4px 4px;
-  mask-image: linear-gradient(110deg, transparent 18%, black 96%);
-}
-.poster-type { align-self: center; padding: 28px 0 36px var(--gutter); }
-.poster-kicker { display: block; margin-bottom: 18px; font: 700 12px var(--font-mono-stack); text-transform: uppercase; letter-spacing: .09em; }
-.bighead {
-  margin: 0;
-  color: var(--ink);
-  font: 700 clamp(42px, 10.15vw, 158px)/.92 var(--font-display-stack);
-  letter-spacing: -.085em;
-  text-transform: uppercase;
-}
 .us { color: var(--gold); }
-.bighead .us { color: inherit; }
-.poster-art::before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  width: 113%;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  right: -29%;
-  bottom: -36%;
-  background: rgb(238 233 218 / 60%);
-}
 .hero-intro {
   display: grid;
   grid-template-columns: minmax(0, 1.55fr) minmax(200px, 1fr);
@@ -675,11 +636,6 @@ html.has-cursor, html.has-cursor * { cursor: none !important; }
 
 @media (max-width: 640px) {
   .hero .brand-name { display: none; }
-  .screenprint { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto clamp(190px, 48vw, 230px); }
-  .poster-type { padding: 20px var(--gutter) 24px; }
-  .poster-kicker { margin-bottom: 12px; font-size: 10px; }
-  .bighead { font-size: clamp(40px, 13.8vw, 75px); }
-  .poster-art::before { bottom: -80%; }
   .hero-intro { grid-template-columns: minmax(0, 1fr); gap: 16px; padding-block: 20px 12px; }
   .hero-intro .cliwrap { justify-self: start; }
   .cli-tip { overflow-wrap: anywhere; }

@@ -51,7 +51,7 @@ export default function Hero() {
         </div>
       </nav>
 
-      <div className="screenprint">
+      <FlightPoster>
         <div className="poster-type">
           <span className="poster-kicker">Red team · Tooling · Detection</span>
           <h1 className="bighead">
@@ -60,8 +60,7 @@ export default function Hero() {
             Engineered<span className="us">_</span>
           </h1>
         </div>
-        <FlightPoster />
-      </div>
+      </FlightPoster>
 
       <div className="hero-intro">
         <div className="hero-bio">

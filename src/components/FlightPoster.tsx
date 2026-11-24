@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState, useSyncExternalStore } from "react";
+import { type ReactNode, useCallback, useEffect, useState, useSyncExternalStore } from "react";
+import InterceptVideo from "./InterceptVideo";
 import PixelJet from "./PixelJet";
 import "./flight-poster.css";
 
@@ -11,28 +12,6 @@ function subscribeMotion(callback: () => void) {
   const query = window.matchMedia(reduceMotion);
   query.addEventListener("change", callback);
   return () => query.removeEventListener("change", callback);
-}
-
-function Intercept() {
-  const bolt = "M93 65 L105 55 L110 52 L121 44 L127 39";
-  return (
-    <g>
-      <g transform="translate(127 39)" fill="var(--orange)">
-        <g className="flight-glitch">
-          <path d="M-3 -12h3v3h-3z M-8 -7h15v3H-8z M-10 -2H5v3h-15z M-5 3h14v3H-5z M3 8h3v2H3z" />
-          <path fill="var(--bg-card)" d="M-7 -7h4v1h-4z M5 3h4v1H5z" />
-        </g>
-        <g className="flight-debris">
-          <path d="M-12 -6h4v2h-4z M9 -11h3v3H9z M6 7h3v2H6z" />
-          <path fill="var(--bg-card)" d="M-5 -10h2v2h-2z M11 1h2v2h-2z" />
-        </g>
-      </g>
-      <g className="flight-bolt" fill="none">
-        <path d={bolt} pathLength="1" stroke="var(--orange)" strokeWidth="3" />
-        <path d={bolt} pathLength="1" stroke="var(--bg-card)" strokeWidth="1" />
-      </g>
-    </g>
-  );
 }
 
 function Contrail() {
@@ -46,7 +25,7 @@ function Contrail() {
   );
 }
 
-export default function FlightPoster() {
+export default function FlightPoster({ children }: { children: ReactNode }) {
   const [mode, setMode] = useState<Mode>("intercept");
   const [playChoice, setPlayChoice] = useState<boolean | null>(null);
   const prefersReduced = useSyncExternalStore(
@@ -55,31 +34,33 @@ export default function FlightPoster() {
     () => true,
   );
   const playing = playChoice ?? !prefersReduced;
+  const onPlaybackBlocked = useCallback(() => setPlayChoice(false), []);
 
   useEffect(() => {
     const intercept = () => setMode("intercept");
     const contrail = () => setMode("contrail");
     window.addEventListener("jet-intercept", intercept);
     window.addEventListener("jet-contrail", contrail);
+    window.addEventListener("jet-flares", contrail);
     return () => {
       window.removeEventListener("jet-intercept", intercept);
       window.removeEventListener("jet-contrail", contrail);
+      window.removeEventListener("jet-flares", contrail);
     };
   }, []);
 
   return (
-    <div className="poster-art flight-poster" data-mode={mode} data-playing={playing}>
-      <div className="flight-stage">
-        {mode === "intercept" && <span className="flight-field" aria-hidden="true" />}
-        <svg className="flight-scene" viewBox="0 0 180 150" preserveAspectRatio="xMidYMid meet"
-          role="img" aria-label={mode === "intercept" ? "Pixel F-22 passing a digital glitch" : "Pixel F-22 banking along a curved contrail"}>
+    <div className="screenprint flight-poster" data-mode={mode} data-playing={playing}>
+      {mode === "intercept" && <InterceptVideo playing={playing} onPlaybackBlocked={onPlaybackBlocked} />}
+      <div className="flight-contrail" hidden={mode !== "contrail"} aria-hidden="true">
+        <svg className="flight-scene" viewBox="0 0 180 150" preserveAspectRatio="xMidYMid meet">
           <g className="flight-formation">
-            {mode === "contrail" && <Contrail />}
+            <Contrail />
             <PixelJet />
           </g>
-          {mode === "intercept" && <Intercept />}
         </svg>
       </div>
+      {children}
       <div className="flight-controls" role="group" aria-label="Flight animation controls">
         <button type="button" aria-pressed={mode === "intercept"} onClick={() => setMode("intercept")}>Intercept</button>
         <button type="button" aria-pressed={mode === "contrail"} onClick={() => setMode("contrail")}>Contrail</button>
