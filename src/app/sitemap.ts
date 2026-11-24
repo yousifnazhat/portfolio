@@ -11,6 +11,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 1,
     },
+    {
+      url: `${SITE_URL}/writeups`,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
     ...collection.map((a) => ({
       url: `${SITE_URL}/exhibit/${a.id}`,
       lastModified: new Date(),

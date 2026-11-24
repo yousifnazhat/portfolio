@@ -44,14 +44,14 @@ export default function CliHint() {
     }
     if (c === "sudo -l" || c === "help" || c === "ls" || c === "?") {
       setMsg(
-        `allowed → whoami · cd experience${competitions.length ? " · cd competitions" : ""} · cd work · cd stack · cd contact · cd home · cd <project> · flares · intercept · clear · help / ls`
+        `allowed → whoami · cd experience${competitions.length ? " · cd competitions" : ""} · cd work · cd stack · cd contact · cd home · cd <project> · flares · intercept · contrail · clear · help / ls`
       );
       return;
     }
-    if (c === "intercept") {
-      window.dispatchEvent(new CustomEvent("jet-intercept"));
+    if (c === "intercept" || c === "contrail") {
+      window.dispatchEvent(new CustomEvent(`jet-${c}`));
       setVal("");
-      setMsg("↗ intercept launched_");
+      setMsg(`↗ ${c} selected_`);
       return;
     }
     if (c === "flares") {

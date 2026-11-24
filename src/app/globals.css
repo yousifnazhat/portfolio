@@ -426,7 +426,7 @@ a {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+  *:not(.flight-poster, .flight-poster *) { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
 }
 
 /* ---------- intro loader (Awwwards pack, adapted) ---------- */
@@ -588,14 +588,6 @@ html.has-cursor, html.has-cursor * { cursor: none !important; }
 }
 .us { color: var(--gold); }
 .bighead .us { color: inherit; }
-.poster-art {
-  position: relative;
-  display: grid;
-  place-items: center;
-  min-width: 0;
-  color: var(--ink);
-  cursor: pointer;
-}
 .poster-art::before {
   content: "";
   position: absolute;
@@ -606,23 +598,6 @@ html.has-cursor, html.has-cursor * { cursor: none !important; }
   right: -29%;
   bottom: -36%;
   background: rgb(238 233 218 / 60%);
-}
-.poster-art .pixel-jet {
-  display: block;
-  width: min(78%, 370px);
-  height: auto;
-  transform: rotate(25deg);
-  filter: drop-shadow(-7px 6px 0 var(--bg-card));
-}
-.poster-art:focus-visible { outline: 2px dashed var(--ink); outline-offset: -6px; }
-.poster-play {
-  position: absolute;
-  bottom: 12px;
-  right: 14px;
-  padding: 4px 8px;
-  background: var(--ink);
-  color: var(--bg-card);
-  font: 500 11px var(--font-mono-stack);
 }
 .hero-intro {
   display: grid;
@@ -636,6 +611,8 @@ html.has-cursor, html.has-cursor * { cursor: none !important; }
 .hero-bio p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.6; }
 .hero-bio .hero-placement { margin-top: 12px; }
 .hero-placement a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--gold-deep); text-underline-offset: 3px; }
+.writeups-link { display: inline-flex; align-items: center; gap: .75em; min-height: 44px; margin-top: 4px; color: var(--ink); font-weight: 700; text-decoration: underline; text-underline-offset: 4px; }
+.writeups-link span { color: var(--gold-deep); }
 .hero-intro .cliwrap { justify-self: end; width: min(100%, 360px); margin: 0; }
 .cli-shortcuts { display: flex; flex-wrap: wrap; column-gap: 14px; }
 .cli-shortcuts button { min-height: 44px; font-size: 12px; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
@@ -698,14 +675,11 @@ html.has-cursor, html.has-cursor * { cursor: none !important; }
 
 @media (max-width: 640px) {
   .hero .brand-name { display: none; }
-  .screenprint { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto 135px; }
+  .screenprint { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto clamp(190px, 48vw, 230px); }
   .poster-type { padding: 20px var(--gutter) 24px; }
   .poster-kicker { margin-bottom: 12px; font-size: 10px; }
   .bighead { font-size: clamp(40px, 13.8vw, 75px); }
-  .poster-art { justify-self: end; width: 48%; }
-  .poster-art .pixel-jet { width: min(76%, 120px); }
   .poster-art::before { bottom: -80%; }
-  .poster-play { right: 8px; bottom: 6px; }
   .hero-intro { grid-template-columns: minmax(0, 1fr); gap: 16px; padding-block: 20px 12px; }
   .hero-intro .cliwrap { justify-self: start; }
   .cli-tip { overflow-wrap: anywhere; }

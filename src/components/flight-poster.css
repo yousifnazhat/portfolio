@@ -1,0 +1,108 @@
+.flight-poster {
+  position: relative;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  min-width: 0;
+  color: var(--ink);
+}
+.flight-stage { position: relative; min-height: 0; }
+.flight-scene { position: absolute; inset: 0; width: 100%; height: 100%; overflow: hidden; }
+.flight-scene .pixel-jet { filter: drop-shadow(-2px 2px 0 var(--jet-shadow, var(--bg-card))); }
+.flight-poster[data-mode="intercept"] {
+  --jet-body: var(--bg-card);
+  --jet-rim: #fff9ed;
+  --jet-spine: #a89d86;
+  --jet-shadow: #ae4319;
+}
+.flight-poster[data-mode="intercept"]::before { display: none; }
+.flight-poster[data-mode="intercept"] .flight-stage {
+  margin: clamp(12px, 2vw, 30px) 12px 4px 0;
+  overflow: hidden;
+  background: var(--ink);
+  border: 1.5px solid var(--ink);
+}
+.flight-field {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgb(242 236 220 / 55%) .8px, transparent 1.1px) 0 0 / 14px 14px;
+  mask-image: linear-gradient(30deg, rgb(0 0 0 / 30%), black);
+  animation: flight-field-drift 3.8s linear infinite;
+}
+@media (max-width: 640px) {
+  .flight-poster[data-mode="intercept"] .flight-stage { margin: 0 12px 4px; }
+}
+.flight-controls {
+  justify-self: end;
+  display: inline-flex;
+  margin: 0 12px 8px 0;
+  border: 1.5px solid var(--ink);
+  background: var(--paper);
+}
+.flight-controls button {
+  display: grid;
+  place-items: center;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0 9px;
+  color: var(--ink);
+  font: 700 11px var(--font-mono-stack);
+  cursor: pointer;
+}
+.flight-controls button + button { border-left: 1px solid var(--ink); }
+.flight-controls button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.flight-controls button:focus-visible { outline: 2px dashed currentColor; outline-offset: -4px; }
+@media (hover: hover) {
+  .flight-controls button:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .flight-controls .flight-play:hover { background: var(--bg-inset); }
+}
+
+.flight-poster { --pass-duration: 4s; }
+.flight-poster[data-mode="intercept"] .flight-formation { animation: flight-pass var(--pass-duration) ease-in-out infinite; }
+.flight-glitch { animation: flight-acquire var(--pass-duration) linear infinite; }
+.flight-bolt { stroke-dasharray: .36 1.2; animation: flight-signal var(--pass-duration) linear infinite; }
+.flight-debris { transform-box: fill-box; transform-origin: center; animation: flight-scatter var(--pass-duration) linear infinite; }
+.flight-poster[data-mode="contrail"] .flight-formation { animation: flight-bank 5.8s ease-in-out infinite; }
+.flight-wake { transform-origin: 0 35px; animation: flight-wake-curve 5.8s ease-in-out infinite; }
+.flight-wake-dashes { animation: flight-wake-flow 1.5s linear infinite; }
+.flight-poster .pixel-jet.burst .pj-burst { animation: flight-flares 1.8s steps(1) both; }
+.flight-poster[data-playing="false"] * { animation-play-state: paused !important; }
+
+@keyframes flight-pass {
+  0%, 100% { transform: translate(55px, 101px) rotate(30deg) scale(.82); }
+  28% { transform: translate(63px, 91px) rotate(37deg) scale(.82); }
+  55% { transform: translate(78px, 81px) rotate(48deg) scale(.82); }
+  78% { transform: translate(67px, 91px) rotate(36deg) scale(.82); }
+}
+@keyframes flight-acquire {
+  0%, 100% { opacity: .8; transform: translate(21px, -15px) skewX(-9deg) scale(.82); }
+  36% { opacity: 1; transform: translate(6px, -3px) skewX(-9deg); }
+  49% { opacity: 1; transform: skewX(-9deg); }
+  54% { opacity: .7; transform: scale(1.35,.55); }
+  62%, 78% { opacity: 0; transform: scale(1.65,.25); }
+  79% { opacity: 0; transform: translate(24px, -18px) scale(.75); }
+}
+@keyframes flight-signal {
+  0%, 33% { opacity: 0; stroke-dashoffset: .38; }
+  34% { opacity: 1; stroke-dashoffset: .38; }
+  49% { opacity: 1; stroke-dashoffset: -.98; }
+  50%, 100% { opacity: 0; stroke-dashoffset: -1; }
+}
+@keyframes flight-scatter {
+  0%, 49% { opacity: 0; transform: scale(.7); }
+  50% { opacity: 1; transform: scale(.7); }
+  63% { opacity: 1; transform: scale(1.55); }
+  74%, 100% { opacity: 0; transform: scale(1.9); }
+}
+@keyframes flight-bank {
+  0%, 100% { transform: translate(93px, 68px) rotate(15deg); }
+  30% { transform: translate(100px, 58px) rotate(25deg); }
+  58% { transform: translate(116px, 61px) rotate(42deg); }
+  80% { transform: translate(109px, 69px) rotate(34deg); }
+}
+@keyframes flight-wake-curve {
+  0%, 100% { transform: skewX(-5deg) scaleX(.62); }
+  55% { transform: skewX(7deg) scaleX(1.18); }
+}
+@keyframes flight-wake-flow { to { stroke-dashoffset: -36; } }
+@keyframes flight-flares { from { opacity: 1; } to { opacity: 0; } }
+@keyframes flight-field-drift { to { background-position: -14px 14px; } }

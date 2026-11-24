@@ -1,10 +1,9 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import "./pixel-jet.css";
+import { memo, useEffect, useRef } from "react";
 
 // Pixel-art F-22 Raptor (top-down) with afterburner plumes and a flare fan,
-// rendered as crisp SVG rects. Palette maps to the theme variables:
+// rendered on a crisp SVG pixel grid. Palette maps to the theme variables:
 // X = ink, H = rim light, M = muted spine, O/L/Y = flame, G = glint, W = core.
 const ROWS = [
   "................H................",
@@ -57,9 +56,9 @@ const ROWS = [
 ];
 
 const COLORS: Record<string, string> = {
-  X: "var(--ink)",
-  H: "#4a4433", // rim light — edges facing the (upper-left) light source
-  M: "var(--muted)",
+  X: "var(--jet-body, var(--ink))",
+  H: "var(--jet-rim, #4a4433)",
+  M: "var(--jet-spine, var(--muted))",
   O: "var(--gold)",
   L: "var(--gold-l)",
   Y: "var(--gold-pale)",
@@ -69,7 +68,7 @@ const COLORS: Record<string, string> = {
 
 const W = ROWS[0].length;
 const H = ROWS.length;
-const PAD = 3; // breathing room for the registration ticks
+const PAD = 3; // original framing around the pixel sprite
 const FLAME_Y = 39; // first flame row — everything below flickers (core stays steady)
 
 // Extra countermeasure fan, shown only while the `flares` command bursts.
@@ -85,62 +84,34 @@ const BURST: [number, number, string][] = [
   [16, 47, "Y"],
 ];
 
-const TICK = 2.6;
-const TICK_W = 0.45;
-const TICK_COLOR = "rgba(21, 20, 15, 0.35)";
+// One path per color and flicker phase keeps the original pixels inexpensive to animate.
+const layers = new Map<string, { color: string; phase: string; path: string }>();
+ROWS.forEach((row, y) => {
+  [...row].forEach((color, x) => {
+    if (!COLORS[color]) return;
+    const phase = y >= FLAME_Y && color !== "W" ? `pj-fl pj-f${(x * 7 + y * 13) % 3}` : "";
+    const key = color + phase;
+    const layer = layers.get(key) ?? { color: COLORS[color], phase, path: "" };
+    layer.path += `M${x} ${y}h1v1h-1z`;
+    layers.set(key, layer);
+  });
+});
 
-function InterceptGlitch() {
-  const [shot, setShot] = useState<number | null>(null);
-
-  useEffect(() => {
-    let reset: number;
-    const intercept = () => {
-      setShot((previous) => (previous ?? 0) + 1);
-      window.clearTimeout(reset);
-      reset = window.setTimeout(() => setShot(null), 1000);
-    };
-    window.addEventListener("jet-intercept", intercept);
-    return () => {
-      window.removeEventListener("jet-intercept", intercept);
-      window.clearTimeout(reset);
-    };
-  }, []);
-
-  if (shot === null) return null;
-
-  return (
-    <g key={shot} className="pj-intercept" aria-hidden="true">
-      <g className="pj-glitch" fill="var(--ink)">
-        <rect x="24" y="1" width="4" height="1" />
-        <rect x="26" y="2" width="4" height="1" />
-        <rect x="23" y="3" width="3" height="1" />
-        <rect x="27" y="4" width="2" height="1" fill="var(--bg-card)" />
-      </g>
-      <g className="pj-zap">
-        <path fill="var(--ink)" d="M20 13h1v2h-1z M21 11h1v2h-1z" />
-        <rect x="21" y="11" width="1" height="1" fill="var(--bg-card)" />
-      </g>
-      <path className="pj-fragments" fill="var(--ink)" d="M23 0h2v1h-2z M29 1h2v1h-2z M25 5h1v1h-1z" />
-    </g>
-  );
-}
-
-export default function PixelJet() {
+const PixelJet = memo(function PixelJet() {
   const ref = useRef<SVGSVGElement | null>(null);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    let t = 0;
     const onFlares = () => {
       el.classList.add("burst");
-      window.clearTimeout(t);
-      t = window.setTimeout(() => el.classList.remove("burst"), 1800);
+      el.querySelector(".pj-burst")?.getAnimations().forEach((animation) => {
+        animation.currentTime = 0;
+      });
     };
     window.addEventListener("jet-flares", onFlares);
     return () => {
       window.removeEventListener("jet-flares", onFlares);
-      window.clearTimeout(t);
     };
   }, []);
 
@@ -148,52 +119,22 @@ export default function PixelJet() {
     <svg
       ref={ref}
       className="pixel-jet"
+      x="-39"
+      y="-53"
+      width="78"
+      height="106"
       viewBox={`${-PAD} ${-PAD} ${W + PAD * 2} ${H + PAD * 2}`}
       shapeRendering="crispEdges"
-      role="img"
-      aria-label="Pixel art of an F-22 Raptor deploying flares"
+      aria-hidden="true"
     >
-      {/* corner registration ticks — spec-sheet framing */}
-      {[
-        [-PAD, -PAD, 1, 1],
-        [W + PAD, -PAD, -1, 1],
-        [-PAD, H + PAD, 1, -1],
-        [W + PAD, H + PAD, -1, -1],
-      ].map(([cx, cy, dx, dy], i) => (
-        <g key={`t${i}`} fill={TICK_COLOR}>
-          <rect x={Math.min(cx, cx + dx * TICK)} y={Math.min(cy, cy + dy * TICK_W)} width={TICK} height={TICK_W} />
-          <rect x={Math.min(cx, cx + dx * TICK_W)} y={Math.min(cy, cy + dy * TICK)} width={TICK_W} height={TICK} />
-        </g>
+      {Array.from(layers, ([key, layer]) => (
+        <path key={key} d={layer.path} fill={layer.color} className={layer.phase || undefined} />
       ))}
 
-      {/* soft drop shadow — airframe only (the plume is a light source) */}
-      <g transform="translate(1.4 2)" opacity="0.1" fill="var(--ink)">
-        {ROWS.slice(0, FLAME_Y).flatMap((row, y) =>
-          [...row].map((c, x) =>
-            COLORS[c] ? <rect key={`s${x}-${y}`} x={x} y={y} width={1} height={1} /> : null
-          )
-        )}
-      </g>
-
-      {/* sprite — flame pixels flicker in three offset phases */}
-      {ROWS.flatMap((row, y) =>
-        [...row].map((c, x) =>
-          COLORS[c] ? (
-            <rect
-              key={`${x}-${y}`}
-              x={x}
-              y={y}
-              width={1}
-              height={1}
-              fill={COLORS[c]}
-              className={y >= FLAME_Y && c !== "W" ? `pj-fl pj-f${(x * 7 + y * 13) % 3}` : undefined}
-            />
-          ) : null
-        )
-      )}
-
       {/* countermeasure burst — hidden until the `flares` command fires */}
-      <g className="pj-burst">
+      <g className="pj-burst" onAnimationEnd={(event) => {
+        if (event.target === event.currentTarget) ref.current?.classList.remove("burst");
+      }}>
         {BURST.map(([x, y, c], i) => (
           <rect
             key={`b${i}`}
@@ -206,7 +147,8 @@ export default function PixelJet() {
           />
         ))}
       </g>
-      <InterceptGlitch />
     </svg>
   );
-}
+});
+
+export default PixelJet;

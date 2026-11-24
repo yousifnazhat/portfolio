@@ -1,0 +1,47 @@
+[
+  {
+    "title": "Triage of public API responses",
+    "slug": "public-api-triage",
+    "question": "Did information visible without an account cross an access boundary?",
+    "work": "I checked the documented public behavior and tested whether seeing a service description also granted access to the operations it described.",
+    "evidence": "One data set was already public by design. A separate service still required a client certificate for its protected operations.",
+    "limits": "Neither observation established access to restricted records. I held both leads out of the proposed reports.",
+    "recommendation": "Keep the public data contract explicit and test that protected operations continue to require credentials."
+  },
+  {
+    "title": "Browser permissions and private data",
+    "slug": "browser-permissions",
+    "question": "Could a page on another site actually read a signed-in user's data?",
+    "work": "I compared cross-origin response headers with what each service returned and checked whether the request reached private content.",
+    "evidence": "I found permissive cross-origin headers on responses that sent the browser to sign in.",
+    "limits": "A redirect alone did not demonstrate a private-data read. I recorded that distinction in the findings.",
+    "recommendation": "Only allow trusted sites that need access. Retest in a browser using a controlled account and a recognizable piece of test data."
+  },
+  {
+    "title": "Who should see a profile field?",
+    "slug": "profile-field-access",
+    "question": "Did two views of the same kind of profile apply the same privacy rules?",
+    "work": "I compared the fields returned to the same account through two related views, checking which details each included.",
+    "evidence": "One response included contact fields that its counterpart omitted. I documented the difference for review.",
+    "limits": "The demonstration context left the origin of the records and the caller's intended permissions unresolved.",
+    "recommendation": "Define the fields each role may see in one place. Verify both views with fictional profiles and accounts in separate groups."
+  },
+  {
+    "title": "A connection versus access to messages",
+    "slug": "realtime-message-access",
+    "question": "What could a visitor actually receive after opening a real-time connection?",
+    "work": "I compared a signed-out connection with one opened by a fresh test account and recorded the application's response to each.",
+    "evidence": "The application denied the signed-out visitor. The signed-in account connected and received no messages.",
+    "limits": "I saw no messages belonging to another account. An empty account also could not establish how membership was enforced for an active conversation.",
+    "recommendation": "Check membership for each subscription. Repeat the test with an invited account and an uninvited one."
+  },
+  {
+    "title": "Resource ownership in a shared service",
+    "slug": "resource-ownership",
+    "question": "Could an account tell whether a resource outside its workspace existed?",
+    "work": "I checked the ownership rules in a staging workspace and compared responses for inaccessible and nonexistent resources.",
+    "evidence": "Both returned the same missing-resource response. Access to a known resource was scoped to its parent within the test workspace.",
+    "limits": "The assessment used one account. Confirming isolation between independently controlled workspaces required a second.",
+    "recommendation": "Repeat with two separately owned workspaces and check that each owner can use only their own resources."
+  }
+]
