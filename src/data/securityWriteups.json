@@ -94,14 +94,14 @@
         "id": "internal-specification",
         "rank": 5,
         "name": "A documented client identifier exposed a 44-endpoint internal specification",
-        "rating": "P3 proposed",
+        "rating": "P3",
         "evidence": "I compared missing, invalid and recognized client identities. An identifier found in published documentation opened the internal specification and reference metadata. Member-only operations still required an authorized session."
       },
       {
         "id": "mobile-credentials",
         "rank": 8,
         "name": "Reusable application credentials shipped in a mobile release",
-        "rating": "P2 proposed",
+        "rating": "P2",
         "evidence": "I found application credentials in the distributed client. Anyone with that release could obtain them. The credential finding and the 44-endpoint disclosure involved different identifiers. I did not establish member-level access with the credentials from the release."
       }
     ],
