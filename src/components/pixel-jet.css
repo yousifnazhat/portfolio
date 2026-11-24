@@ -1,0 +1,28 @@
+.pj-zap, .pj-fragments { opacity: 0; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .pj-glitch { animation: pj-glitch 900ms steps(1) both; }
+  .pj-zap { animation: pj-zap 900ms steps(1) both; }
+  .pj-fragments { animation: pj-fragments 900ms steps(1) both; }
+
+  @keyframes pj-glitch {
+    0% { transform: translateX(1px); }
+    16% { transform: none; }
+    54%, 100% { opacity: 0; }
+  }
+
+  @keyframes pj-zap {
+    0%, 24% { opacity: 0; }
+    25% { opacity: 1; transform: none; }
+    35% { transform: translate(2px, -4px); }
+    45% { transform: translate(5px, -8px); }
+    54%, 100% { opacity: 0; }
+  }
+
+  @keyframes pj-fragments {
+    0%, 53% { opacity: 0; }
+    54% { opacity: 1; }
+    70% { transform: translate(1px, -1px); opacity: 0.6; }
+    90%, 100% { opacity: 0; }
+  }
+}

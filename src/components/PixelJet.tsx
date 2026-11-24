@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import "./pixel-jet.css";
 
 // Pixel-art F-22 Raptor (top-down) with afterburner plumes and a flare fan,
 // rendered as crisp SVG rects. Palette maps to the theme variables:
@@ -88,6 +89,42 @@ const TICK = 2.6;
 const TICK_W = 0.45;
 const TICK_COLOR = "rgba(21, 20, 15, 0.35)";
 
+function InterceptGlitch() {
+  const [shot, setShot] = useState<number | null>(null);
+
+  useEffect(() => {
+    let reset: number;
+    const intercept = () => {
+      setShot((previous) => (previous ?? 0) + 1);
+      window.clearTimeout(reset);
+      reset = window.setTimeout(() => setShot(null), 1000);
+    };
+    window.addEventListener("jet-intercept", intercept);
+    return () => {
+      window.removeEventListener("jet-intercept", intercept);
+      window.clearTimeout(reset);
+    };
+  }, []);
+
+  if (shot === null) return null;
+
+  return (
+    <g key={shot} className="pj-intercept" aria-hidden="true">
+      <g className="pj-glitch" fill="var(--ink)">
+        <rect x="24" y="1" width="4" height="1" />
+        <rect x="26" y="2" width="4" height="1" />
+        <rect x="23" y="3" width="3" height="1" />
+        <rect x="27" y="4" width="2" height="1" fill="var(--bg-card)" />
+      </g>
+      <g className="pj-zap">
+        <path fill="var(--ink)" d="M20 13h1v2h-1z M21 11h1v2h-1z" />
+        <rect x="21" y="11" width="1" height="1" fill="var(--bg-card)" />
+      </g>
+      <path className="pj-fragments" fill="var(--ink)" d="M23 0h2v1h-2z M29 1h2v1h-2z M25 5h1v1h-1z" />
+    </g>
+  );
+}
+
 export default function PixelJet() {
   const ref = useRef<SVGSVGElement | null>(null);
 
@@ -169,6 +206,7 @@ export default function PixelJet() {
           />
         ))}
       </g>
+      <InterceptGlitch />
     </svg>
   );
 }

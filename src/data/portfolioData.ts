@@ -6,6 +6,7 @@ export type ArtifactImage = { src: string; fit: "cover" | "contain"; caption?: s
 export const profile = {
   name: "Yousif Nazhat",
   role: "Offensive Security Engineer",
+  bio: "Completely self-taught, I strive to push the boundaries of frontier AI. My fascination lies at the intersection of ML and offensive security.",
   tagline: "Offensive-security engineer who designs.",
   wallText:
     "I keep red-team tradecraft, security tooling, and high-reliability hardware under one roof — systems built, and systems broken.",

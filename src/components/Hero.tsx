@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { navItems, profile, stats } from "../data/portfolioData";
 import CliHint from "./CliHint";
 import PixelJet from "./PixelJet";
@@ -7,16 +8,10 @@ import PixelJet from "./PixelJet";
 export default function Hero() {
   return (
     <section className="hero" id="top">
-      <div className="topbar">
-        <span>AVAILABLE FOR WORK_ // OFFENSIVE SECURITY ENGINEER</span>
-        <span className="tb-right">
-          {profile.contact.email}
-        </span>
-      </div>
-
       <nav className="nav" aria-label="Portfolio sections">
         <a className="brand" href="#top" aria-label="Yousif Nazhat, back to top">
-          YN<span className="us">_</span>
+          <span className="monogram">YN<span className="us">_</span></span>
+          <span className="brand-name">{profile.name}</span>
         </a>
         <ul className="navlinks">
           {navItems.map((it, i) => (
@@ -54,36 +49,38 @@ export default function Hero() {
             </ul>
           </details>
         </div>
-        <span className="codeicon" aria-hidden="true">&gt;/&lt;</span>
       </nav>
 
-      <div className="hero-main">
-        <div className="hero-left">
-          <span className="chip">RED TEAM · TOOLING · DETECTION_</span>
+      <div className="screenprint">
+        <div className="poster-type">
+          <span className="poster-kicker">Red team · Tooling · Detection</span>
           <h1 className="bighead">
             Offense,
             <br />
             Engineered<span className="us">_</span>
           </h1>
-          <CliHint />
         </div>
+        <button
+          type="button"
+          className="poster-art"
+          aria-label="Play F-22 pixel intercept"
+          onClick={() => window.dispatchEvent(new CustomEvent("jet-intercept"))}
+        >
+          <PixelJet />
+          <span className="poster-play" aria-hidden="true">▶ intercept</span>
+        </button>
+      </div>
 
-        <div className="hero-right">
-          <h2 className="rlabel">
-            Hey, I&rsquo;m Yousif<span className="us">_</span>
-          </h2>
-          <p>
-            An offensive-security engineer who designs. I build security tooling and
-            high-reliability systems.
+      <div className="hero-intro">
+        <div className="hero-bio">
+          <h2>{profile.role}.</h2>
+          <p>{profile.bio}</p>
+          <p className="hero-placement">
+            My team placed <Link href="/competition/cyber-apocalypse-2026">#12 worldwide at Cyber Apocalypse 2026</Link>,
+            Hack The Box’s largest community event of the year.
           </p>
-          <p>
-            I love <span className="hl">enumerating</span>.
-          </p>
-          <div className="jetbox">
-            <PixelJet />
-            <div className="ascii-cap">{"// f-22 raptor"}<span> · air superiority_</span></div>
-          </div>
         </div>
+        <CliHint />
       </div>
 
       <div className="hero-stats">

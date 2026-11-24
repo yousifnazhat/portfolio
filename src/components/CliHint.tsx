@@ -18,8 +18,10 @@ const SECTIONS: Record<string, string> = {
 
 const PROJECTS = new Set(collection.map((c) => c.id));
 
-/* The hero command line. `whoami` opens the bio terminal; `cd <page>` runs a
-   page transition; `help`/`ls` lists commands. */
+const QUICK_COMMANDS = ["sudo -l", "intercept", "whoami"];
+
+/* Portfolio commands are handled locally. `whoami` opens the bio terminal;
+   `cd <page>` navigates, and `sudo -l`/`help`/`ls` lists available commands. */
 export default function CliHint() {
   const [val, setVal] = useState("");
   const [msg, setMsg] = useState("");
@@ -30,19 +32,26 @@ export default function CliHint() {
     setMsg("");
   };
 
-  const run = () => {
-    const c = val.trim().toLowerCase();
+  const run = (command = val) => {
+    const c = command.trim().toLowerCase().replace(/\s+/g, " ");
     if (!c) return;
+    setVal(command);
     if (c === "whoami") {
       window.dispatchEvent(new CustomEvent("whoami-egg"));
       setVal("");
       setMsg("");
       return;
     }
-    if (c === "help" || c === "ls" || c === "?") {
+    if (c === "sudo -l" || c === "help" || c === "ls" || c === "?") {
       setMsg(
-        `cmds → whoami · cd experience${competitions.length ? " · cd competitions" : ""} · cd work · cd stack · cd contact · flares`
+        `allowed → whoami · cd experience${competitions.length ? " · cd competitions" : ""} · cd work · cd stack · cd contact · cd home · cd <project> · flares · intercept · clear · help / ls`
       );
+      return;
+    }
+    if (c === "intercept") {
+      window.dispatchEvent(new CustomEvent("jet-intercept"));
+      setVal("");
+      setMsg("↗ intercept launched_");
       return;
     }
     if (c === "flares") {
@@ -73,13 +82,13 @@ export default function CliHint() {
         <input
           className="cli-in"
           value={val}
-          placeholder="type a command…"
+          placeholder="sudo -l"
           spellCheck={false}
           autoComplete="off"
           autoCapitalize="none"
           autoCorrect="off"
           enterKeyHint="go"
-          aria-label="command line — try whoami or cd experience"
+          aria-label="portfolio command line — try sudo -l"
           onChange={(e) => {
             setMsg("");
             setVal(e.target.value);
@@ -91,10 +100,17 @@ export default function CliHint() {
           }}
         />
       </div>
-      <div className="cli-tip">
+      <div className="cli-shortcuts" role="group" aria-label="Quick portfolio commands">
+        {QUICK_COMMANDS.map((command) => (
+          <button type="button" key={command} onClick={() => run(command)} aria-label={`Run ${command}`}>
+            {command}
+          </button>
+        ))}
+      </div>
+      <div className="cli-tip" role="status">
         {msg || (
           <>
-            ↳ try <b>whoami</b> · <b>cd experience</b> · <b>cd contact</b>
+            ↳ <b>sudo -l</b> lists available commands
           </>
         )}
       </div>
